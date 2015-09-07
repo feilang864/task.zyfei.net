@@ -1,0 +1,22 @@
+﻿<head>
+    <script type="text/javascript" src="/Resource/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/Resource/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+    @Html.Partial("_Search")
+    <button id="set_parent">确认</button>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#set_parent").click(function () {
+            var projectId = $("[name='selectedProject']").val();
+            if (projectId == undefined) {
+                alert("您还没有选择项目。");
+            } else {
+                var project = $("[name='selectedProject'][value='" + projectId + "']").next();
+                window.opener.setParent(projectId, project);
+                window.close();
+            }
+        });
+    })
+</script>

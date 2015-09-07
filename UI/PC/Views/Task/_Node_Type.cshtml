@@ -1,0 +1,24 @@
+﻿@using FFLTask.GLB.Global.Enum
+@using Global.Core.ExtensionMethod
+@model FFLTask.SRV.ViewModel.Task.LiteItemModel
+@{
+    string src = "/Resource/Image/" + Model.NodeType.ToString().ToLower();
+    if (Model.Virtual)
+    {
+        src = src + "-dashed";
+    }
+    else
+    {
+        src = src + "-solid";
+    }
+    if (Model.HasChild)
+    {
+        src = src + "-filled";
+    }
+    else
+    {
+        src = src + "-empty";
+    }
+    src = src + ".gif";
+}
+<img src="@src" /><text>@Model.NodeType.GetEnumDescription()</text>

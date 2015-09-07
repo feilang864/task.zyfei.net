@@ -1,0 +1,105 @@
+﻿@model FFLTask.SRV.ViewModel.Task.ListModel
+<table id="search_table">
+    <tr>
+        <th>
+            发布日期：
+        </th>
+        <td>
+            从
+            @Html.TextBoxFor(m => m.TimeSpan.FromPublish, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            到
+            @Html.TextBoxFor(m => m.TimeSpan.ToPublish, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            <br />
+            @Html.ValidationMessageFor(m => m.TimeSpan.FromPublish)
+            @Html.ValidationMessageFor(m => m.TimeSpan.ToPublish)
+        </td>
+        <th>
+            分配日期：
+        </th>
+        <td>
+            从
+            @Html.TextBoxFor(m => m.TimeSpan.FromAssign, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            到
+            @Html.TextBoxFor(m => m.TimeSpan.ToAssign, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            <br />
+            @Html.ValidationMessageFor(m => m.TimeSpan.FromAssign)
+            @Html.ValidationMessageFor(m => m.TimeSpan.ToAssign)
+        </td>
+        <th>
+            承接日期：
+        </th>
+        <td>
+            从
+            @Html.TextBoxFor(m => m.TimeSpan.FromOwn, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            到
+            @Html.TextBoxFor(m => m.TimeSpan.ToOwn, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            <br />
+            @Html.ValidationMessageFor(m => m.TimeSpan.FromOwn)
+            @Html.ValidationMessageFor(m => m.TimeSpan.ToOwn)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            预计完成日期：
+        </th>
+        <td>
+            从
+            @Html.TextBoxFor(m => m.TimeSpan.FromExpectComplete, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            到
+            @Html.TextBoxFor(m => m.TimeSpan.ToExpectComplete, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            <br />
+            @Html.ValidationMessageFor(m => m.TimeSpan.FromExpectComplete)
+            @Html.ValidationMessageFor(m => m.TimeSpan.ToExpectComplete)
+        </td>
+        <th>
+            实际完成日期：
+        </th>
+        <td>
+            从
+            @Html.TextBoxFor(m => m.TimeSpan.FromActualComplete, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            到
+            @Html.TextBoxFor(m => m.TimeSpan.ToActualComplete, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            <br />
+            @Html.ValidationMessageFor(m => m.TimeSpan.FromActualComplete)
+            @Html.ValidationMessageFor(m => m.TimeSpan.ToActualComplete)
+        </td>
+        <th>
+            最后更新时间：
+        </th>
+        <td>
+            从
+            @Html.TextBoxFor(m => m.TimeSpan.FromLastestUpdateTime, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            到
+            @Html.TextBoxFor(m => m.TimeSpan.ToLastestUpdateTime, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
+            <br />
+            @Html.ValidationMessageFor(m => m.TimeSpan.FromLastestUpdateTime)
+            @Html.ValidationMessageFor(m => m.TimeSpan.ToLastestUpdateTime)
+        </td>
+    </tr>
+</table>
+<script type="text/javascript">
+    var showText = "隐藏";
+    var hideText = "展开";
+    $(document).ready(function () {
+        if ($("#search_table input[type='text'][value!='']").length > 0) {
+            $("#show_hide").text(showText);
+        }
+        else {
+            $("#search_table").hide();
+            $("#show_hide").text(hideText);
+        }
+
+        $("#show_hide").click(function (event) {
+            event.preventDefault();
+            if ($("#show_hide").text() == hideText) {
+                $("#search_table").show();
+                $("#show_hide").text(showText);
+            }
+            else if ($("#show_hide").text() == showText) {
+                $("#search_table").hide();
+                $("#search_table input[type='text']").val('');
+                $("#show_hide").text(hideText);
+            }
+        });
+    })
+</script>

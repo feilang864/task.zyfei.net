@@ -1,0 +1,8 @@
+﻿@{
+    string[] publisherStatus = ViewBag.Status.ToString().Split(',');
+    for (var i = 0; i < publisherStatus.Length; i++)
+    {
+        string js = string.Format("$(\"input:checkbox[value='{0}']\").attr(\"checked\", {1});\r", publisherStatus[i], ViewBag.Checked.ToString());
+        @Html.Raw(js);
+    }
+}

@@ -1,0 +1,31 @@
+﻿@model FFLTask.SRV.ViewModel.Shared.PagerModel
+<ul class="pager">
+    <li><a id="1" href="@string.Format(Model.FormatUrl, 1)" >首页</a> </li>
+    @{
+        int begin = 0;
+        if (Model.PageIndex > 1)
+        {
+            begin = ((Model.PageIndex - 1) / Model.RowSize) * Model.RowSize;
+        }
+        int end = begin + Model.RowSize;
+        int sumOfPage = Model.SumOfPage;
+        end = end > sumOfPage ? sumOfPage : end;
+    }
+    @if (Model.PageIndex > 1)
+    {
+        <li><a id="@(Model.PageIndex - 1)" href="@string.Format(Model.FormatUrl, Model.PageIndex - 1)"  >&lt;&lt;上一页</a></li>
+    }
+    @for (int i = begin; i < end; i++)
+    {
+        string className = i + 1 == Model.PageIndex ? "current_page" : "";
+        <li><a id="@(i + 1)" href="@string.Format(Model.FormatUrl, i + 1)" class="@className">@(i + 1)</a></li>
+    }
+    @if (Model.PageIndex < sumOfPage)
+    {
+        <li><a id="@(Model.PageIndex + 1)" href="@string.Format(Model.FormatUrl, Model.PageIndex + 1)">下一页&gt;&gt;</a></li>
+    }
+    @if (Model.PageIndex != sumOfPage)
+    {
+        <li><a id="@sumOfPage" href="@string.Format(Model.FormatUrl, sumOfPage)">末页</a></li>        
+    }
+</ul>

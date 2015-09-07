@@ -1,0 +1,12 @@
+﻿@using FFLTask.UI.PC.WebHelper
+@model FFLTask.SRV.ViewModel.Account.UserModel
+<div id="logon_status">
+    @if (Model.HasLogon)
+    {
+        <span style="color: Red">欢迎光临：<b>@Html.Partial("_UserLink", Model)</b> <a href="/Log/Off?prepage=@ViewBag.PrepageUrl" style="font-size: 12px;">退出登录</a></span>
+    }
+    else
+    {
+        <span>[<a href="/Log/On?prepage=@ViewBag.PrepageUrl">登录</a>|<a href="/Register?prepage=@ViewBag.PrepageUrl">注册</a>]</span>
+    }
+</div>

@@ -1,0 +1,2 @@
+﻿@model FFLTask.SRV.ViewModel.Project._DropdownlistLinkedNodeModel
+<span>>></span>@Html.DropDownListFor(m => m.CurrentProject.Id, new SelectList(Model.Projects, "Id", "Name"), new { onchange = "refreshProject(this);" })

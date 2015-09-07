@@ -1,0 +1,26 @@
+﻿@model FFLTask.SRV.ViewModel.Task.EditModel
+@using FFLTask.GLB.Global.Enum
+@Html.Partial("EditColumns/_Edit_Subtitle", TaskProcess.Assign, new ViewDataDictionary { { "Edit", true } })
+<table id="@TaskProcess.Assign">
+    <tr>
+        <th class="first_column">
+            分配给：
+        </th>
+        <td>
+            @Html.DropDownListFor(m => m.TaskItem.Owner.Id, new SelectList(Model.Owners, "Id", "Name"), "------")
+        </td>
+    </tr>
+</table>
+@if (false)
+{
+    <script src="/Resource/Scripts/jquery-2.1.0-vsdoc.js"></script>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#@Html.IdFor(m => m.TaskItem.Owner.Id)").change(function () {
+            if ($("[name='InProcess']")) {
+                $("[name='InProcess']").remove();
+            }
+        })
+    })
+</script>

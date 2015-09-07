@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "用户注册·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns.cshtml";
+}
+@model FFLTask.SRV.ViewModel.Account.RegisterModel
+@section Introduction{
+    <ul>
+        <li>1、用户名必须是唯一的，用于登录系统。可由任意汉字、英文、数字、符号组成，但字数不超过12个，如“胡平”、“zyfei”、“yezi2014”</li>
+        <li>2、真实姓名可以重复，用于显示。字数不超过12个，如“王超”，“小李”。如果不填写，默认使用用户名。</li>
+        <li>3、密码用于系统登录，可以由不少于4位，最多不超过20位的英文字母、数字和非字母符号（如”*”、”&”、“+”）组成。 越复杂的密码越安全，推荐使用长度7位以上，包含数字、英文字母和非字母符号的密码，如：rt1n3#</li>
+    </ul>
+}
+@using (Html.BeginForm())
+{
+    <h3>
+        用户注册</h3>
+    <table>
+        <tr>
+            <th>
+                用户名：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.UserName)
+                <a href="#" id="checkUserName" style="font-size: 12px;">检查用户名</a>
+                <br />
+                @Html.ValidationMessageFor(m => m.UserName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                密码：
+            </th>
+            <td>
+                @Html.PasswordFor(m => m.Password)
+                <br />
+                @Html.ValidationMessageFor(m => m.Password)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                确认密码：
+            </th>
+            <td>
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                <br />
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                验证码：
+            </th>
+            <td>
+                @Html.Action("_ImageCode", "Shared", Model.ImageCode)
+            </td>
+        </tr>
+    </table>
+    <div id="dual_columns_input_submit">
+        <input type="submit" class="submit" id="dual_columns_input_submit_input" value="注册" />
+        @Html.RadioButtonFor(m => m.BuildProject, "true")创建
+        @Html.RadioButtonFor(m => m.BuildProject, "false")加入 项目
+    </div>
+}
+@section  JavaScript{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#checkUserName").click(function (event) {
+                event.preventDefault();
+                var name = $("#UserName").val();
+                if (name == "") {
+                    alert("您还没有输入用户名。");
+                } else {
+                    $.ajax({
+                        url: "/Register/IsUserNameExist",
+                        type: "POST",
+                        data: { 'name': name },
+                        beforeSend: function () { $("#checkUserName").hide(); },
+                        success: function (data) {
+                            if (!data) {
+                                alert("恭喜！该用户名还未被使用。");
+                            }
+                            else {
+                                alert("很抱歉，该用户名已经被使用。换一个吧。")
+                            }
+                        },
+                        complete: function () {
+                            $("#checkUserName").show();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,10 @@
+﻿@{
+    string status = ViewBag.Status.ToString();
+}
+$("#@ViewBag.Id").click(function () {
+    if ($(this).attr("checked")) {
+        @Html.Partial("_JsSelected", new ViewDataDictionary { { "Status", @status }, { "Checked", "true" } })
+    }else {
+        @Html.Partial("_JsSelected", new ViewDataDictionary { { "Status", @status }, { "Checked", "false" } })
+    }
+})

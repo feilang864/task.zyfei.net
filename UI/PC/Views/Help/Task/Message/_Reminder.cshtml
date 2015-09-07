@@ -1,0 +1,28 @@
+﻿@*Note: inline width style*@
+<div class="code" style="width: 628px">
+    <div id="navigator">
+        @*Note: inline padding-right style*@
+        <div style="float: right; margin-top: 9px; padding-right: 34px;">
+            <span>项目：</span>
+            <a href="/Project/Create" target="_blank">创建</a>
+            <a href="/Project/Search" target="_blank">查找</a>
+            <span>任务：</span>
+            <a href="/Task/List" target="_blank">列表</a><a href="/Task/New" target="_blank">创建</a>        <span>留言：</span>
+            <a href="/Message/FromMe" target="_blank">我的</a>
+            <a href="/Message/ToMe" id="mock_blink" target="_blank">给我的</a>
+        </div>
+        <div style="clear: both">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var doChangeColor;
+    $(document).ready(function () {
+        doChangeColor = setInterval("mockChangeColor()", 300);
+    });
+    function mockChangeColor() {
+        var color = "#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
+        color = color.split("|");
+        document.getElementById("mock_blink").style.color = color[parseInt(Math.random() * color.length)];
+    }
+</script>

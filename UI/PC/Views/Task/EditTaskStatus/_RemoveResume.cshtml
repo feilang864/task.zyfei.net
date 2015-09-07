@@ -1,0 +1,19 @@
+﻿@using FFLTask.GLB.Global.Enum
+@model FFLTask.SRV.ViewModel.Task.EditModel
+@if (Model.CurrentUser.Id == Model.TaskItem.Publisher.Id)
+{
+    bool canRemove = Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Publish
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Assign
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Own
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Quit;
+    bool canResume = Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Remove;
+
+    if (canRemove)
+    {
+        @Html.Partial("EditColumns/_Edit_Subtitle", TaskProcess.Remove, new ViewDataDictionary { { "Edit", true } })
+    }
+    else if (canResume)
+    {
+        @Html.Partial("EditColumns/_Edit_Subtitle", TaskProcess.Resume, new ViewDataDictionary { { "Edit", true } })
+    }
+}

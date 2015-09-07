@@ -1,0 +1,17 @@
+﻿@model IList<FFLTask.SRV.ViewModel.Project.FullItemModel>
+@if (Model != null)
+{
+    <ul>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var childProject = Model[i];
+            <li>
+                @childProject.LiteItem.Name
+                @if (childProject.Children != null)
+                {
+                    @Html.Partial("_ProjectTree", childProject.Children);
+                }
+            </li>
+        }
+    </ul>
+}

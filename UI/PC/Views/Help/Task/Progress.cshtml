@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "使用说明·任务·流程";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="help_container">
+    <h1>
+        任务流程
+        <span id="crumb">
+            <span id="outline">当前路径：</span>
+            <a href="/Help">使用说明</a> >> <a href="/Help/Task">任务</a> >> <a href="/Help/Task/Progress">流程</a>
+        </span>
+    </h1>
+    <ul>
+        <li>
+            <a name="new"></a>
+            <h2>发布</h2>
+            <ul>
+                <li>发布任务比较简单，只需要按照页面所示依次填写即可。</li>
+                <li>
+                    @Html.Partial("Task/Progress/_Create")
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a name="edit"></a>
+            <h2>编辑</h2>
+            <ul>
+                <li>任务发布之后，进入编辑页面。编辑页面被分成了左右两列。</li>
+                <li>
+                    <h3>左列</h3>
+                    <ul>
+                        <li>
+                            左列被分为六个栏目（以下<b>左侧</b>：可编辑状态，<b>右侧</b>：只读）,从上到下依次为：
+                            @Html.Partial("Task/Progress/_Edit")
+                        </li>
+                        <li>以上栏目根据不同的当前用户、不同的当前任务状态，有不同的显示（隐藏/只读/可编辑），以实现之前我们提到的<a href="#">约束</a>效果。</li>
+                        <li>
+                            使用时只需“傻瓜式”操作即可：当前用户有权限操作，就能够编辑；无权操作，就只能看到内容；连内容都看不到，说明流程尚未走到这一步。<br />
+                            以“任务已经开始”为例：
+                            <ul class="ul2">
+                                <li>
+                                    发布栏：
+                                    <ul class="ul1">
+                                        <li>因为任务已经开始，需求已经固定，发布人就不能再修改，所以只能看，不能改</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    进度栏：
+                                    <ul class="ul1">
+                                        <li>当前用户是发布人时，就以只读状态显示。因为此时任务的进展是由承接人控制的，发布人无权修改。与之对应的，</li>
+                                        <li>当前用户是承接人时，就以可编辑状态显示。</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    验收栏：
+                                    <ul class="ul1">
+                                        <li>被隐藏，因为还没到这个阶段，也就没有这方面的信息。</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            如需了解任务流程的所有情形，请参考：
+                            <ul class="ul1">
+                                <li>@Html.DocumentLink("/Task/front/Task/Edit/Process.pptx", "PPT：任务流程图")</li>
+                                <li>@Html.DocumentLink("/Task/front/Task", "文档：任务编辑页面")</li>
+                                <li>@Html.DocumentLink("/Task/front/Task/Edit/_Columns.xlsx", "Excel：任务栏显示")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>右列</h3>
+                    <ul>
+                        <li>显示该任务从发布到验收的全部历史记录</li>
+                        <li>
+                            @Html.Partial("Task/Progress/_History")
+                        </li>
+                        <li><span class="future" title="该功能尚未实现">未读留言可以修改</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div id="flip">
+        <span>
+            <a href="/Help/Task" target="_blank"><< 任务</a> ：上一页
+        </span>
+        <span class="split"></span>
+        <span>
+            下一页：<a href="/Help/Task/Message" target="_blank"> 留言 >> </a>
+        </span>
+    </div>
+</div>

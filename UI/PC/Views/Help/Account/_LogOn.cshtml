@@ -1,0 +1,72 @@
+﻿@*inline width style*@
+<div class="code" style="width: 420px">
+    @*note: inline none-float style*@
+    <div id="dual_columns_input" style="float:none;">
+        @*note: inline none-float style*@
+        <h3 style="margin:0">
+            用户登录
+        </h3>
+        <table>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <th>
+                    用户名：
+                </th>
+                <td>
+                    <input data-val="true" data-val-length="* 用户名的长度不能大于255" data-val-length-max="255" data-val-required="* 用户名不能为空" id="UserName" name="UserName" type="text" value="" />
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    密码：
+                </th>
+                <td>
+                    <input data-val="true" data-val-length="* 密码的长度不能小于4，大于20" data-val-length-max="20" data-val-length-min="4" data-val-required="* 密码不能为空" id="Password" name="Password" type="password" />
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    验证码：
+                </th>
+                <td>
+                    <input data-val="true" data-val-length="* 验证码的长度只能等于4" data-val-length-max="4" data-val-length-min="4" data-val-required="* 验证码不能为空" id="InputImageCode" name="InputImageCode" onfocus="showImgCode()" size="4" style="width:40px" type="text" value="" />
+                    <img id="validateCode" style="vertical-align: middle; display: none;" />
+                    <a name="imageCode" /><a href="#" id="freshImgCode" style="font-size: 12px; display: none">
+                        看不清楚
+                    </a> <span id="imgCodeReminder" class="reminder">点击输入框显示</span>
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="InputImageCode" data-valmsg-replace="true"></span>
+                    <script type="text/javascript">
+                        $("#freshImgCode").click(function (event) {
+                            event.preventDefault();
+                            $('#InputImageCode').val("").focus();
+                            showImgCode();
+                        })
+                    </script>
+
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td style="padding-bottom: 12px;">
+                    <p>
+                        <input data-val="true" data-val-required="The 记住我的登录状态 field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />
+                        <label for="RememberMe">记住我的登录状态</label>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <div id="dual_columns_input_submit">
+            <input type="submit" class="submit" id="dual_columns_input_submit_input" value="登录" />
+            <a href="#" target="_blank" id="dual_columns_input_submit_forgot_password">忘记密码</a>
+        </div>
+    </div>
+</div>

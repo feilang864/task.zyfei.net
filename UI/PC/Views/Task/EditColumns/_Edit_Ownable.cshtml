@@ -1,0 +1,12 @@
+﻿@model FFLTask.SRV.ViewModel.Task.EditModel
+@Html.Partial("EditColumns/_Edit_Subtitle", FFLTask.GLB.Global.Enum.TaskProcess.Assign)
+<table>
+    <tr>
+        <th class="first_column">
+            分配给:
+        </th>
+        <td>
+            <label> @Html.CheckBoxFor(m=>m.Own) 承接</label>
+        </td>
+    </tr>
+</table>

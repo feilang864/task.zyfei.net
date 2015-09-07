@@ -1,0 +1,14 @@
+﻿@model FFLTask.SRV.ViewModel.Shared.ImageCodeModel
+@Html.TextBoxFor(x => x.InputImageCode, new { size = 4, style = "width:40px", onfocus = "showImgCode()" })
+<img id="validateCode" style="vertical-align: middle; display: none;" />
+<a name="imageCode" /><a href="#" id="freshImgCode" style="font-size: 12px; display: none">
+    看不清楚</a> <span id="imgCodeReminder" class="reminder">点击输入框显示</span>
+<br />
+@Html.Raw(Server.HtmlDecode(Html.ValidationMessageFor(x => x.InputImageCode).ToString()))
+<script type="text/javascript">
+    $("#freshImgCode").click(function (event) {
+        event.preventDefault();
+        $('#InputImageCode').val("").focus();
+        showImgCode();
+    })
+</script>

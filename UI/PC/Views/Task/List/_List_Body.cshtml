@@ -1,0 +1,176 @@
+﻿@model FFLTask.SRV.ViewModel.Task.ListModel
+@using Global.Core.ExtensionMethod
+@using FFLTask.SRV.ViewModelMap
+@using FFLTask.GLB.Global.Enum
+@{
+    var showColoumns = Model.ShowColumns.Select(m => Enum.Parse(typeof(ListColumn), m.Value));
+}
+@foreach (var item in Model.Items)
+{
+    <tr>
+        @if (showColoumns.Contains(ListColumn.ID))
+        {
+            <td>
+                @item.LiteItem.Id
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.NodeType))
+        {
+            <td>
+                @Html.Partial("_Node_Type", item.LiteItem)
+            </td>
+        }
+        <td class="list_title">
+            <a href="/Task/Edit/@item.LiteItem.Id" target="_blank" style=" margin-right: 10px;">@item.LiteItem.Title</a>
+            <span>[@Html.ActionLink("关系", "Relation", new { taskId = item.LiteItem.Id }, new { name = "relation" })]
+            </span>
+        </td>
+        @if (showColoumns.Contains(ListColumn.Publisher))
+        {
+            <td>
+                @if (item.Publisher != null)
+                {
+                    @item.Publisher.Name
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.Priority))
+        {
+            <td>
+                @if (item.Priority != null)
+                {
+                    @item.Priority.GetEnumDescription()
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.Difficulty))
+        {
+            <td>
+                @if (item.Difficulty != null)
+                {
+                    @item.Difficulty.GetEnumDescription()
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.ExpectedWorkPeriod))
+        {
+            <td>
+                @if (item.ExpectedWorkPeriod != null)
+                {
+                    @item.ExpectedWorkPeriod
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.ActualWorkPeriod))
+        {
+            <td>
+                @if (item.ActualWorkPeriod != null)
+                {
+                    @item.ActualWorkPeriod            
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.OverDue))
+        {
+            <td>
+                @if (item.OverDue != null)
+                {
+                    @item.OverDue.Value            
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.ExpectedComplete))
+        {
+            <td class="wrap_datetime">
+                @if (item.ExpectedComplete.Combine() != null)
+                {
+                    @item.ExpectedComplete.Combine().Value.ToChinese()
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.ActualComplete))
+        {
+            <td class="wrap_datetime">
+                @if (item.ActualComplete != null)
+                {
+                    @item.ActualComplete.Value.ToChinese()
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.Delay))
+        {
+            <td>
+                @if (item.Delay != null)
+                {
+                    @item.Delay.Value
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.Status))
+        {
+            <td>
+                @item.LiteItem.CurrentStatus.Name
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.Owner))
+        {
+            <td>
+                @if (item.Owner != null)
+                {
+                    @item.Owner.Name
+                }
+                //TODO:
+                else if (Model.CanOwn && item.LiteItem.CurrentStatus.Name != "取消")
+                {
+                    <a href="#" id="@item.LiteItem.Id" name="own">承接</a>
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.Accepter))
+        {
+            <td>
+                @item.Accepter.Name
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.PublishTime))
+        {
+            <td class="wrap_datetime">
+                @item.Created.ToChinese()
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.AssignTime))
+        {
+            <td class="wrap_datetime">
+                @if (item.Assign != null)
+                {
+                    @item.Assign.Value.ToChinese()
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.OwnTime))
+        {
+            <td class="wrap_datetime">
+                @if (item.Own != null)
+                {
+                    @item.Own.Value.ToChinese()                
+                }
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.LastUpdateTime))
+        {
+            <td class="wrap_datetime">
+                @item.LatestUpdate.ToChinese() <a href="/Task/History/@item.LiteItem.Id" name="history" style=" font-size:12px; margin-left: 6px;">
+                    历史</a>
+            </td>
+        }
+        @if (showColoumns.Contains(ListColumn.Quality))
+        {
+            <td>
+                @if (item.Quality != null)
+                {
+                    @item.Quality.GetEnumDescription()
+                }
+            </td>
+        }
+    </tr>
+}

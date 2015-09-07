@@ -1,0 +1,56 @@
+﻿@model FFLTask.SRV.ViewModel.Shared._NavigatorModel
+<div id="navigator">
+    <div style="float: right; margin-top: 9px; padding-right: 154px;">
+        @if (Model.CurrentUser.IsAdmin)
+        {
+            <span>团队：</span>
+            @Html.ActionLink("授权", "Grant", "Auth", null, new { target = "_blank" })
+        }
+        <span>项目：</span>
+        @Html.ActionLink("创建", "Create", "Project", null, new { target = "_blank" })
+        @Html.ActionLink("查找", "Search", "Project", null, new { target = "_blank" })
+        <span>任务：</span>
+        @if (Model.CurrentUser.HasJoinedProject)
+        {
+            @Html.ActionLink("列表", "List", "Task", null, new { target = "_blank" })
+            @Html.ActionLink("创建", "New", "Task", null, new { target = "_blank" })
+        }
+        else
+        {
+            <a>列表</a>
+            <a>新建</a>
+        }
+        @if (Model.CurrentUser.IsAdmin)
+        {
+            @Html.ActionLink("交接", "Search", "Team", null, new { target = "_blank" })
+        }
+        <span>留言：</span>
+        @Html.ActionLink("我的", "FromMe", "Message", null, new { target = "_blank" })
+        @Html.ActionLink("给我的", "ToMe", "Message", null, new { target = "_blank", id = "blink" })
+    </div>
+    <div style="clear: both">
+    </div>
+</div>
+@if (Model.HasUnknownMessage)
+{
+    <script type="text/javascript">
+        var doChangeColor, doCheckHasUnknownMessage;
+        $(document).ready(function () {
+            doChangeColor = setInterval("changeColor()", 300);
+            doCheckHasUnknownMessage = setInterval("checkHasUnknownMessage()", 60000);
+        });
+
+        function checkHasUnknownMessage() {
+            $.ajax({
+                url: "/User/HasUnknownMessage",
+                type: "POST",
+                success: function (data) {
+                    if (!data) {
+                        clearInterval(doChangeColor);
+                        clearInterval(doCheckHasUnknownMessage);
+                    }
+                }
+            });
+        }
+    </script>
+}

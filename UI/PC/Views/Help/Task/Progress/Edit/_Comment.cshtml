@@ -1,0 +1,79 @@
+﻿@*inline width style*@
+<div class="code" style="width: 628px">
+    @*note: inline none-float style*@
+    <div id="dual_columns_big_input" style="float:none">
+        <div class="subtitle_container">
+            <span class="subtitle_text">
+                留言
+            </span>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var $inputs = $("#Comment").find("input,select,#previous_project,#next_project");
+                $inputs.attr("disabled", true);
+                $("[edit='Comment']").click(function () {
+                    if ($(this).is(":checked")) {
+                        $inputs.attr("disabled", false);
+                        $("#dual_columns_big_input_submit_input").attr("disabled", false);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(false);
+                        }
+                    } else {
+                        $inputs.attr("disabled", true);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(true);
+                        }
+                    }
+                    if ($("[name='TaskProcess']:checked").length > 0) {
+                        $("#comment_to input").prop("disabled", true);
+                        $("#comment_to input[type='checkbox']").prop("checked", false);
+                    } else {
+                        $("#comment_to input").prop("disabled", false);
+                        $("#comment_to input[type='checkbox']").prop("checked", true);
+                    }
+
+                    if ($(this).val() == 'Remove') {
+                        if ($(this).is(":checked")) {
+                            $("[name='InProcess']").attr("disabled", "disabled");
+                        }
+                        else {
+                            $("[name='InProcess']").removeAttr("disabled");
+                        }
+                    }
+                });
+            })
+        </script>
+        <table>
+            <tr id="comment_to" style="clear: both; font-size: 14px;">
+                <th>
+                    收信人：
+                </th>
+                <td colspan="3">
+                    <label><input checked="checked" id="AddresseeId" name="AddresseeId" type="radio" value="" />无</label>
+                    <label><input id="AddresseeId" name="AddresseeId" type="radio" value="2" /> 承接人</label>
+                </td>
+            </tr>
+            <tr>
+                <th class="top_align first_column">
+                    内容：
+                </th>
+                <td class="textarea" colspan="3">
+                    <textarea cols="20" id="Comment" name="Comment" rows="2" style="width:480px; height:100px;"></textarea>
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="Comment" data-valmsg-replace="true"></span>
+                </td>
+            </tr>
+            <tr>
+                <th class="top_align first_column">
+                    附件：
+                </th>
+                <td colspan="3">
+                    <div id="upload_files">
+                        <input type="file" name="file" onchange="uploadChange(this)" />
+                        <span class="reminder">（* 页面提交时上传文件）</span><a href="#" id="upload">继续上传</a><br />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

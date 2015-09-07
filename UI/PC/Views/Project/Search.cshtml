@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "项目搜索·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns.cshtml";
+}
+@section Introduction{
+    <ul>
+        <li>
+            1、如果您已经知道项目的编号，选择
+            <input type="radio" value="radiobutton" checked="checked" />
+            编号 进行查询能更快更精确的得到结果，询问项目创始人/管理员可以获得项目的编号。
+        </li>
+        <li>
+            2、如果使用
+            <input type="radio" value="radiobutton" checked="checked" />
+            名称 进行查询，请注意不要使用空格分号等符号，目前系统还不支持复杂查询。
+        </li>
+        <li>3、查询的结果会显示项目的整个层级关系，如：<a href="#">首顾科技</a>&gt;&gt;<a href="#">创业家园</a>&gt;&gt;<a href="#">DBA</a>，表明DBA项目是创业家园的子项目，而创业家园又是首顾科技的子项目。</li>
+        <li>4、非项目创始人无权修改项目内容。</li>
+    </ul>
+}
+<div>
+    <h3>
+        项目搜索
+    </h3>
+    @Html.Partial("_Search")
+    <div id="dual_columns_input_submit">
+        <button id="join">加入</button>
+        <button id="edit">修改</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#join").click(function () {
+            var projectId = $("[name='selectedProject']").val();
+            if (projectId == undefined) {
+                alert("您还没有选择项目。");
+            } else {
+                location = "/Project/Join/" + projectId;
+            }
+        });
+        $("#edit").click(function () {
+            var projectId = $("[name='selectedProject']").val();
+            if (projectId == undefined) {
+                alert("您还没有选择项目。");
+            } else {
+                location = "/Project/Edit/" + projectId;
+            }
+        });
+    })
+</script>

@@ -1,0 +1,23 @@
+﻿@model IList<FFLTask.SRV.ViewModel.Team.TransferSearchResultItemModel>
+@using Global.Core.ExtensionMethod
+@if (!Model.IsNullOrEmpty())
+{
+    <h4>
+        作为：@Model[0].Role.GetEnumDescription()</h4>
+    <table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Action("_LiteralLinkedProject", "Project", new { projectId = item.ProjectId })
+                </td>
+                <td>
+                    共@(item.Total)条 未完成@(item.InCompleted)条
+                </td>
+                <td>
+                    <a href="/Team/Transfer/@ViewBag.UserId/@item.Role/@item.ProjectId">进入</a>
+                </td>
+            </tr>       
+        }
+    </table>     
+}

@@ -1,0 +1,127 @@
+﻿#dual_columns_big {
+    float: right;
+    margin: 100px 83px 214px auto;
+    width: 1160px;
+}
+
+#dual_columns_big_input {
+    float: left;
+    margin-right: 59px;
+    width: 666px;
+}
+
+    #dual_columns_big_input .owner_opt {
+        font-size: 14px;
+    }
+
+    #dual_columns_big_input .subtitle_container {
+        border-bottom: 1px dashed;
+        width: 366px;
+        margin: 10px 110px 12px auto;
+        float: right;
+    }
+
+    #dual_columns_big_input .subtitle_text {
+        float: right;
+        margin-right: 12px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    #dual_columns_big_input textarea {
+        width: 500px;
+        height: 100px;
+    }
+
+    #dual_columns_big_input table {
+        margin: auto 9px;
+        width: 566px;
+        clear: both;
+    }
+
+        #dual_columns_big_input table th {
+            padding: 6px 0;
+            text-align: left;
+            font-weight: normal;
+        }
+
+        #dual_columns_big_input table td {
+            padding: 6px 0;
+        }
+
+    #dual_columns_big_input .title {
+        border-bottom: 1px solid #4C9ED9;
+        width: 616px;
+        margin-bottom: 26px;
+    }
+
+        #dual_columns_big_input .title .h3 {
+            font-size: 24px;
+            font-weight: 700;
+            padding-left: 30px;
+            margin-right: 18px;
+        }
+
+        #dual_columns_big_input .title a {
+            margin-right: 12px;
+        }
+
+    #dual_columns_big_input h3 {
+        border-bottom: 1px solid;
+        width: 586px;
+        border-bottom-color: #4C9ED9;
+        font-size: 24px;
+        padding-left: 30px;
+        margin-bottom: 28px;
+    }
+
+    #dual_columns_big_input th.first_column {
+        width: 68px;
+    }
+
+    #dual_columns_big_input td.second_column {
+        width: 110px;
+    }
+
+    #dual_columns_big_input th.third_column {
+        width: 110px;
+    }
+
+    #dual_columns_big_input td.fourth_column {
+        width: 300px;
+    }
+
+#dual_columns_big_input_submit {
+    margin-right: 50px;
+    text-align: center;
+    border-top: 3px solid #4C9ED9;
+    width: 586px;
+    margin-top: 20px;
+    padding: 0 15px;
+}
+
+#dual_columns_big_input_submit_input {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    padding-left: 8px;
+    height: 28px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+#dual_columns_big_description {
+    float: right;
+    width: 349px;
+    margin-right: 76px;
+}
+
+    #dual_columns_big_description ul {
+    }
+
+    #dual_columns_big_description li {
+        font-size: 14px;
+        margin-top: 18px;
+        line-height: 150%;
+    }

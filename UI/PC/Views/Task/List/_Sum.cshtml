@@ -1,0 +1,79 @@
+﻿@model FFLTask.SRV.ViewModel.Task._SumModel
+<table id="sum_table">
+    <tr>
+        <th>
+            任务种类
+        </th>
+        <th>
+            发布
+        </th>
+        <th>
+            承接
+        </th>
+        <th>
+            验收
+        </th>
+        <th>
+            优先级
+        </th>
+        <th>
+            难度
+        </th>
+        <th>
+            耗时(分钟)
+        </th>
+        <th>
+            状态
+        </th>
+        <th>
+            超期
+        </th>
+        <th>
+            质量
+        </th>
+        <th>
+            质疑
+        </th>
+        <th>
+            拒绝验收
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.Types)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.Publish)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.Own)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.Accept)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.Priorities)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.Difficulties)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.ConsumeTime)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.Status)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.OverDue)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.Qualities)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.Doubt)
+        </td>
+        <td>
+            @Html.Partial("~/Views/Task/List/_Sum_List_Item.cshtml", Model.RefuseAccept)
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "修改项目·自由飞·任务管理系统 ";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns_Big.cshtml";
+}
+@model FFLTask.SRV.ViewModel.Project.EditModel
+@section RightTitle{
+    <h2>说明</h2>
+}
+@section Introduction{
+    <ul>
+        <li>1.名称必填，长度不超过12个字符，可以重复（如果不愿意和别人重复，请点击<a href="#" class="checkCompanyName">是否重复</a>检查）</li>
+        <li>2.简介可不填写，无长度限制（建议填写，且长度不超过255字）</li>
+    </ul>
+}
+@if (ViewBag.IsFounder == null)
+{
+    using (Html.BeginForm())
+    { 
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ParentId)
+    <h3>
+        修改项目</h3>
+    <table>
+        <tr>
+            <th>
+                <label>@Html.CheckBox("hasParent", Model.ParentId.HasValue)父项目：</label>
+            </th>
+            <td>
+                @if (Model.ParentId.HasValue)
+                {
+                   <span id="parent_text">@Html.Action("_LiteralLinkedProject", new { projectId = Model.ParentId })</span>
+                }
+                else
+                {   
+                    <span id="parent_text">* 该项目为根项目</span>
+                }
+                <span>[<a href="#" id="modify_parent">修改</a>]</span>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                名称：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.Name)<br />
+                <a href="#" class="checkCompanyName" style="font-size: 12px;">是否重复</a><br />
+                @Html.ValidationMessageFor(m => m.Name)
+            </td>
+        </tr>
+        <tr>
+            <th style="float: left;">
+                描述：
+            </th>
+            <td class="textarea">
+                @Html.TextAreaFor(m => m.Description, new { @style = " width:285px;height:102px;" })<br />
+                @Html.ValidationMessageFor(m => m.Description)
+            </td>
+        </tr>
+    </table>
+    <div id="dual_columns_big_input_submit">
+        <input type="submit" class="submit" id="dual_columns_big_input_submit_input" value="提交" />
+    </div>
+   
+    }
+    @section  JavaScript{
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".checkCompanyName").click(function (event) {
+                    event.preventDefault();
+                    var name = $("#Name").val();
+                    if (name == "") {
+                        alert("您还没有输入用户名。");
+                    } else {
+                        $.ajax({
+                            url: "/Project/HasExist",
+                            type: "POST",
+                            data: { 'projectName': name },
+                            beforeSend: function () { $("#checkCompanyName").hide(); },
+                            success: function (data) {
+                                if (!data) {
+                                    alert("恭喜！该项目名还未被使用。");
+                                }
+                                else {
+                                    alert("很抱歉，该项目名已经被使用。换一个吧。")
+                                }
+                            },
+                            complete: function () {
+                                $("#checkCompanyName").show();
+                            }
+                        });
+                    }
+                });
+
+                $("#modify_parent").click(function (event) {
+                    event.preventDefault();
+                    openWindow("/Project/SearchPopup", "修改父项目", 500, 500);
+                });
+            });
+
+            function setParent(parentId, parentElement) {
+                $("#parent_text").html(parentElement.html());
+                $("#@Html.IdFor(m => m.ParentId)").val(parentId);
+                $("[name='hasParent'").attr("checked", "checked");
+            }
+        </script>
+    }
+}
+else
+{ 
+    @section  JavaScript{
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alert("您不是当前项目的创始人，无权修改该项目");
+            });
+        </script>
+    }
+}

@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "使用说明·任务·检索";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="help_container">
+    <h1>
+        任务检索
+        <span id="crumb">
+            <span id="outline">当前路径：</span>
+            <a href="/Help">使用说明</a> >> <a href="/Help/Task">任务</a> >> <a href="/Help/Task/Search">检索</a>
+        </span>
+    </h1>
+    <ul>
+        <li>
+            <a name="list"></a>
+            <h2>列表</h2>
+            @Html.Partial("Task/Search/_List")
+        </li>
+        <li>
+            <h2><span class="future" title="该功能尚未实现">用户</span></h2>
+        </li>
+        <li>
+            <h2><span class="future" title="该功能尚未实现">任务树</span></h2>
+        </li>
+    </ul>
+    <div id="flip">
+        <span>
+            <a href="/Help/Task/Relation" target="_blank"> << 任务关系 </a> ：上一页
+        </span>
+        <span class="split"></span>
+        <span>
+            下一页：<a href="/Help/Team" target="_blank"> 团队管理 >> </a>
+        </span>
+    </div>
+</div>

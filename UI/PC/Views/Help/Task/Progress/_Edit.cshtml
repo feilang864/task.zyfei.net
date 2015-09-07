@@ -1,0 +1,73 @@
+﻿<style>
+    .column_compare td {
+        padding: 0 4px;
+    }
+</style>
+<ul>
+    <li>
+        <b>发布栏</b>：可修改任务自身的基本属性（标题、描述、难度、优先级等）
+    </li>
+    <li>
+        <table class="column_compare">
+            <tr>
+                <td>@Html.Partial("Task/Progress/Edit/_Publish")</td>
+                <td>@Html.Partial("Task/Progress/Edit/_PublishReadOnly")</td>
+            </tr>
+        </table>
+    </li>
+    <li>
+        <b>分配/承接栏</b>：可以修改任务的承接人
+    </li>
+    <li>
+        <table class="column_compare">
+            <tr>
+                <td>@Html.Partial("Task/Progress/Edit/_Assign")</td>
+                <td>@Html.Partial("Task/Progress/Edit/_AssignReadOnly")</td>
+            </tr>
+        </table>
+    </li>
+    <li>
+        <b>进度栏</b>：任务承接人标示任务的进行状态
+    </li>
+    <li>
+        <table class="column_compare">
+            <tr>
+                <td>@Html.Partial("Task/Progress/Edit/_InProgress")</td>
+                <td>@Html.Partial("Task/Progress/Edit/_InProgressReadOnly")</td>
+            </tr>
+        </table>
+    </li>
+    <li>
+        <b>验收栏</b>：验收任务用
+    </li>
+    <li>
+        <table class="column_compare">
+            <tr>
+                <td>@Html.Partial("Task/Progress/Edit/_Accept")</td>
+                <td>@Html.Partial("Task/Progress/Edit/_AcceptReadOnly")</td>
+            </tr>
+        </table>
+    </li>
+    <li>
+        <b>取消/恢复栏</b>：任务可以被取消/恢复
+    </li>
+    <li>
+        <table class="column_compare">
+            <tr>
+                <td>@Html.Partial("Task/Progress/Edit/_Remove")</td>
+                <td><div class="code" style="width: 628px">不可编辑时不显示</div></td>
+            </tr>
+        </table>
+    </li>
+    <li>
+        <b>留言栏</b>：任务各方在此可以留言
+    </li>
+    <li>
+        <table class="column_compare">
+            <tr>
+                <td>@Html.Partial("Task/Progress/Edit/_Comment")</td>
+                <td><div class="code" style="width: 628px">始终可编辑</div></td>
+            </tr>
+        </table>
+    </li>
+</ul>

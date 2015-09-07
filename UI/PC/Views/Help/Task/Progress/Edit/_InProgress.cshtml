@@ -1,0 +1,63 @@
+﻿@*inline width style*@
+<div class="code" style="width: 628px">
+    @*note: inline none-float style*@
+    <div name="InProcess" id="dual_columns_big_input" style="float: none;">
+        <div class="subtitle_container">
+            <label>
+                <input type="checkbox" value="InProcess" name="TaskProcess" edit="InProcess" />编辑
+            </label>
+            <span class="subtitle_text">
+                进度
+            </span>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var $inputs = $("#InProcess").find("input,select,#previous_project,#next_project");
+                $inputs.attr("disabled", true);
+                $("[edit='InProcess']").click(function () {
+                    if ($(this).is(":checked")) {
+                        $inputs.attr("disabled", false);
+                        $("#dual_columns_big_input_submit_input").attr("disabled", false);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(false);
+                        }
+                    } else {
+                        $inputs.attr("disabled", true);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(true);
+                        }
+                    }
+                    if ($("[name='TaskProcess']:checked").length > 0) {
+                        $("#comment_to input").prop("disabled", true);
+                        $("#comment_to input[type='checkbox']").prop("checked", false);
+                    } else {
+                        $("#comment_to input").prop("disabled", false);
+                        $("#comment_to input[type='checkbox']").prop("checked", true);
+                    }
+
+                    if ($(this).val() == 'Remove') {
+                        if ($(this).is(":checked")) {
+                            $("[name='InProcess']").attr("disabled", "disabled");
+                        }
+                        else {
+                            $("[name='InProcess']").removeAttr("disabled");
+                        }
+                    }
+                });
+            })
+        </script>
+        <table id="InProcess">
+            <tr>
+                <th class="first_column">
+                    进度：
+                </th>
+                <td>
+                    <select data-val="true" data-val-required="The Stage field is required." id="SelectedQualifiedStatus_Stage" name="SelectedQualifiedStatus.Stage">
+                        <option value="31">开始</option>
+                        <option value="34">放弃</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

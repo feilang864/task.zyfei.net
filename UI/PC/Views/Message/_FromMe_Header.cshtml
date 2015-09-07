@@ -1,0 +1,50 @@
+﻿@using FFLTask.GLB.Global.Enum
+@using FFLTask.SRV.ViewModel.Message
+@model FromMeModel
+@{
+    string sort_icon, sort_url;
+
+    // set the default sort order
+    string des = Request.QueryString["des"] ?? "true";
+
+    string currentUrl = Request.Url.LocalPath;
+
+    if (des == "false")
+    {
+        sort_icon = "/Resource/Image/sort_up.png";
+        sort_url = string.Format("{0}?sort={{0}}&des={1}", currentUrl, "true");
+    }
+    else
+    {
+        sort_icon = "/Resource/Image/sort_down.png";
+        sort_url = string.Format("{0}?sort={{0}}&des={1}", currentUrl, "false");
+    }
+}
+<tr>
+    <th>
+    </th>
+    <th>
+        <a class="sort" href= "@string.Format(sort_url, MessageSort.PublishTime)">
+            <img src="@sort_icon" class="no_border" />
+            发布时间
+         </a>
+    </th>
+    <th>
+        @Html.DropDownListFor(m => m.SelectedProjectId, Model.Projects.SelectList(), "项目")
+    </th>
+    <th>
+        任务名称
+    </th>
+    <th>
+        <a class="sort" href= "@string.Format(sort_url, MessageSort.ReadTime)">
+            <img src="@sort_icon" class="no_border" />
+            读取时间
+        </a>
+    </th>
+    <th>
+        @Html.DropDownListFor(m => m.SelectedAddresseeId, new SelectList(Model.Addressees, "Id", "Name"), "收信人")
+    </th>
+    <th>
+        内容
+    </th>
+</tr>

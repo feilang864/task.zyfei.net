@@ -1,0 +1,259 @@
+﻿@{
+    ViewBag.Title = "添加任务·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns_Big.cshtml";
+}
+@using Global.Core.ExtensionMethod
+@section RightTitle{
+    <h2>说明</h2>
+}
+@section Introduction{
+    <ul>
+        <li>1、标题不能为空，长度不超过255个字符。</li>
+        <li>2、图片可以直接发布在内容里，其他格式的文件请通过附件发布。</li>
+        <li>3、验收人没有指定的话，默认为发布人。</li>
+        <li>4、不指定分配人，提交后任务为“发布”状态；指定分配人，提交后为“分配”状态。</li>
+        <li>5、虚任务是自己没有实际工作内容，需要靠其子任务来实现其功能的任务。虚任务不能指定工时。</li>
+        <li>6、不勾选“转到”，提交后页面跳转到该任务的编辑页面。</li>
+        <li>7、勾选“转到”，任务创建后，页面可跳转到：以该任务为父任务的编辑页面、其他新任务的创建页面，和任务列表页面。</li>
+    </ul>
+}
+@using FFLTask.GLB.Global.Enum
+@using Global.Core.Helper
+@model FFLTask.SRV.ViewModel.Task.NewModel
+@using (@Html.BeginForm("New", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <h3>
+        添加任务
+    </h3>
+    <table>
+        <tr>
+            <th>
+                项目:
+            </th>
+            <td colspan="3">
+                @Html.EditorFor(m => m.CurrentProject, "Project/_DropDownListLinkedProject")
+                <img alt="处理中..." src="/Resource/Image/waiting.gif" id="waiting" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                父任务:
+            </th>
+            <td colspan="3">
+                @Html.TextBoxFor(m => m.TaskItem.Parent.Id)
+                <label>@Html.RadioButtonFor(m => m.IdOrName, SearchBy.Name) @SearchBy.Name.GetEnumDescription()</label>
+                <label>@Html.RadioButtonFor(m => m.IdOrName, SearchBy.Id) @SearchBy.Id.GetEnumDescription() </label>
+                <a href="#" id="find">查找</a><br />
+                @Html.ValidationMessageFor(m => m.TaskItem.Parent.Id, "* 编号只能为数字")
+                <div id="parentList"></div>
+                @if (ViewBag.ShowNotFound != null && (bool)ViewBag.ShowNotFound)
+                {
+                    <span class="field-validation-error" id="not_find">* 无法找到该编号的任务</span>
+                }
+                else
+                {
+                    <span class="field-validation-error" id="not_find" style="display: none">* 无法找到该编号的任务</span>
+                }
+                @if (Model.TaskItem.Parent != null)
+                {
+                    @Html.ActionLink(Model.TaskItem.Parent.Title, "Edit", new { taskId = Model.TaskItem.Parent.Id }, new { id = "parent_title" })
+                    <span>[<a href="/Task/Relation/@Model.TaskItem.Parent.Id" name="relation">关系</a>]</span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>
+                标题:
+            </th>
+            <td colspan="3">
+                @Html.TextBoxFor(m => m.TaskItem.LiteItem.Title, new { @class = " long_textbox" })<br />
+                @Html.ValidationMessageFor(m => m.TaskItem.LiteItem.Title)
+            </td>
+        </tr>
+        <tr>
+            <th class="top_align">
+                内容:
+            </th>
+            <td class="textarea" colspan="3">
+                @Html.TextAreaFor(m => m.TaskItem.Body)
+            </td>
+        </tr>
+        <tr>
+            <th class="top_align">
+                附件:
+            </th>
+            <td class="textarea" colspan="3">
+                @Html.Partial("~/Views/Task/_UpLoadFiles.cshtml")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                难度:
+            </th>
+            <td>
+                @Html.DropDownListFor(m => m.TaskItem.Difficulty, Model.AllDifficulties.GetSelectListItems<TaskDifficulty>(), "-----")
+            </td>
+            <th>
+                工时(分钟):
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.TaskItem.ExpectedWorkPeriod)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                优先级:
+            </th>
+            <td>
+                @Html.DropDownListFor(m => m.TaskItem.Priority, Model.AllPriorities.GetSelectListItems<TaskPriority>(), "---")
+            </td>
+            <th style="width: 100px;">
+                预计完成时间:
+            </th>
+            <td>
+                @Html.EditorFor(m => m.TaskItem.ExpectedComplete)
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 60px;">
+                分配给:
+            </th>
+            <td>
+                @Html.DropDownListFor(m => m.TaskItem.Owner.Id, new SelectList(Model.Owners, "Id", "Name"), "-----")
+            </td>
+            <th>
+                虚任务:
+            </th>
+            <td>
+                @Html.CheckBoxFor(m => m.TaskItem.LiteItem.Virtual)
+                @Html.ValidationMessageFor(m => m.TaskItem.LiteItem.Virtual)
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 60px;">
+                验收人:
+            </th>
+            <td colspan="3">
+                @Html.DropDownListFor(m => m.TaskItem.Accepter.Id, new SelectList(Model.Accepters, "Id", "Name"), "-----")
+            </td>
+        </tr>
+    </table>
+    <div id="dual_columns_big_input_submit">
+        <input type="submit" value="创建" id="dual_columns_big_input_submit_input" />
+        <img alt="处理中..." src="/Resource/Image/waiting.gif" id="submitting" style="margin-top: 20px;" />
+        转到：
+        <label>
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.Current) 编辑
+        </label> |
+        <label>
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.Child)子
+        </label>
+        <label>
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.Brother, new { id = "redirect_brother" })兄弟
+        </label>
+        <label>
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.Other)其他
+        </label> 任务 |
+        <label>
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.List)任务列表
+        </label>
+    </div>
+}
+@if (false)
+{
+    <script type="text/javascript" src="/Resource/Scripts/jquery-2.1.0-vsdoc.js"></script>
+}
+@section JavaScript{
+    <script src="@Url.Content("~/Resource/kindeditor-v4.1/kindeditor-min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Resource/kindeditor-v4.1/lang/zh_CN.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        var taskBodyId = "@Html.IdFor(m => m.TaskItem.Body)",
+            idOrName = "@Html.IdFor(m=>m.IdOrName)";
+
+        var $taskParent = $("#@Html.IdFor(x => x.TaskItem.Parent.Id)"),
+            $taskIsVirtual = $("#@Html.IdFor(m => m.TaskItem.LiteItem.Virtual)");
+
+
+        var $waiting = $("#waiting");
+        $waiting.hide();
+
+        var editor;
+        var isSubmit = false;
+        window.onbeforeunload = function () {
+            editor.sync();
+            if (!isSubmit && $("#" + taskBodyId).val() != "") {
+                return "页面内容还没有被保存，确认要离开？";
+            }
+        }
+
+        $(document).ready(function () {
+
+            $("#submitting").hide();
+
+            $(".date_picker").datepicker();
+
+            $("#find").hide();
+            $taskParent.focus(function () {
+                onParentFocus($(this));
+            });
+            $("#find").click(function (event) {
+                var taskId = $taskParent.val();
+                var byName = $("#" + idOrName + ":checked").val() == "Name";
+                findParentTask(event, taskId, byName);
+            });
+
+            preventEnterSubmit();
+            $("form").submit(function (event) {
+                if ($("#not_find").is(":visible")) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+            $("#dual_columns_big_input_submit_input").click(function () {
+                isSubmit = true;
+                preventDuplicatedSubmit(this);
+            });
+
+            KindEditor.ready(function (K) {
+                editor = K.create('textarea[name="TaskItem.Body"]', {
+                    allowFileManager: false,
+                    @Html.Partial("KindEditorItems/_Simple")
+                });
+            });
+
+            showBrotherTask();
+            $taskParent.blur(function () {
+                showBrotherTask();
+            });
+
+            $taskIsVirtual.click(function () {
+                markTaskIsVirtual($(this));
+            });
+
+            $("a[name='relation']").click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr("href");
+                openWindow(url, "任务关系", 600, 500);
+            });
+        });
+
+        function showBrotherTask() {
+            if ($taskParent.val() == "") {
+                $("#redirect_brother").parent().hide();
+            }
+            else {
+                $("#redirect_brother").parent().show();
+            }
+        }
+
+        function refreshProject(event) {
+            var projectId = get_current_project_id($(event));
+            canPublish(projectId);
+            refreshOwner(projectId, "#@Html.IdFor(x => x.TaskItem.Owner.Id)");
+            refreshDifficulties(projectId, "#@Html.IdFor(x => x.TaskItem.Difficulty)");
+            refreshPriority(projectId, "#@Html.IdFor(x => x.TaskItem.Priority)");
+            refreshAccepter(projectId, "#@Html.IdFor(x => x.TaskItem.Accepter.Id)");
+        }
+    </script>
+}

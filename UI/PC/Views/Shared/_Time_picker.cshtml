@@ -1,0 +1,16 @@
+﻿@{
+    IList<int> minutes = new List<int>();
+    IList<int> hours = new List<int>();
+    for (int i = 0; i < 25; i++)
+    {
+        hours.Add(i);
+    }
+
+    for (int i = 0; i < 61; i++)
+    {
+        minutes.Add(i);
+    }
+}
+<span>
+    @Html.DropDownList("hours", new SelectList(@hours)) 时
+    @Html.DropDownList("minutes", new SelectList(@minutes)) 分</span> 

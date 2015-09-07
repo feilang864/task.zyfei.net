@@ -1,0 +1,228 @@
+﻿@{
+    ViewBag.Title = "使用说明·任务";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="help_container">
+    <h1>
+        任务
+        <span id="crumb">
+            <span id="outline">当前路径：</span>
+            <a href="/Help">使用说明</a> >> <a href="/Help/Task">任务</a>
+        </span>
+    </h1>
+    <ul>
+        <li>
+            <h2><a href="/Help/Task/Progress" target="_blank">流程</a></h2>
+        </li>
+        <ul>
+            <li>任务的流程是指：任务从产生（发布）到终结（验收/取消）的全过程，其管理主要是通过<a href="/Task/New">任务发布</a>和<a href="/Help/Task/Progress#edit" target="_blank">任务编辑</a>页面来实现的。</li>
+            <li>
+                <h3>基本概念</h3>
+                <ul>
+                    <li>理解任务的流程管理，需要先了解几个基本概念：</li>
+                    <li>
+                        <a name="owner"></a>
+                        <h4>责任人</h4>
+                        <ul>
+                            <li>对任务负责的人，有时候也统称为“任务各方”。</li>
+                            <li>
+                                理论上，每一个任务都可以具有三个责任人：
+                                <ul class="ul1">
+                                    <li><b>发布人</b>：发布任务的人，说明任务的需求、难度、估计的任务量等</li>
+                                    <li><b>承接人</b>：完成任务的人</li>
+                                    <li><b>验收人</b>：对任务进行验收的人</li>
+                                </ul>
+                            </li>
+                            <li>
+                                实际上，这三个责任人可以是相同的人（默认可以相同，<span class="future" title="该功能尚未实现">项目设置中也可设置为不允许相同</span>）。比如：
+                                <ul class="ul1">
+                                    <li>可以给自己分配一个任务，这时候：发布人=承接人</li>
+                                    <li>发布人和验收人可以是同一人，也可以是不同的人</li>
+                                    <li>承接人和验收人也可以是同一个人，这样任务一旦完成就会自动验收合格</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a name="status"></a>
+                        <h4>任务状态</h4>
+                        <ul>
+                            <li>
+                                当任务处于不同的流程，就具有了不同的“状态”：
+                                <ul class="ul1">
+                                    <li>
+                                        <b>发布</b>：任务被发布，具有标题内容等基本属性，还没有指定承接人<br />
+                                    </li>
+                                    <li>
+                                        <b>分配</b>：由发布人指定了承接人<br />
+                                    </li>
+                                    <li>
+                                        承接：任务被承接人主动承接（任务发布人未指定承接人）<br />
+                                    </li>
+                                    <li>
+                                        <b>开始</b>：承接人开始工作<br />
+                                    </li>
+                                    <li>
+                                        暂停：承接人（因各种原因）暂停该任务的工作<br />
+                                    </li>
+                                    <li>
+                                        <b>完成</b>：任务被承接人完成<br />
+                                    </li>
+                                    <li>
+                                        放弃：承接人放弃承接该任务<br />
+                                    </li>
+                                    <li>
+                                        协商：承接人在进行任务的过程中和发布人协商，请求更改任务属性（比如：难度被低估/需求有未考虑到的地方）
+                                    </li>
+                                    <li>
+                                        更新：发布人根据承接人的协商请求，更改了任务的属性<br />
+                                    </li>
+                                    <li>
+                                        取消：发布人取消该任务（比如：任务已无存在价值）
+                                    </li>
+                                    <li>
+                                        <b>验收</b>：任务被完成后，验收人验收通过（任务结束）<br />
+                                    </li>
+                                    <li>
+                                        拒收：任务被完成后，验收人拒绝验收<br />
+                                    </li>
+                                    <li>
+                                        异议：任务被拒收后，承接人对验收人的拒收意见提出异议
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a name="constraint"></a>
+                        <h4>约束</h4>
+                        <ul>
+                            <li>这是本任务系统的重要<a href="/Help" target="_blank">特色</a>之一。</li>
+                            <li>
+                                意思是：根据任务当前的状态，限制责任人对其进行操作。比如：
+                                <ul class="ul1">
+                                    <li>任务一旦“开始”，发布人就不能再更改任务需求。</li>
+                                    <li>任务直到完成，才能验收</li>
+                                    <li>任务一旦完成，就彻底结束</li>
+                                </ul>
+                            </li>
+                            <li>
+                                这些约束都是通过<a href="/Help/Task/Progress#edit" target="_blank">任务编辑</a>页面的动态展示来实现<br />
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3><a href="/Help/Task/Progress#new" target="_blank">发布</a></h3>
+                <ul>
+                    <li>
+                        任务发布，表明产生了一个新任务。发布任务时：
+                        <ul class="ul1">
+                            <li>必须填写标题</li>
+                            <li>可以填写其他任务属性</li>
+                            <li>可以选择：指定/不指定发布人</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3><a href="/Help/Task/Progress#edit" target="_blank">编辑</a></h3>
+                <ul>
+                    <li>任务编辑页面是流程管理的核心页面，任务状态的变化和对责任人的约束都体现在该页面。</li>
+                </ul>
+            </li>
+        </ul>
+        <li>
+            <h2><a href="/Help/Task/Comment" target="_blank">留言</a></h2>
+            <ul>
+                <li>
+                    留言是任务管理中的一项重要辅助功能，除了能帮助责任人之间进行沟通以外；还是任务<a href="/Help/Task/Progress#history" target="_blank">历史记录</a>的一个重要部分，能够帮助我们了解任务的全貌。
+                    <ul class="ul1">
+                        <li>
+                            <b><a href="/Help/Task/Comment">发布</a></b>：可以在<a href="/Help/Task/Progress#edit" target="_blank">任务编辑</a>页面发布留言
+                        </li>
+                        <li>
+                            <b><a href="/Help/Task/Comment">通知</a></b>：有未读留言时，应该通知收信人
+                        </li>
+                        <li>
+                            <b><a href="/Help/Task/Comment">管理</a></b>：查看留言是否被收件人阅读，标记留言为已读，删除已读留言等
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2><a href="/Help/Task/Relation" target="_blank">关系</a> </h2>
+            <ul>
+                <li>
+                    <h3><a href="/Help/Task/Relation#parent" target="_blank">父子关系</a></h3>
+                    <ul>
+                        <li>
+                            <h4><a href="/Help/Task/Relation#tree" target="_blank">任务树</a></h4>
+                            <ul>
+                                <li>通过指定任务之间的父子关系，可以将任务有序的整理起来，形成一个任务树。实现本系统的另一大个功能：<a href="#">任务切分</a>。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4><a href="/Help/Task/Relation#virtual" target="_blank">虚任务</a></h4>
+                            <ul>
+                                <li>虚任务是一种特殊任务，类似于文件夹，可以作为一个任务容器来使用</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4><a href="/Help/Task/Relation#icon" target="_blank">图标</a></h4>
+                            <ul>
+                                <li>通过任务的图标可以立即知道任务在关系树中的位置。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4><a href="/Help/Task/Relation#sequence" target="_blank">次序</a></h4>
+                            <ul>
+                                <li>同级（兄弟）任务之间，可以用关系来指导完成这些任务的先后顺序。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3><b class="future" title="该功能尚未实现" style="">关联关系</b></h3>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2><a href="/Help/Task/Search" target="_blank">检索</a></h2>
+            <ul>
+                <li>任务的检索包括：查找（筛选/排序）和统计，主要通过以下几个页面/方法实现：</li>
+                <li>
+                    <h3><a href="/Help/Task/Search#list" target="_blank">任务列表</a></h3>
+                    <ul>
+                        <li><a href="/Task/List" target="_blank">任务列表</a>是基于项目的：检索的范围始终是限定在某个（些）项目中的，是最常用的检索页面。</li>
+                    </ul>
+                </li>
+                <li class="future" title="该功能尚未实现">
+                    <h3>用户任务检索</h3>
+                    <ul>
+                        <li>用户任务检索是基于用户的：检索的范围限定在某一个用户（在其参与的所有项目中）所负责的任务</li>
+                        <li>目前主要是在任务移交中使用</li>
+                    </ul>
+                </li>
+                <li class="future" title="该功能尚未实现">
+                    <h3>任务树</h3>
+                    <ul>
+                        <li>任务树是基于用户关系的：从某一个项目出发，利用项目之间的关系进行检索</li>
+                    </ul>
+                </li>
+                <li></li>
+            </ul>
+        </li>
+    </ul>
+    <div id="flip">
+        <span>
+            <a href="/Help/Project" target="_blank"><< 项目</a> ：上一页
+        </span>
+        <span class="split"></span>
+        <span>
+            下一页：<a href="/Help/Task/Progress" target="_blank"> 任务流程 >> </a>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,191 @@
+﻿@*Note: inline style width*@
+<div class="code" style="width:918px;">
+    <div id="time_span_and_sum">
+        <table id="search_table" style="display:block">
+            <tr>
+                <th>
+                    发布日期：
+                </th>
+                <td>
+                    从
+                    <input class="date_picker" data-val="true" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_FromPublish" name="TimeSpan.FromPublish" type="text" value="" />
+                    到
+                    <input class="date_picker" data-val="true" data-val-comparetopublish="* 截止时间小于开始时间" data-val-comparetopublish-frompublish="FromPublish" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_ToPublish" name="TimeSpan.ToPublish" type="text" value="" />
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.FromPublish" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.ToPublish" data-valmsg-replace="true"></span>
+
+                    <script type="text/javascript">
+                    $.validator.addMethod("comparetimespan_topublish", function (value, element, param) {
+                        if (value == "") {
+                            return true;
+                        }
+                        var valueOther = $("#" + param).val();
+                        if (valueOther == "") {
+                            return true;
+                        }
+                        var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                        var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                        return val1 > val2;
+                    });
+                    $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_topublish", "timespan_frompublish");
+                    </script>
+
+                </td>
+                <th>
+                    分配日期：
+                </th>
+                <td>
+                    从
+                    <input class="date_picker" data-val="true" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_FromAssign" name="TimeSpan.FromAssign" type="text" value="" />
+                    到
+                    <input class="date_picker" data-val="true" data-val-comparetoassign="* 截止时间小于开始时间" data-val-comparetoassign-fromassign="FromAssign" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_ToAssign" name="TimeSpan.ToAssign" type="text" value="" />
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.FromAssign" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.ToAssign" data-valmsg-replace="true"></span>
+
+                    <script type="text/javascript">
+                    $.validator.addMethod("comparetimespan_toassign", function (value, element, param) {
+                        if (value == "") {
+                            return true;
+                        }
+                        var valueOther = $("#" + param).val();
+                        if (valueOther == "") {
+                            return true;
+                        }
+                        var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                        var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                        return val1 > val2;
+                    });
+                    $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_toassign", "timespan_fromassign");
+                    </script>
+
+                </td>
+                <th>
+                    承接日期：
+                </th>
+                <td>
+                    从
+                    <input class="date_picker" data-val="true" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_FromOwn" name="TimeSpan.FromOwn" type="text" value="" />
+                    到
+                    <input class="date_picker" data-val="true" data-val-comparetoown="* 截止时间小于开始时间" data-val-comparetoown-fromown="FromOwn" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_ToOwn" name="TimeSpan.ToOwn" type="text" value="" />
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.FromOwn" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.ToOwn" data-valmsg-replace="true"></span>
+
+                    <script type="text/javascript">
+                    $.validator.addMethod("comparetimespan_toown", function (value, element, param) {
+                        if (value == "") {
+                            return true;
+                        }
+                        var valueOther = $("#" + param).val();
+                        if (valueOther == "") {
+                            return true;
+                        }
+                        var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                        var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                        return val1 > val2;
+                    });
+                    $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_toown", "timespan_fromown");
+                    </script>
+
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    预计完成日期：
+                </th>
+                <td>
+                    从
+                    <input class="date_picker" data-val="true" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_FromExpectComplete" name="TimeSpan.FromExpectComplete" type="text" value="" />
+                    到
+                    <input class="date_picker" data-val="true" data-val-comparetoexpectcomplete="* 截止时间小于开始时间" data-val-comparetoexpectcomplete-fromexpectcomplete="FromExpectComplete" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_ToExpectComplete" name="TimeSpan.ToExpectComplete" type="text" value="" />
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.FromExpectComplete" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.ToExpectComplete" data-valmsg-replace="true"></span>
+
+                    <script type="text/javascript">
+                    $.validator.addMethod("comparetimespan_toexpectcomplete", function (value, element, param) {
+                        if (value == "") {
+                            return true;
+                        }
+                        var valueOther = $("#" + param).val();
+                        if (valueOther == "") {
+                            return true;
+                        }
+                        var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                        var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                        return val1 > val2;
+                    });
+                    $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_toexpectcomplete", "timespan_fromexpectcomplete");
+                    </script>
+
+                </td>
+                <th>
+                    实际完成日期：
+                </th>
+                <td>
+                    从
+                    <input class="date_picker" data-val="true" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_FromActualComplete" name="TimeSpan.FromActualComplete" type="text" value="" />
+                    到
+                    <input class="date_picker" data-val="true" data-val-comparetoactualcomplete="* 截止时间小于开始时间" data-val-comparetoactualcomplete-fromactualcomplete="FromActualComplete" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_ToActualComplete" name="TimeSpan.ToActualComplete" type="text" value="" />
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.FromActualComplete" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.ToActualComplete" data-valmsg-replace="true"></span>
+
+                    <script type="text/javascript">
+                    $.validator.addMethod("comparetimespan_toactualcomplete", function (value, element, param) {
+                        if (value == "") {
+                            return true;
+                        }
+                        var valueOther = $("#" + param).val();
+                        if (valueOther == "") {
+                            return true;
+                        }
+                        var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                        var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                        return val1 > val2;
+                    });
+                    $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_toactualcomplete", "timespan_fromactualcomplete");
+                    </script>
+
+                </td>
+                <th>
+                    最后更新时间：
+                </th>
+                <td>
+                    从
+                    <input class="date_picker" data-val="true" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_FromLastestUpdateTime" name="TimeSpan.FromLastestUpdateTime" type="text" value="" />
+                    到
+                    <input class="date_picker" data-val="true" data-val-comparetolastestupdatetime="* 截止时间小于开始时间" data-val-comparetolastestupdatetime-fromlastestupdatetime="FromLastestUpdateTime" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="TimeSpan_ToLastestUpdateTime" name="TimeSpan.ToLastestUpdateTime" type="text" value="" />
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.FromLastestUpdateTime" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid" data-valmsg-for="TimeSpan.ToLastestUpdateTime" data-valmsg-replace="true"></span>
+
+                    <script type="text/javascript">
+                    $.validator.addMethod("comparetimespan_tolastestupdatetime", function (value, element, param) {
+                        if (value == "") {
+                            return true;
+                        }
+                        var valueOther = $("#" + param).val();
+                        if (valueOther == "") {
+                            return true;
+                        }
+                        var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                        var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                        return val1 > val2;
+                    });
+                    $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_tolastestupdatetime", "timespan_fromlastestupdatetime");
+                    </script>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

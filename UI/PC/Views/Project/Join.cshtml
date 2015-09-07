@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "加入项目组·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns.cshtml";
+}
+@model FFLTask.SRV.ViewModel.Project.JoinModel
+@section Introduction{
+    <ul>
+        <li>1、加入项目组后，请联系项目管理员给予你相应的权限，之后你才能在项目中发布/承接/验收任务。</li>
+        <li>2、根据项目的设置，通常权限都会有一定的期限。在权限到期后，需要重新激活（不是重新加入）。</li>
+        <li>3、父子项目之间是独立的。即加入子项目，不会自动加入父项目，反之亦然。如果要同时加入父子项目，请同时勾选他们。</li>
+    </ul>
+}
+<div>
+    @using (@Html.BeginForm())
+    { 
+        <h3>
+            加入项目组
+        </h3>
+        @Html.Partial("_JoinTree", Model)
+        <div id="dual_columns_input_submit">
+            <input type="submit" class="submit" id="dual_columns_input_submit_input" value="加入" />
+        </div> 
+    }
+</div>

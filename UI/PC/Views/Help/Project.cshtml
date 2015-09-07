@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "使用说明·项目";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="help_container">
+    <h1>
+        项目
+        <span id="crumb">
+            <span id="outline">当前路径：</span>
+            <a href="/Help">使用说明</a> >> <a href="/Help/Project">项目</a>
+        </span>
+    </h1>
+    <h2><a href="/Project/Create" target="_blank">创建</a></h2>
+    <ul>
+        <li>
+            创建项目时可以指定父项目，父项目只能是你已经创建的、或者你加入且具有管理员权限的项目。
+        </li>
+        <li>
+            项目的名称（如：前台、后台、DBA等）是可以重复的。但根项目（如：自由飞）建议不要重复，可以点击<a href="#">是否重复</a>进行检查。
+        </li>
+        <li>
+            @Html.Partial("Project/_Create")
+        </li>
+        <li>
+            所以，“确定”一个项目，需要查看项目的“关系”。比如，单纯的一个项目名“DBA”是无法告诉你这究竟是哪一个项目的DBA。<br />
+            我们采用了以下三种方式来呈现项目之间的父子关系，以方便的确定一个的项目的为位置：
+            <style>
+                .align_code th {
+                    padding-top: 8px;
+                }
+            </style>
+            <table width="441" class="align_code">
+                <tr>
+                    <th width="85">下拉列表： </th>
+                    <td width="340">
+                        @Html.Partial("Project/_LinkedDropdownList")
+                    </td>
+                </tr>
+                <tr>
+                    <th>单链：</th>
+                    <td>
+                        @Html.Partial("Project/_LinkedLink")
+                    </td>
+                </tr>
+                <tr>
+                    <th>树：</th>
+                    <td>
+                        @Html.Partial("Project/_Tree")
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li></li>
+    </ul>
+    <h2><span class="future" title="该功能尚未实现">项目设置</span></h2>
+    <h2><a href="/Project/Search" target="_blank">加入</a></h2>
+    <ul>
+        <li>加入项目之前，首先应<a href="/Project/Search" target="_blank">搜索</a>到想加入的项目，可以使用项目名称或编号进行搜索</li>
+        <li>
+            @Html.Partial("Project/_Search")
+        </li>
+        <li>
+            选中希望加入的项目，点击
+            <input type="submit" name="Submit32" value="加入" />
+            ，跳转到<a href="">加入项目</a>的页面
+        </li>
+        <li>
+            @Html.Partial("Project/_Join")
+        </li>
+        <li>
+            已经加入的项目会显示为
+            <input checked="checked" disabled="disabled" type="checkbox" value="true" />
+        </li>
+        <li>
+            勾选你想加入的项目，点击
+            <input type="submit" name="Submit32" value="加入" />即可。
+        </li>
+        <li>
+            加入项目之后，请耐心等待（或主动联系）项目管理员给予你相应的<a href="/Help/Team#auth" target="_blank">权限</a>，才能进行相应的操作。
+        </li>
+    </ul>
+    <div id="flip">
+        <span>
+            <a href="/Help/Account" target="_blank"><< 用户</a> ：上一页
+        </span>
+        <span class="split"></span>
+        <span>
+            下一页：<a href="/Help/Task" target="_blank"> 任务 >> </a>
+        </span>
+    </div>
+</div>

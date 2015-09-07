@@ -1,0 +1,13 @@
+﻿@model FFLTask.SRV.ViewModel.Task.EditModel
+@using FFLTask.GLB.Global.Enum
+@Html.Partial("EditColumns/_Edit_Subtitle", TaskProcess.InProcess, new ViewDataDictionary { { "Edit", true } })
+<table id="@TaskProcess.InProcess">
+    <tr>
+        <th class="first_column">
+            进度：
+        </th>
+        <td>
+            @Html.DropDownListFor(m => m.SelectedQualifiedStatus.Stage, new SelectList(Model.QualifiedStatus, "Stage", "Name"))
+        </td>
+    </tr>
+</table>

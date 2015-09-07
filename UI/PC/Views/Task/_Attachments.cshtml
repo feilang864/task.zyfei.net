@@ -1,0 +1,19 @@
+﻿@model FFLTask.SRV.ViewModel.Task.EditModel
+@if (Model.Attachments != null && Model.Attachments.Count > 0)
+{
+    <tr>
+        <th class="top_align first_column">
+            附件：
+        </th>
+        <td colspan="3">
+            @for (int i = 0; i < Model.Attachments.Count; i++)
+            {
+                string address = string.Format(@"/Resource/Image/Attachment/{0}/{1}", Model.TaskItem.LiteItem.Id, Model.Attachments[i].FileName);
+                <p>
+                    <img src="/Resource/Image/attachment.gif" /><a href="/Task/Download?path=@address">@Model.Attachments[i].FileName</a>
+                    <span>上传： @Html.Partial("_UserLink", Model.Attachments[i].Uploader) </span>
+                </p>
+            }
+        </td>
+    </tr>
+}

@@ -1,0 +1,45 @@
+﻿@{    
+    ViewBag.Title = "当前任务列表·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using FFLTask.SRV.ViewModel.Message
+@using Global.Core.ExtensionMethod
+@model FromMeModel
+<div id="dual_columns_big">
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("_FromMeOperater")
+        <table id="messages" class="list">
+            @Html.Partial("_FromMe_Header", Model)
+            @if (Model.Messages.IsNullOrEmpty())
+            {
+                <tr>
+                    <td colspan="7">
+                        当前没有发布留言
+                    </td>
+                </tr> 
+            }
+            else
+            {
+                @Html.Partial("_FromMe_Body", Model)
+            }
+        </table>
+        @Html.Partial("_FromMeOperater")
+    }
+    <div class="pager" style="margin: 8px auto 10px auto; height: 30px;">@Html.Action("_Pager", "Shared", Model.Pager)</div>
+</div>
+<div style="clear: both;">
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".select_read").click(function () {
+            $(".read").find("input:checkbox").attr("checked", $(this).is(":checked"));
+        });
+        $(".select_unread").click(function () {
+            $(".unread").find("input:checkbox").attr("checked", $(this).is(":checked"));
+        });
+        $("#messages select").change(function () {
+            $("form").submit();
+        });
+    });
+</script>

@@ -1,0 +1,113 @@
+﻿#header {
+    width: auto;
+    height: 66px;
+}
+
+#navigator {
+    background-color: #4C9ED9;
+    width: auto;
+    height: 32px;
+    color: #ECECFB;
+}
+
+    #navigator span {
+        font-weight: bold;
+        font-size: 16px;
+        font-family: '宋体';
+        margin-left: 18px;
+    }
+
+    #navigator a {
+        margin-left: 6px;
+        font-size: 14px;
+        font-family: '宋体';
+        height: 32px;
+        padding: 13px 0 5px 0;
+        text-decoration: none;
+        color: #d3d7d2;
+    }
+
+        #navigator a:link {
+            color: #d3d7d2;
+        }
+
+        #navigator a:visited {
+            color: #d3d7d2;
+        }
+
+        #navigator a:hover {
+            color: White;
+        }
+
+        #navigator a:active {
+            background-image: url(../../Resource/Image/current_location.jpg);
+            background-repeat: no-repeat;
+            background-position: bottom;
+            color: White;
+        }
+
+#footer {
+    background-color: #4C9ED9;
+    color: #000033;
+    padding: 16px 48px 20px 48px;
+    font-size: 14px;
+}
+
+    #footer div {
+        margin-top: 12px;
+    }
+
+    #footer a {
+        text-decoration: none;   
+        margin-left: 4px; 
+    }
+
+#logo {
+    margin-left: 24px;
+    position: relative;
+    margin-top: 17px;
+}
+
+#header_title_small {
+    font-size: 24px;
+    color: #000033;
+    letter-spacing: 5px;
+    font-family: '微软雅黑';
+    margin-top: 33px;
+    position: absolute;
+    margin-left: 22px;
+}
+
+#header_title_big {
+    position: absolute;
+    margin-top: 23px;
+    margin-left: 123px;
+    letter-spacing: 5px;
+    font-size: 32px;
+    color: #000033;
+    font-family: '微软雅黑';
+}
+
+#sample {
+    margin-left: 389px;
+    position: absolute;
+    margin-top: 40px;
+    color: #000066;
+    font-family: '微软雅黑';
+    font-size: 14px;
+    border-width: 1px medium 2px;
+    border-style: dashed none solid;
+    border-color: #F00;
+    padding: 0 6px;
+}
+
+    #sample a {
+        text-decoration: none;
+    }
+
+#logon_status {
+    float: right;
+    position: absolute;
+    right: 30px;
+    top: 27px;
+}

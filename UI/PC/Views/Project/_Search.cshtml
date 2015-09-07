@@ -1,0 +1,43 @@
+﻿@model FFLTask.SRV.ViewModel.Project._SearchModel
+@using (Ajax.BeginForm("_SearchResult", new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "search_result"
+}))
+{
+    <table>
+        <tr>
+            <th>
+                使用：
+            </th>
+            <td>
+                @Html.RadioButtonFor(m => m.IdOrName, true)编号 @Html.RadioButtonFor(m => m.IdOrName, false)名称
+            </td>
+        </tr>
+        <tr>
+            <th>
+                输入：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.Input)
+                <a href="#" id="search">搜索</a>
+            </td>
+        </tr>
+        <tr>
+            @*just a workaround for style="height:1px;", else the tr show an empty height*@ 
+            <th style="height:1px;">
+            </th>
+            <td id="search_result">
+            </td>
+        </tr>
+    </table>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#search").click(function (event) {
+            event.preventDefault();
+            $("form").submit();
+        });
+    })
+</script>

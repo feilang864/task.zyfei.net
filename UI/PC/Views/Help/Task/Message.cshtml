@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "使用说明·任务·留言";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="help_container">
+    <h1>
+        留言
+        <span id="crumb">
+            <span id="outline">当前路径：</span>
+            <a href="/Help">使用说明</a> >> <a href="/Help/Task">任务</a> >> <a href="/Help/Task/Message">留言</a>
+        </span>
+    </h1>
+    <ul>
+        <li>
+            <h2>发布</h2>
+            <ul>
+                <li>在<a href="/Help/Task/Edit" target="_blank">任务编辑</a>页面可以给相关人员留言，留言时可以指定<b>收件人</b>（被留言的人）。</li>
+                <li>
+                    如果收件人选择为
+                    <input name="radiobutton" type="radio" value="radiobutton" checked="checked" />
+                    无，留言不会被发出，仅作为任务的补充说明留在任务历史里。
+                </li>
+                <li>
+                    @Html.Partial("Task/Message/_Publish")
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2>通知</h2>
+            <ul>
+                <li>收件人有未读留言时，他可以从导航条中看到闪烁的提示</li>
+                <li>点击即可进入<a href="/Message/ToMe" target="_blank">给我的留言</a>页面</li>
+                <li>
+                    @Html.Partial("Task/Message/_Reminder")
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2>管理</h2>
+            <ul>
+                <li>
+                    <a name="tome"></a>
+                    <h3>给我的留言</h3>
+                    <ul>
+                        <li>未读的留言显示为粗体，已读的留言正常显示。</li>
+                        <li>
+                            @Html.Partial("Task/Message/_ToMe")
+                        </li>
+                        <li>可以一次性的 <label><input type="checkbox" value="true" checked="checked" />勾选</label> 所有已读/未读留言，然后： </li>
+                        <li>
+                            <ul class="ul1">
+                                <li>选中<b>标记为：</b><label><input type="radio" checked="checked" />已读</label>，提交，会将选中的留言标记为“已读”。</li>
+                                <li>选中<b>标记为：</b><label><input type="radio" checked="checked" />删除</label>，提交，会将选中的留言从"未读留言"中移除（留言本身不会删除，仍然保留在任务历史中）。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>我的留言</h3>
+                    <ul>
+                        <li><b>发件人</b>（留言的人）也可以查看留言是否被阅读，一样的可以移除自己的留言</li>
+                        <li>
+                            @Html.Partial("Task/Message/_FromMe")
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>为什么需要清理</h3>
+                    <ul>
+                        <li><span class="future" title="该功能尚未实现">未读留言可以发件人可以编辑，已读留言发件人不能编辑</span></li>
+                        <li><span class="future" title="该功能尚未实现">我的留言和给我的留言，每个用户最多只能保留最近的300条</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div id="flip">
+        <span>
+            <a href="/Help/Task/Progress" target="_blank"><< 任务流程</a> ：上一页
+        </span>
+        <span class="split"></span>
+        <span>
+            下一页：<a href="/Help/Task/Relation" target="_blank"> 关系 >> </a>
+        </span>
+    </div>
+</div>

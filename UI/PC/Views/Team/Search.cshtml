@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "成员任务·团队";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns_Big.cshtml";
+}
+@model FFLTask.SRV.ViewModel.Team.SearchModel
+@using FFLTask.SRV.ViewModel.Team
+@using Global.Core.ExtensionMethod
+@section RightTitle{
+    <h2>
+        说明
+    </h2>
+}
+@section Introduction{
+}
+<h3>
+    成员任务检索
+</h3>
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>
+                用户名：
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+                @Html.HiddenFor(m => m.UserId)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                进行：
+            </td>
+            <td>
+                <label> @Html.RadioButtonFor(m => m.ResultFor, ResultFor.Transfer)任务移交</label>
+                <label> @Html.RadioButtonFor(m => m.ResultFor, ResultFor.Dismiss)解聘</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" class="submit" value="提交" />
+            </td>
+        </tr>
+    </table>
+    if (Model.TransferResult != null)
+    {
+        //TODO: need use IsNullOrEmpty() after it change its parameter from IList to IEnumerable
+        if (Model.TransferResult.AsPublisher.Count() == 0 &&
+            Model.TransferResult.AsOwner.Count() == 0 &&
+            Model.TransferResult.AsAccepter.Count() == 0)
+        {
+            <span>* 没有查找到该用户负责的任务</span>
+        }
+        else
+        {
+            @Html.Partial("Search/_TransferResult", Model.TransferResult.AsPublisher, new ViewDataDictionary { { "UserId", Model.UserId } })
+            @Html.Partial("Search/_TransferResult", Model.TransferResult.AsOwner, new ViewDataDictionary { { "UserId", Model.UserId } })
+            @Html.Partial("Search/_TransferResult", Model.TransferResult.AsAccepter, new ViewDataDictionary { { "UserId", Model.UserId } })
+        }
+    }
+    else if (Model.DismissResult != null)
+    {
+        <table>
+            <tr><th></th><th>项目</th><th>负责任务</th>@*<th></th>*@</tr>
+            @for (int i = 0; i < Model.DismissResult.Items.Count; i++)
+            {
+
+                <tr>
+                    <td>
+                        @if (Model.DismissResult.Items[i].Dismissed ||
+                            Model.DismissResult.Items[i].Charge > 0)
+                        {
+                            @Html.CheckBoxFor(m => m.DismissResult.Items[i].Selected, new { disabled = "disabled" })
+                        }
+                        else
+                        {
+                            @Html.CheckBoxFor(m => m.DismissResult.Items[i].Selected)
+                        }
+                        @Html.HiddenFor(m => m.DismissResult.Items[i].ProjectId)
+                    </td>
+                    <td>
+                        @Html.Action("_LiteralLinkedProject", "Project", new { projectId = Model.DismissResult.Items[i].ProjectId })
+                    </td>
+                    <td>
+                        @Model.DismissResult.Items[i].Charge 条
+                    </td>
+                    <td>
+                        @if (Model.DismissResult.Items[i].Dismissed)
+                        {
+                            <span>已解聘</span>
+                        }
+                        else if (Model.DismissResult.Items[i].Charge == 0)
+                        {
+                            <a href="#">解聘</a>
+                        }
+                        else
+                        {
+                            <a href="/Project/Summary/@Model.DismissResult.Items[i].ProjectId">查看</a>
+                        }
+                    </td>
+                </tr>
+            }
+
+            <tr>
+                <td>
+                    <input type="checkbox" />全选
+                </td>
+                <td colspan="2">
+                    <input type="submit" value="解聘" />
+                </td>
+            </tr>
+        </table>
+    }
+}

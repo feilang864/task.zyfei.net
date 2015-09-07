@@ -1,0 +1,54 @@
+﻿@*inline width style*@
+<div class="code" style="width: 420px">
+    @*note: inline none-float style*@
+    <div id="dual_columns_input" style="float:none;">
+        <div>
+            @*note: inline none-float style*@
+            <h3 style="margin:0">
+                项目搜索
+            </h3>
+            <table>
+                <tr>
+                    <th>
+                        使用：
+                    </th>
+                    <td>
+                        <input data-val="true" data-val-required="The IdOrName field is required." id="IdOrName" name="IdOrName" type="radio" value="True" checked="checked"/>编号 
+                        <input id="IdOrName" name="IdOrName" type="radio" value="False" />名称
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        输入：
+                    </th>
+                    <td>
+                        <input id="Input" name="Input" type="text" value="自由飞" />
+                        <a href="#" id="search">搜索</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input id="selectedProject" type="radio" value="15" name="selectedProject">
+                        <span>
+                            <a href="/Project/Summary/7">自由飞</a>
+                        </span>
+                        <br>
+                        <input id="selectedProject" type="radio" value="30" name="selectedProject">
+                        <span>
+                            <a href="/Project/Summary/27">玩具动员</a>
+                            <span>>></span>
+                            <a href="/Project/Summary/30">自由飞鸟</a>
+                        </span>
+                        <br>
+                    </td>
+                </tr>
+
+            </table>
+            <div id="dual_columns_input_submit">
+                <button id="join">加入</button>
+                <button id="edit">修改</button>
+            </div>
+        </div>
+    </div>
+</div>

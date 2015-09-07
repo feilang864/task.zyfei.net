@@ -1,0 +1,96 @@
+﻿@model FFLTask.SRV.ViewModel.Project._DropdownlistLinkedModel
+@if (Model.LinkedProject != null && Model.LinkedProject.Count > 0)
+{
+    string showPreLink = Model.LinkedProject.Count >= 2 ? "inline" : "none";
+    string showNextLink = Model.SelectedProjectHasChild ? "inline" : "none"; ;
+    string showSeparator = (showPreLink == "inline" && showNextLink == "inline") ? "inline" : "none";
+    <span id="linked_projects">
+        @Html.Partial("~/Views/Project/_DropdownlistLinkedNode.cshtml", Model.LinkedProject.First)
+    </span>
+    <span style="font-size: 12px;"><a href="#" id="previous_project" style=" display: @showPreLink">&lt;&lt;上一级</a> <span id="separator" style=" display: @showSeparator">|</span> <a href="#" id="next_project" style=" display: @showNextLink">下一级&gt;&gt;</a> </span>
+    @Html.HiddenFor(m => m.SelectedProjectHasChild)
+    @Html.HiddenFor(m => m.TailSelectedProject.Id) //always use this as selected project
+    if (false)
+    {
+        <script type="text/javascript" src="/Resource/Scripts/jquery-2.1.0-vsdoc.js"></script>
+    }
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#next_project").click(function (event) {
+            var $last_project_id = get_last_project().val();
+            event.preventDefault();
+            $.ajax({
+                url: "/Project/_NextProjectNode/" + $last_project_id,
+                type: "GET",
+                dataType: "html",
+                success: function (data) {
+                    $("#linked_projects").append(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    JqueryAjaxError(jqXHR, textStatus, errorThrown);
+                },
+                complete: function(){
+                    refreshProject();
+                    refresh_links();
+                }
+            });
+        });
+        $("#previous_project").click(function (event) {
+            var $last_project = get_last_project();            
+            event.preventDefault();
+            $last_project.prev().remove();
+            $last_project.remove();
+            refreshProject();
+            refresh_links();
+        });
+    })
+    function refresh_links() {
+        hide_links();
+        if ($("#linked_projects select:visible").length > 1) {
+            show_previous_link();
+        };
+        show_next_link();
+    }
+    function hide_links() {
+        $("#previous_project").hide();
+        $("#separator").hide();
+        $("#next_project").hide();
+    }
+    function show_previous_link() {
+        $("#previous_project").show();
+    }
+    function show_next_link() {
+        var $last_project_id = get_last_project().val();     
+        $.ajax({
+            url: "/Project/HasChild/" + $last_project_id,
+            type: "GET",
+            success: function (data) {
+                if (data) {
+                    if ($("#previous_project").is(":visible")) {
+                        $("#separator").show();
+                    };
+                    $("#@Html.IdFor(m => m.SelectedProjectHasChild)").val(data);
+                    $("#next_project").show();
+                }     
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                JqueryAjaxError(jqXHR, textStatus, errorThrown);
+            }
+        });
+    }
+    function get_last_project(){
+        return $("#linked_projects").children().last();
+    }
+    function get_current_project_id(event) {
+        event.nextAll().remove();
+        refresh_links();
+        var projectId = get_last_project().val();
+        $("#@Html.IdFor(m=>m.TailSelectedProject.Id)").val(projectId);
+        return projectId;
+    }
+    </script>
+}
+else
+{ 
+    <span class="reminder">您还没有加入任何项目</span>
+}

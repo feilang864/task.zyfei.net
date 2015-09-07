@@ -1,0 +1,106 @@
+﻿@*TODO: @Model.Selectedxxxx*@
+@model FFLTask.SRV.ViewModel.Task.EditModel
+@using FFLTask.SRV.ViewModelMap
+@using Global.Core.ExtensionMethod
+@Html.Partial("EditColumns/_Edit_Subtitle", FFLTask.GLB.Global.Enum.TaskProcess.Publish)
+<table>
+    <tr>
+        <th class="first_column">
+            项目：
+        </th>
+        <td colspan="3">
+            @Html.Action("_LiteralLinkedProject", "Project", new { projectId = Model.CurrentProject.TailSelectedProject.Id })
+        </td>
+    </tr>
+    <tr>
+        <th class="first_column">
+            标题：
+        </th>
+        <td class=" long_textbox" colspan="3">
+            @Html.Partial("_Node_Type", Model.TaskItem.LiteItem)
+            @Model.TaskItem.LiteItem.Title
+            [@Html.ActionLink("关系", "Relation", new { taskId = Model.TaskItem.LiteItem.Id }, new { name = "relation" })]
+        </td>
+    </tr>
+    @if (!string.IsNullOrEmpty(Model.TaskItem.Body))
+    {        
+        <tr>
+            <th class="top_align first_column">
+                内容：
+            </th>
+            <td colspan="3">
+                @Html.Raw(Model.TaskItem.Body)
+            </td>
+        </tr>
+    }
+    @Html.Partial("_Attachments")
+    <tr>
+        <th class="first_column">
+            难度：
+        </th>
+        <td class="second_column">
+            @if (@Model.TaskItem.Difficulty != null)
+            {
+                @Model.TaskItem.Difficulty.GetEnumDescription()
+            }
+            else
+            {
+                <text>未指定</text>
+            }
+        </td>
+        <th class="third_column">
+            工时（分钟）：
+        </th>
+        <td class="fourth_column">
+            @Model.TaskItem.ExpectedWorkPeriod
+        </td>
+    </tr>
+    <tr>
+        <th>
+            优先级：
+        </th>
+        <td>
+            @if (Model.TaskItem.Priority != null)
+            {
+                @Model.TaskItem.Priority.GetEnumDescription()
+            }
+            else
+            {
+                <text>未指定</text> 
+            }
+        </td>
+        <th>
+            计划完成时间：
+        </th>
+        <td>
+            @if (Model.ExpectedComplete.Combine() != null)
+            {
+                @Model.ExpectedComplete.Combine().Value.ToChinese()                
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>
+            验收人：
+        </th>
+        <td>
+            @if (@Model.TaskItem.Accepter != null)
+            {
+                @Model.TaskItem.Accepter.Name
+            }
+        </td>
+        <th>
+            虚任务：
+        </th>
+        <td>
+            @if (@Model.TaskItem.LiteItem.Virtual)
+            {
+                <span>是</span>
+            }
+            else
+            { 
+                <span>否</span>
+            }
+        </td>
+    </tr>
+</table>

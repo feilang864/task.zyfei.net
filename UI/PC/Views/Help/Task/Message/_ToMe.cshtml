@@ -1,0 +1,218 @@
+﻿@*inline width style*@
+<div class="code" style="width:948px;">
+    @*Note: add this div to distinguish _ToMe and _FromMe in js code*@
+    <div class="toMe">
+        @*Note: add prefix in class to distinguish _ToMe and _FromMe in js code*@
+        <label><input type="checkbox" class="toMe_select_read" />已读</label>
+        <label><input type="checkbox" class="toMe_select_unread" />未读</label>
+        <b>标记为：</b>
+        <label><input checked="checked" data-val="true" data-val-required="The MessageMark field is required." id="MessageMark" name="MessageMark" type="radio" value="Read" />已读</label>
+        <label><input id="MessageMark" name="MessageMark" type="radio" value="Delete" />删除</label>
+        <input type="submit" value="提交" />
+        <table id="messages" class="list">
+
+            <tr>
+                <th>
+                </th>
+                <th>
+                    <a class="sort" href="/Message/toMe/Page-1?sort=PublishTime&amp;des=false">
+                        <img src="/Resource/Image/sort_down.png" class="no_border" />
+                        时间
+                    </a>
+                </th>
+                <th>
+                    <select id="SelectedProjectId" name="SelectedProjectId">
+                        <option value="">项目</option>
+                        <option value="11">首顾科技&gt;&gt;任务管理器</option>
+                        <option value="9">首顾科技&gt;&gt;创业家园&gt;&gt;集成</option>
+                    </select>
+                </th>
+                <th>
+                    任务名称
+                </th>
+                <th>
+                    <select id="SelectedAddresserId" name="SelectedAddresserId">
+                        <option value="">留言人</option>
+                        <option value="32">留言人-A</option>
+                        <option value="33">留言人-B</option>
+                        <option value="34">留言人-C</option>
+                    </select>
+                </th>
+                <th>
+                    内容
+                </th>
+            </tr>
+
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_0__Checked" name="Messages[0].Checked" type="checkbox" value="true" /><input name="Messages[0].Checked" type="hidden" value="false" />
+                    <input data-val="true" data-val-required="The Id field is required." id="Messages_0__Id" name="Messages[0].Id" type="hidden" value="20" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-13 00:40
+                </td>
+                <td>
+                    首顾科技>>任务管理器
+                </td>
+                <td>
+                    <a class="task_edit" href="/Task/Edit/61" target="_blank">引入留言功能</a>
+                </td>
+                <td>
+                    留言人-A
+                </td>
+                <td>
+                    20-任务需要谨慎
+                </td>
+            </tr>
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_1__Checked" name="Messages[1].Checked" type="checkbox" value="true" /><input name="Messages[1].Checked" type="hidden" value="false" />
+                    <input data-val="true" data-val-required="The Id field is required." id="Messages_1__Id" name="Messages[1].Id" type="hidden" value="19" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-13 00:40
+                </td>
+                <td>
+                    首顾科技>>任务管理器
+                </td>
+                <td>
+                    <a class="task_edit" href="/Task/Edit/61" target="_blank">引入留言功能</a>
+                </td>
+                <td>
+                    留言人-A
+                </td>
+                <td>
+                    19-做该任务需要谨慎
+                </td>
+            </tr>
+            <tr class="unread">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_2__Checked" name="Messages[2].Checked" type="checkbox" value="true" /><input name="Messages[2].Checked" type="hidden" value="false" />
+                    <input data-val="true" data-val-required="The Id field is required." id="Messages_2__Id" name="Messages[2].Id" type="hidden" value="18" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-13 00:40
+                </td>
+                <td>
+                    首顾科技>>任务管理器
+                </td>
+                <td>
+                    <a class="task_edit" href="/Task/Edit/61" target="_blank">引入留言功能</a>
+                </td>
+                <td>
+                    留言人-A
+                </td>
+                <td>
+                    18-做该任务谨慎
+                </td>
+            </tr>
+            <tr class="unread">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_3__Checked" name="Messages[3].Checked" type="checkbox" value="true" /><input name="Messages[3].Checked" type="hidden" value="false" />
+                    <input data-val="true" data-val-required="The Id field is required." id="Messages_3__Id" name="Messages[3].Id" type="hidden" value="17" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-13 00:40
+                </td>
+                <td>
+                    首顾科技>>任务管理器
+                </td>
+                <td>
+                    <a class="task_edit" href="/Task/Edit/61" target="_blank">引入留言功能</a>
+                </td>
+                <td>
+                    留言人-A
+                </td>
+                <td>
+                    17-做该任务需要谨慎
+                </td>
+            </tr>
+            <tr class="unread">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_4__Checked" name="Messages[4].Checked" type="checkbox" value="true" /><input name="Messages[4].Checked" type="hidden" value="false" />
+                    <input data-val="true" data-val-required="The Id field is required." id="Messages_4__Id" name="Messages[4].Id" type="hidden" value="16" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-13 00:40
+                </td>
+                <td>
+                    首顾科技>>任务管理器
+                </td>
+                <td>
+                    <a class="task_edit" href="/Task/Edit/61" target="_blank">引入留言功能</a>
+                </td>
+                <td>
+                    留言人-A
+                </td>
+                <td>
+                    16-做需要谨慎
+                </td>
+            </tr>
+            <tr class="unread">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_5__Checked" name="Messages[5].Checked" type="checkbox" value="true" /><input name="Messages[5].Checked" type="hidden" value="false" />
+                    <input data-val="true" data-val-required="The Id field is required." id="Messages_5__Id" name="Messages[5].Id" type="hidden" value="15" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-13 00:40
+                </td>
+                <td>
+                    首顾科技>>任务管理器
+                </td>
+                <td>
+                    <a class="task_edit" href="/Task/Edit/61" target="_blank">引入留言功能</a>
+                </td>
+                <td>
+                    留言人-A
+                </td>
+                <td>
+                    15-做该任务需验收时注意区分要谨慎
+                </td>
+            </tr>
+            <tr class="unread">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_6__Checked" name="Messages[6].Checked" type="checkbox" value="true" /><input name="Messages[6].Checked" type="hidden" value="false" />
+                    <input data-val="true" data-val-required="The Id field is required." id="Messages_6__Id" name="Messages[6].Id" type="hidden" value="14" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-13 00:40
+                </td>
+                <td>
+                    首顾科技>>任务管理器
+                </td>
+                <td>
+                    <a class="task_edit" href="/Task/Edit/61" target="_blank">引入留言功能</a>
+                </td>
+                <td>
+                    留言人-A
+                </td>
+                <td>
+                    14-做该任务需要谨慎
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".unread .task_edit").click(function (event) {
+                    $(this).parent().parent().find("input[type='checkbox']").attr("checked", "checked");
+                });
+            });
+        </script>
+        <label><input type="checkbox" class="toMe_select_read" />已读</label>
+        <label><input type="checkbox" class="toMe_select_unread" />未读</label>
+        <b>标记为：</b>
+        <label><input checked="checked" id="MessageMark" name="MessageMark" type="radio" value="Read" />已读</label>
+        <label><input id="MessageMark" name="MessageMark" type="radio" value="Delete" />删除</label>
+        <input type="submit" value="提交" />
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".toMe_select_read").click(function () {
+            $("div.toMe .read").find("input:checkbox").attr("checked", $(this).is(":checked"));
+        });
+        $(".toMe_select_unread").click(function () {
+            $("div.toMe .unread").find("input:checkbox").attr("checked", $(this).is(":checked"));
+        });
+    });
+</script>

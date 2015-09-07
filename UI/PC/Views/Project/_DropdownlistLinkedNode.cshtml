@@ -1,0 +1,17 @@
+﻿@model LinkedListNode<FFLTask.SRV.ViewModel.Project._DropdownlistLinkedNodeModel>
+@if (Model.Previous != null)
+{
+    <span>>></span>
+}
+@if (Model.Next == null)
+{
+    @Html.DropDownList("Last", new SelectList(Model.Value.Projects, "Id", "Name", Model.Value.CurrentProject.Id), new { onchange = "refreshProject(this);" })
+}
+else
+{
+    @Html.DropDownList("Node", new SelectList(Model.Value.Projects, "Id", "Name", Model.Value.CurrentProject.Id), new { onchange = "refreshProject(this);" })
+    if (Model.Next != null)
+    {
+        @Html.Partial("~/Views/Project/_DropdownlistLinkedNode.cshtml", Model.Next)
+    }
+}

@@ -1,0 +1,98 @@
+﻿@{    
+    ViewBag.Title = "任务查找·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model FFLTask.SRV.ViewModel.Task.SearchModel
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <th>项目组：
+            </th>
+            <td colspan="5">@Html.DropDownListFor(m=>m.SelectedProjectId,new SelectList(Model.Projects,"Id","Name"))
+            </td>
+        </tr>
+        <tr>
+            <th>任务编号：
+            </th>
+            <td  colspan="5">@Html.TextBoxFor(m=>m.TaskNumber)
+            </td>
+        </tr>
+        <tr>
+            <th>发布人：
+            </th>
+            <td colspan="2">@Html.DropDownListFor(m=>m.SelectedPublishId,new SelectList(Model.Publisher,"Id","Name"))
+            </td>
+            <th>承接人：
+            </th>
+            <td colspan="2">@Html.DropDownListFor(m=>m.SelecteOwnerId,new SelectList(Model.Owners,"Id","Name"))
+            </td>
+        </tr>
+        <tr>
+            <th rowspan="2">
+                发布日期：
+            </th>
+            <th style=" text-align: right;">自：</th>
+            <td>
+            @Html.TextBoxFor(m=>m.StartPublishDate)
+            </td>
+            <th rowspan="2">承接日期：</th>
+            <th style=" text-align:right;">自：</th>
+            <td>
+            @Html.TextBoxFor(m=>m.StartAssignerDate)
+            </td>
+        </tr>
+         <tr>
+            <th style=" text-align:right;">至：</th>
+            <td>@Html.TextBoxFor(m=>m.EndPublishDate)</td>
+            <th style=" text-align:right;">至：</th>
+            <td>@Html.TextBoxFor(m=>m.EndAssignerDate)</td>
+        </tr>
+          <tr>
+            <th rowspan="2">预计完成时间：</th>
+            <th style=" text-align:right;">自：</th>
+            <td>
+            @Html.TextBoxFor(m=>m.StartExpectCompleteDate)
+            </td>
+            <th rowspan="2">实际完成日期：</th>
+            <td style=" text-align:right;"> 自：</td>
+            <td>
+                @Html.TextBoxFor(m=>m.StartActaulCompleteDate)
+            </td>
+        </tr>
+        <tr>
+            <th style=" text-align:right;">至：</th>
+            <td>
+                @Html.TextBoxFor(m=>m.EndExpectCompleteDate)
+            </td>
+            <th style=" text-align:right;">至：</th>
+            <td>
+                @Html.TextBoxFor(m=>m.EndActualCompleteDate)
+            </td>
+        </tr>
+          <tr>
+            <th rowspan="2">优先级：</th>
+            <td colspan="2" rowspan="2">@Html.DropDownListFor(m=>m.Priority,new SelectList(Model.AllPriotity))</td>
+            <th rowspan="2" style=" text-align::right;">超期（百分比）：</th>
+            <th style=" text-align::right;">大于：</th>
+            <td>
+                    @Html.TextBoxFor(m => m.GreaterOverDue, new { @style = "width:20px;" })%
+            </td>
+        </tr>
+        <tr>
+            <th style=" text-align:right;">小于：</th>
+            <td> @Html.TextBoxFor(m => m.LessOverDue, new { @style = "width:20px;" })%</td>
+        </tr>
+        <tr>
+            <th rowspan="2">最后更新时间：</th>
+            <th style=" text-align:right;">自：</th>
+            <td>@Html.TextBoxFor(m=>m.StartLastUpdateTime)</td>
+            <td rowspan="2" colspan="3" >
+            <input type="submit" value="搜索" /></td>
+        </tr>
+        <tr>
+            <th style=" text-align:right;">至：</th>
+            <td>@Html.TextBoxFor(m=>m.EndLastUpdateTime)</td>
+        </tr>
+    </table> 
+}

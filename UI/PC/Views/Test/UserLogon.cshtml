@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "UserLogon";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using FFLTask.SRV.ViewModel.Test
+@model FFLTask.SRV.ViewModel.Test.UserLogonModel
+<div id="mp_content" class="mp_div1">
+    <div style="float: left; width: 582px; padding: 0 30px 20px 10px;">
+        <h1>
+            选择一个用户登录</h1>
+        @using (Html.BeginForm())
+        {
+            <table>
+                <tr>
+                    <th>
+                        用户&nbsp;&nbsp;&nbsp;&nbsp;
+                    </th>
+                    <th>
+                        项目组&nbsp;&nbsp;&nbsp;&nbsp;
+                    </th>
+                    <th>
+                        发布人&nbsp;&nbsp;&nbsp;&nbsp;
+                    </th>
+                    <th>
+                        承接人&nbsp;&nbsp;&nbsp;&nbsp;
+                    </th>
+                </tr>
+                <tr>
+                    <td rowspan="2">
+                        @Html.RadioButtonFor(m => m.SelectedUserId, FakeUsers.心晴, false) 心晴
+                    </td>
+                    <td>
+                        美工
+                    </td>
+                    <tr>
+                        <td>
+                            UI
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">
+                            @Html.RadioButtonFor(m => m.SelectedUserId, FakeUsers.自由飞, false) 自由飞
+                        </td>
+                        <td>
+                            UI
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            美工
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">
+                            @Html.RadioButtonFor(m => m.SelectedUserId, FakeUsers.叶子, false) 叶子
+                        </td>
+                        <td>
+                            UI
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            后台
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            美工
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.RadioButtonFor(m => m.SelectedUserId, FakeUsers.科技改变生活, false) 科技改变生活
+                        </td>
+                        <td>
+                            后台
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.RadioButtonFor(m => m.SelectedUserId, FakeUsers.技术宅, false) 技术宅
+                        </td>
+                        <td>
+                            后台
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="登录" />
+                            <span>@Html.CheckBoxFor(m => m.Remember)<span>记住我
+                        </td>
+                    </tr>
+            </table>
+        }
+    </div>
+<div id="error_right">
+    <h1>
+        测试说明</h1>
+</div>
+<div style="clear: both">
+</div>
+</div> 

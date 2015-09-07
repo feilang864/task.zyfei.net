@@ -1,0 +1,60 @@
+﻿@*inline width style*@
+<div class="code" style="width: 678px">
+    @*note: inline none-float style*@
+    <div id="dual_columns_big_input" style="float:none;">
+        @*note: inline none-float style*@
+        <h3 style="margin:0">
+            创建项目组
+        </h3>
+        <table>
+            <tr>
+                <th>
+                    父项目：
+                </th>
+                <td>
+                    <input id="SelectedParent" name="SelectedParent" type="radio" value="7" />    <a href="/Project/Summary/7">首顾科技</a>
+                    <br />
+                    <input id="SelectedParent" name="SelectedParent" type="radio" value="8" />    <a href="/Project/Summary/7">首顾科技</a><span>>></span>
+                    <a href="/Project/Summary/8">创业家园</a>
+                    <br />
+                    <input id="SelectedParent" name="SelectedParent" type="radio" value="10" />    <a href="/Project/Summary/7">首顾科技</a><span>>></span>
+                    <a href="/Project/Summary/8">创业家园</a><span>>></span>
+                    <a href="/Project/Summary/10">DBA</a>
+                    <br />
+                    <input id="SelectedParent" name="SelectedParent" type="radio" value="11" />    <a href="/Project/Summary/7">首顾科技</a><span>>></span>
+                    <a href="/Project/Summary/11">任务管理器</a>
+                    <br />
+                    <input id="SelectedParent" name="SelectedParent" type="radio" value="13" />    <a href="/Project/Summary/7">首顾科技</a><span>>></span>
+                    <a href="/Project/Summary/11">任务管理器</a><span>>></span>
+                    <a href="/Project/Summary/13">UI</a>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    名称：
+                </th>
+                <td>
+                    <input data-val="true" data-val-required="* 名称不能为空" id="Name" name="Name" type="text" value="" /><br />
+                    <a href="#" id="checkCompanyName" style="font-size: 12px;">是否重复</a><br />
+                    <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+                </td>
+            </tr>
+            <tr>
+                <th style="float: left;">
+                    简介：
+                </th>
+                <td class="textarea">
+                    <textarea cols="20" data-val="true" data-val-length="* 简介的长度不能大于256" data-val-length-max="256" id="Introduction" name="Introduction" rows="2" style=" width:285px;height:102px;"></textarea>
+                    <span class="field-validation-valid" data-valmsg-for="Introduction" data-valmsg-replace="true"></span>
+                </td>
+            </tr>
+        </table>
+        <div id="dual_columns_big_input_submit">
+            <center>
+                <input type="submit" class="submit" id="dual_columns_big_input_submit_input" value="提交" />
+                <input data-val="true" data-val-required="The Continue field is required." id="Continue" name="Continue" type="checkbox" value="true" /><input name="Continue" type="hidden" value="false" /> 继续创建
+            </center>
+        </div>
+    </div>
+</div>

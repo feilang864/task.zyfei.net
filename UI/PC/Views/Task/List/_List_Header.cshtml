@@ -1,0 +1,203 @@
+﻿@using FFLTask.GLB.Global.UrlParameter;
+@using Global.Core.Helper
+@using FFLTask.GLB.Global.Enum
+@model FFLTask.SRV.ViewModel.Task.ListModel
+@{
+    bool des = true;
+    if (ViewBag.Direction != null)
+    {
+        des = (bool)ViewBag.Direction;
+    }
+    string sort_icon = "/Resource/Image/sort_{0}.png";    
+    sort_icon = string.Format(sort_icon,  des ? "down" : "up");
+    
+    IList<ListColumn> showColoumns = Model.ShowColumns.Select(m => Enum.Parse((typeof(ListColumn)), m.Value)).Cast<ListColumn>().ToList();
+}
+<tr>
+    @if (showColoumns.Contains(ListColumn.ID))
+    {
+        <th rowspan="2">
+            编号
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.NodeType))
+    {
+        <th rowspan="2">
+            @Html.DropDownListFor(m => m.SelectedNodeType, new SelectList(Model.NodeTypes, "value", "key"), "种类")
+        </th>
+    }
+    <th rowspan="2">
+        标题
+    </th>
+    @if (showColoumns.Contains(ListColumn.Publisher))
+    {
+        <th rowspan="2">
+            @Html.DropDownListFor(m => m.SelectedPublisherId, new SelectList(Model.Publishers, "Id", "Name"), "发布人")
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.Priority))
+    {
+        <th rowspan="2">
+            <a class="sort" href= "#" SortType="@TaskList.Sort_By_Priority" Direction="@des.ToString()" style=" text-decoration:none">
+                <img src="@sort_icon" class="no_border" />
+            </a>
+            @Html.DropDownListFor(m => m.SelectedPriority, Model.AllPriorities.GetSelectListItems<TaskPriority>(), "优先级")
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.Difficulty))
+    {
+        <th rowspan="2">
+            @Html.DropDownListFor(m => m.SelectedDifficulty, Model.AllDifficulties.GetSelectListItems<TaskDifficulty>(), "难度")
+        </th>
+    }
+    @{
+        int colspanWorkPeriod = showColoumns.Count(m =>
+            m == ListColumn.ExpectedWorkPeriod ||
+            m == ListColumn.ActualWorkPeriod ||
+            m == ListColumn.OverDue);
+    }
+    @if (colspanWorkPeriod > 0)
+    {
+        <th colspan="@colspanWorkPeriod">
+            耗时
+        </th>
+    }
+    @{
+        int colspanCompleteTime = showColoumns.Count(m =>
+            m == ListColumn.ExpectedComplete ||
+            m == ListColumn.ActualComplete||
+            m==ListColumn.Delay);
+    }
+    @if (colspanCompleteTime > 0)
+    {
+        <th colspan="@colspanCompleteTime">
+            完成日期
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.Status))
+    {
+        <th rowspan="2">
+            @Html.DropDownListFor(m => m.SelectedStage, new SelectList(Model.AllStatus, "Stage", "Name"), "状态", new { id = "dropdownlist_status" })
+            <br />
+            @Html.ActionLink("多选", "Status", "Prefer", new { projectId = Model.CurrentProject.TailSelectedProject.Id }, new { @class = "multiple_status" })
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.Owner))
+    {
+        <th rowspan="2">
+            @Html.DropDownListFor(m => m.SelectedOwnerId, new SelectList(Model.Owners, "Id", "Name"), "承接人")
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.Accepter))
+    {
+        <th rowspan="2">
+            @Html.DropDownListFor(m => m.SelectedAccepterId, new SelectList(Model.Accepters, "Id", "Name"), "验收人")
+        </th>
+    }
+    @{
+        int colspanTime = showColoumns.Count(m =>
+            m == ListColumn.PublishTime ||
+            m == ListColumn.AssignTime ||
+            m == ListColumn.OwnTime ||
+            m == ListColumn.LastUpdateTime);
+    }
+    @if (colspanTime > 0)
+    {
+        <th colspan="@colspanTime">
+            时间
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.Quality))
+    {
+        <th rowspan="2">
+            @Html.DropDownListFor(m => m.SelectedQuality, Model.AllQualities.GetSelectListItems<TaskQuality>(), "质量")
+        </th>
+    }
+</tr>
+<tr>
+    @if (showColoumns.Contains(ListColumn.ExpectedWorkPeriod))
+    {
+        <th>
+            <a class="sort" href= "#" SortType="@TaskList.Sort_By_ExpectedWorkPeriod" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border" />预计</a>
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.ActualWorkPeriod))
+    {
+        <th>
+            <a class="sort" href="#" SortType="@TaskList.Sort_By_ActualWorkPeriod" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border" />实际</a>
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.OverDue))
+    {
+        <th>
+            <a class="sort" href="#" SortType="@TaskList.Sort_By_OverDue" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border" />超期</a>
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.ExpectedComplete))
+    {
+        <th>
+            <a class="sort" href="#" SortType="@TaskList.Sort_By_ExpectedComplete" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border"/>预计</a>
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.ActualComplete))
+    {
+        <th>
+            <a class="sort" href="#" SortType="@TaskList.Sort_By_ActualComplete" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border"/>实际</a>
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.Delay))
+    {
+        <th>
+            <a class="sort" href="#" SortType="@TaskList.Sort_By_Delay" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border"/>逾期</a>
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.PublishTime))
+    {
+        <th>
+            <a class="sort" href="#" SortType="@TaskList.Sort_By_Created" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border"/>发布</a>
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.AssignTime))
+    {
+        <th>
+            <a class="sort" href="#" SortType="@TaskList.Sort_By_Assign" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border" />分配</a>
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.OwnTime))
+    {
+        <th>
+            <a class="sort" href="#" SortType="@TaskList.Sort_By_Own" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border"/>承接</a>
+        </th>
+    }
+    @if (showColoumns.Contains(ListColumn.LastUpdateTime))
+    {
+        <th>
+            <a class="sort" href="#" SortType="@TaskList.Sort_By_LatestUpdate" Direction="@des.ToString()">
+                <img src="@sort_icon" class="no_border"/>最后更新</a>
+        </th>
+    }
+</tr>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".multiple_status").click(function (event) {
+            event.preventDefault();
+            var url = $(this).attr("href");
+            openWindow(url, "自定义状态", 500, 400);
+        })
+    })
+
+    function refreshProject(event) {
+        var projectId = get_current_project_id($(event));
+        refreshOwner(projectId, "#@Html.IdFor(x => x.SelectedOwnerId)");
+        refreshDifficulties(projectId, "#@Html.IdFor(x => x.SelectedDifficulty)");
+    }
+</script>

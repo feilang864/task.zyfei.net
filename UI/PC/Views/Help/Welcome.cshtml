@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "使用说明·首页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="help_container">
+    <h1>欢迎进入“自由飞”任务管理系统</h1>
+    <h2>为什么需要这样一个系统</h2>
+    <ul>
+        <li>
+            我们希望，使用本系统可以帮助您解决软件开发中最常见的三大问题：
+            <ul class="ul1">
+                <li>需求变更</li>
+                <li>工作量估算</li>
+                <li>人员绩效考核</li>
+            </ul>
+        </li>
+        <li>本系统已在我们内部使用超过一年的时间。实践证明，确实可以大幅度的提高项目管理效率。</li>
+    </ul>
+    <a name="feature"></a>
+    <h2>特色</h2>
+    <ul>
+        <li>
+            <h3>优化项目管理</h3>
+            <ul>
+                <li>
+                    <h4><strong>切分任务</strong></h4>
+                    <ul>
+                        <li>
+                            将项目进行分解成一个结构清晰的<b>任务树</b>：
+                            <ul class="ul1">
+                                <li>项目切成一个一个的<strong>大</strong>任务</li>
+                                <li>大任务切成一个一个的<strong>中</strong>任务</li>
+                                <li>中任务再切成一个一个的<strong>小</strong>任务</li>
+                                <li>小任务再切成一个一个的<strong>极小</strong>任务</li>
+                                <li>极小任务再一个一个的……</li>
+                            </ul>
+                        </li>
+                        <li>
+                            这样做，从上（大）往下（小），可以厘清思路；从下（小）往上（大），可以最大程度的实现精细化管理：
+                            <ul class="ul1">
+                                <li>越小的任务越容易管理（如：估算工时、安排进度等）</li>
+                                <li>管理好每一个小任务，也就最终管理好整个项目</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h4><strong>明确责任</strong></h4>
+                    <ul>
+                        <li>
+                            通过任务“发布&gt;&gt;承接&gt;&gt;完成&gt;&gt;验收”等一系列的流程控制，保证：
+                            <ul class="ul1">
+                                <li>任务的每一个阶段都有明确的<a href="/Help/Task#owner" target="_blank">责任人</a></li>
+                                <li>交接工作的清晰明确</li>
+                                <li>每一个责任人都能负起责任</li>
+                            </ul>
+                        </li>
+                        <li>
+                            比如，一个任务一旦被承接：
+                            <ul class="ul1">
+                                <li>对于任务承接方而言，视为其已经完全理解任务需求。因为如果你认为需求还不够清晰明确，就不应该承接。既然已经承接了，责任就转移到承接方。之后，如果需求有多种合理解释，将按照有利于发包方的原则进行解释。</li>
+                                <li>对于任务发包方而言，其描述（需求）就不能再更改，除非承接方同意。这样，任务发包方必须尽可能的认真对待需求，减少随意修改。 </li>
+                            </ul>
+                        </li>
+                        <li>
+                            再比如，任务验收：
+                            <ul class="ul1">
+                                <li>任务一旦验收，这个任务就结束了。哪怕后来发现这个任务有未完成、有bug等，都不能再重开此任务，只能重新发布新任务（意味着新的工作量计算）。这样可以督促验收人认真验收，否则自行承担相关责任。</li>
+                                <li>如果验收人拒绝验收任务，应说明原因；承接人对拒收不服，可以提出异议。</li>
+                            </ul>
+                        </li>
+                        <li>总之，对任务各方都形成<a href="/Help/Task#constraint" target="_blank">约束</a>，明确区分各方职责，能让每一个人都必须对自己的行为负责。</li>
+                    </ul>
+                </li>
+                <li>
+                    <h4><strong>量化考核</strong></h4>
+                    <ul>
+                        <li>
+                            以任务的难度、耗时量化任务的价值；以任务完成量、及时率、合格率等考核开发人员：
+                            <ul class="ul1">
+                                <li>对外：可以按任务难度、花费时间等进行结算</li>
+                                <li>对内：可以据此考核绩效（系统内置汇总统计功能）</li>
+                            </ul>
+                            考核同样是双向的，除了发布/完成/验收/任务的<b>数量</b>统计，还有比率能说明<b>质量</b>，比如：
+                            <ul class="ul1">
+                                <li>承接人的任务完全情况可以通过“验收合格率”来考核</li>
+                                <li>发布人的“更新率”可以说明其发布的任务是否准确</li>
+                                <li>验收人的“拒收异议率”可以说明其任务验收的准确性。</li>
+                            </ul>
+                            （“更新”、“拒收”、“异议”的意思可参考<a href="/Help/Task#status" target="_blank">任务状态</a>）
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <h3>开源免费</h3>
+            <ul>
+                <li>你可以<a href="/Register" target="_blank">注册</a>一个新用户，立即开始使用本系统。</li>
+                <li>
+                    也可以下载源代码部署到自己的环境中：
+                    <ul class="ul1">
+                        <li>源代码地址：svn://211.149.149.221/task.zyfei.net</li>
+                        <li>文档地址：svn://211.149.149.221/document/Task</li>
+                    </ul>
+                </li>
+                <li>
+                    同时，我们的系统一直都在建设完善中。你也可以，做出你的贡献：
+                    <ul class="ul1">
+                        <li>联系我们，提出<a href="" class="future" title="该功能尚未实现">意见建议</a></li>
+                        <li>参与项目的开发，详见：<a href="http://www.cnblogs.com/freeflying/p/4729923.html" target="_blank">英雄帖：开源项目招募英才</a></li>
+                        <li>项目的架构请参考：<a href="http://www.cnblogs.com/freeflying/category/724051.html" target="_blank">架构之路</a></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h2>如何开始</h2>
+    <ul>
+        <li>以下仅简略介绍系统的主要功能。如需详细了解可查阅@(Html.DocumentLink("/Task", "技术文档"))。</li>
+        <li>
+            <h3>注册成为<a href="/Help/Account" target="_blank">用户</a></h3>
+            <ul>
+                <li>要使用本系统，首先需要<a href="/Register" target="_blank">注册</a>成为一个用户。</li>
+            </ul>
+        </li>
+        <li>
+            <h3>创建/加入<a href="/Help/Project">项目</a></h3>
+            <ul>
+                <li>整个系统是以项目为基本单位来进行隔离的</li>
+                <li>所以，当你注册成功之后，还需要<a href="/Project/Create" target="_blank">创建</a>/<a href="/Project/Search" target="_blank">加入</a>项目</li>
+            </ul>
+        </li>
+        <li>
+            <h3>发布/承接/验收<a href="/Help/Task" target="_blank">任务</a></h3>
+            <ul>
+                <li>
+                    这是本系统的核心功能，主要包括：
+                    <ul class="ul2">
+                        <li>任务的<a href="/Help/Task/Progress" target="_blank">流程管理</a>：<a href="/Task/New" target="_blank">发布</a>&gt;&gt;承接&gt;&gt;完成&gt;&gt;验收</li>
+                        <li>
+                            任务的<a href="/Help/Task/Relation" target="_blank">关系</a>
+                            <ul class="ul1">
+                                <li>任务之间通过父子关系形成任务树</li>
+                                <li><span class="future" title="该功能尚未实现">任务之间可以相互关联</span></li>
+                            </ul>
+                        </li>
+                        <li>任务的<a href="/Help/Task/Search" target="_blank">检索统计分析</a>等</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h3>管理<a href="/Help/Team" target="_blank">团队</a></h3>
+            <ul>
+                <li>作为项目管理员，你还需要使用一些管理团队的功能：</li>
+                <li>
+                    <ul class="ul1">
+                        <li><span class="future" title="该功能尚未实现">进行项目设置</span></li>
+                        <li>团队成员的<a href="/Help/Team#auth" target="_blank">授权</a></li>
+                        <li><span class="future" title="该功能尚未实现">团队成员离职时任务交接</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div id="flip">
+        <span>
+            下一页：<a href="/Help/Account" target="_blank"> 用户 >> </a>
+        </span>
+    </div>
+</div>

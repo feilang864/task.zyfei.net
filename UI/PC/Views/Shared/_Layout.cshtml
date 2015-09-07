@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" type="image/ico" href="/Resource/Image/logo.ico" media="screen" />
+    <title>@ViewBag.Title</title>@* TODO: should put the js file at the end of the page, but doing so will cause issue, e.g. ImageCode's js*@
+    @Html.Partial("Release/_JavaScript")
+    @Html.Partial("Release/_StyleSheet")
+</head>
+<body>
+    @Html.Partial("_Header")
+    @Html.Action("_Navigator", "Shared")
+    <div id="body">
+        @RenderBody()
+    </div>
+    @Html.Partial("_Footer")
+    @RenderSection("JavaScript", required: false)
+</body>
+@if (false)
+{
+    <script type="text/javascript" src="/Resource/Scripts/jquery-2.1.0-vsdoc.js"></script>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input:password,input:text,textarea")
+            .addClass("textbox")
+            .focus(function () {
+                $(this).css("border-style", "dashed");
+            }).blur(function () {
+                $(this).css("border-style", "solid");
+            });
+        $("#navigator a").each(function () {
+            if ($(this)[0].href == window.location.href) {
+                $(this).addClass("navigator_current_page");
+            }
+        })
+    });        
+</script>
+</html>

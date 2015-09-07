@@ -1,0 +1,33 @@
+﻿@model FFLTask.SRV.ViewModel.Task.EditModel
+@using FFLTask.GLB.Global.Enum
+@using Global.Core.Helper
+@Html.Partial("EditColumns/_Edit_Subtitle", TaskProcess.Accept, new ViewDataDictionary { { "Edit", true } })
+<table id="@TaskProcess.Accept">
+    <tr>
+        <th class="first_column">
+            验收：
+        </th>
+        <td>
+            <label>@Html.RadioButtonFor(m => m.TaskItem.HasAccepted, false, new { onclick = "hideQuality()" })不合格</label>
+            <label>@Html.RadioButtonFor(m => m.TaskItem.HasAccepted, true, new { onclick = "showQuality()" })合格</label>
+            <span id="quality">
+                质量：@Html.DropDownListFor(m => m.TaskItem.Quality, Model.AllQualities.GetSelectListItems<TaskQuality>())
+            </span>
+        </td>
+    </tr>
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($("[name='HasAccepted']:checked").val() == "False") {
+            hideQuality();
+        } else {
+            showQuality();
+        }
+    });
+    function hideQuality() {
+        $("#quality").hide();
+    }
+    function showQuality() {
+        $("#quality").show();
+    }
+</script>

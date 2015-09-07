@@ -1,0 +1,28 @@
+﻿@model FFLTask.SRV.ViewModel.Shared.AbstractModel
+<table>
+    <tr>
+        <th>
+            名称：
+        </th>
+        <td>
+            @Model.Name
+        </td>
+        <th>
+            创始人：
+        </th>
+        <td>
+            @Html.Partial("_UserLink", Model.Founder)
+        </td>
+    </tr>
+    @if (!string.IsNullOrEmpty(Model.Description))
+    {
+        <tr>
+            <th>
+                描述：
+            </th>
+            <td colspan="3">
+                @Model.Description
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="dual_columns_big">
+    <div id="dual_columns_big_input">
+        @RenderBody()
+    </div>
+    <div id="dual_columns_big_description">
+        @RenderSection("RightTitle", false)
+        @RenderSection("Introduction", false)
+    </div>
+</div>
+<div style="clear: both;">
+</div>
+@section JavaScript{
+    @RenderSection("JavaScript", required: false)
+}

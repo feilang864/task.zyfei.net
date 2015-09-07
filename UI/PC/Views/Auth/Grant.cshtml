@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Grant";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns_Big.cshtml";
+}
+@section RightTitle{
+    <h2>说明</h2>
+}
+@section Introduction{
+    <ul>
+        <li>1、各项目之间的权限项目独立，不权限能在项目之间继承。比如，某“父项目”有一“子项目”，仅授予张三某“父项目”的发布权限，<b>不能</b>使其自动获得“子项目”的发布权限。</li>
+        <li>2、首先勾选：<input type="checkbox" checked="checked" /> 编辑，才能开始对该行的用户进行授权操作；勾选之后不能取消。</li>
+        <li>3、将用户移出项目之前，务必确保其所有任务已<a href="/Task/Search">交接完毕</a>；否则，可能造成一些无法预料的后果（比如，他发布的任务无法验收）</li>
+    </ul>
+}
+@model IList<FFLTask.SRV.ViewModel.Auth.ProjectAuthorizationModel>
+@using (Html.BeginForm())
+{
+    <h3>
+        权限管理
+    </h3>
+    for (int i = 0; i < Model.Count; i++)
+    {
+        <div style="margin-top: 12px;">
+            <span>项目：</span>
+            @Html.Action("_LiteralLinkedProject", "Project", new { projectId = Model[i].Id })
+        </div>
+        <table style="margin: 10px 16px;">
+            @for (int j = 0; j < Model[i].Authorizations.Count; j++)
+            {
+                <tr>
+                    @Html.HiddenFor(m => Model[i].Authorizations[j].Id)
+                    <td style="width: 32px">
+                        @Html.CheckBoxFor(x => Model[i].Authorizations[j].IsEdit)
+                        编辑
+                        @Html.HiddenFor(x => Model[i].Authorizations[j].IsEdit)
+                    </td>
+                    <td style="width: 48px;">
+                        <a href="/User/@Model[i].Authorizations[j].User.Id">@Model[i].Authorizations[j].User.Name</a>
+                    </td>
+                    <td style="width: 32px">
+                        @Html.CheckBoxFor(x => Model[i].Authorizations[j].CanPublish, new { disabled = "disabled" })
+                        发布
+                        @Html.HiddenFor(x => Model[i].Authorizations[j].CanPublish)
+                    </td>
+                    <td style="width: 32px">
+                        @Html.CheckBoxFor(x => Model[i].Authorizations[j].CanOwn, new { disabled = "disabled" })
+                        承接
+                        @Html.HiddenFor(x => Model[i].Authorizations[j].CanOwn)
+                    </td>
+                    <td style="width: 32px">
+                        @Html.CheckBoxFor(x => Model[i].Authorizations[j].CanAdmin, new { disabled = "disabled" })
+                        管理
+                        @Html.HiddenFor(x => Model[i].Authorizations[j].CanAdmin)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    <div id="dual_columns_big_input_submit">
+        <input type="submit" class="submit" value="提交" id="dual_columns_big_input_submit_input" />
+    </div>
+}
+@if (false)
+{
+    <script type="text/javascript" src="/Resource/Scripts/jquery-2.1.0-vsdoc.js"></script>
+}
+@section JavaScript{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("input:checkbox[name$='IsEdit']").click(function (event) {
+                if ($(this)[0].checked) {
+                    $(this).parent().siblings().find("input:checkbox").attr("disabled", false);
+                }
+                else {
+                    event.preventDefault();
+                    return false;
+                }
+            })
+        })
+    </script>
+}

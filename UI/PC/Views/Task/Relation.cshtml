@@ -1,0 +1,106 @@
+﻿@using FFLTask.SRV.ViewModel.Task
+@model TaskRelationModel
+<head>
+    <title>任务关系</title>
+    <script type="text/javascript" src="/Resource/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/Resource/Scripts/task.js"></script>
+    <style type="text/css">
+        .status
+        {
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        .sequence_number
+        {
+            margin-right: 6px;
+        }
+        .sequence_change
+        {
+            background-color: Gray;
+            border: 1px dashed;
+            text-decoration: none;
+            color: Black;
+            font-size:12px;
+            padding: 2px 4px;
+        }
+    </style>
+</head>
+<body>
+    @{
+        int indent = 0;
+        SequenceModel sequence_model;
+    }
+    @foreach (LiteItemModel ancestor in Model.Ancestor)
+    {
+        indent += 20;
+        <p style="margin-left:@(indent)px">
+            @Html.Partial("_Node_Type", ancestor)
+            @Html.ActionLink(ancestor.Title, "Edit", new { taskId = ancestor.Id }, new { target = "_blank" })
+            <span class="status">[@ancestor.CurrentStatus.Name]</span>
+        </p>
+    }
+    @{
+        indent += 20;
+        Model.Brothers.Add(Model.Current);
+        IList<LiteItemModel> brothers = Model.Brothers.OrderBy(x => x.Sequence).ToList();
+        IList<LiteItemModel> children = Model.Children.OrderBy(x => x.Sequence).ToList();
+    }
+    @if (brothers.Count > 1)
+    { 
+        <p style="margin-left:@(indent)px">
+            <a class="sequence_change" href="/Task/Sequence/@Model.Ancestor.Last.Value.Id">改变次序</a>
+        </p>
+    }
+    @foreach (LiteItemModel brother in brothers)
+    {
+
+        if (brother == Model.Current)
+        {
+            <p style="margin-left:@(indent)px; font-weight: bold">
+            @Html.Partial("_Node_Type", brother)
+                <span class="sequence_number">@brother.Sequence</span>@Html.ActionLink(brother.Title, "Edit", new { taskId = brother.Id }, new { target = "_blank" })
+                <span class="status">[@brother.CurrentStatus.Name]</span>
+            </p>
+            int child_indent = indent + 20;
+            if (Model.Children.Count > 1)
+            {
+                <p style="margin-left:@(child_indent)px">
+                    <a class="sequence_change" href="/Task/Sequence/@Model.Current.Id">改变次序</a>
+                </p> 
+            }
+            foreach (LiteItemModel child in children)
+            {
+                <p style="margin-left:@(child_indent)px">
+                    @Html.Partial("_Node_Type", child)
+                    <span class="sequence_number">@child.Sequence</span>
+                    @Html.ActionLink(child.Title, "Edit", new { taskId = child.Id }, new { target = "_blank" })
+                    <span class="status">[@child.CurrentStatus.Name]</span>
+                </p>
+            }
+        }
+        else
+        {
+            <p style="margin-left:@(indent)px">
+                @Html.Partial("_Node_Type", brother)
+                <span class="sequence_number">@brother.Sequence</span>@Html.ActionLink(brother.Title, "Edit", new { taskId = brother.Id }, new { target = "_blank" })
+                <span class="status">[@brother.CurrentStatus.Name]</span>
+            </p>
+        }
+    }
+    <center>
+        <input type="submit" class="submit" value="关闭" onclick="closeWindow()" />
+    </center>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".sequence_change").click(function (event) {
+            event.preventDefault();
+            var url = $(this).attr("href");
+            openWindow(url, "改变次序", 500, 400);
+        });
+
+        $("a[class!='sequence_change']").click(function (event) {
+            window.close();
+        });
+    });
+</script>

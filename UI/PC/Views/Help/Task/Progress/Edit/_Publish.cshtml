@@ -1,0 +1,304 @@
+﻿@*inline width style*@
+<div class="code" style="width: 628px">
+    @*note: inline none-float style*@
+    <div id="dual_columns_big_input" style="float: none;">
+        <div class="subtitle_container">
+            <label>
+                <input type="checkbox" value="Publish" name="TaskProcess" edit="Publish" />编辑
+            </label>
+            <span class="subtitle_text">
+                发布
+            </span>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var $inputs = $("#Publish").find("input,select,#previous_project,#next_project");
+                $inputs.attr("disabled", true);
+                $("[edit='Publish']").click(function () {
+                    if ($(this).is(":checked")) {
+                        $inputs.attr("disabled", false);
+                        $("#dual_columns_big_input_submit_input").attr("disabled", false);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(false);
+                        }
+                    } else {
+                        $inputs.attr("disabled", true);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(true);
+                        }
+                    }
+                    if ($("[name='TaskProcess']:checked").length > 0) {
+                        $("#comment_to input").prop("disabled", true);
+                        $("#comment_to input[type='checkbox']").prop("checked", false);
+                    } else {
+                        $("#comment_to input").prop("disabled", false);
+                        $("#comment_to input[type='checkbox']").prop("checked", true);
+                    }
+
+                    if ($(this).val() == 'Remove') {
+                        if ($(this).is(":checked")) {
+                            $("[name='InProcess']").attr("disabled", "disabled");
+                        }
+                        else {
+                            $("[name='InProcess']").removeAttr("disabled");
+                        }
+                    }
+                });
+            })
+        </script>
+        <table id="Publish">
+            <tr>
+                <th class="first_column">
+                    项目：
+                </th>
+                <td colspan="3">
+                    <span id="linked_projects">
+                        <select id="CurrentProject_Node" name="CurrentProject.Node" onchange="refreshProject(this);">
+                            <option selected="selected" value="1">自由飞</option>
+                        </select>    <span>>></span>
+                        <select id="CurrentProject_Last" name="CurrentProject.Last" onchange="refreshProject(this);">
+                            <option value="2">创业家园</option>
+                            <option selected="selected" value="3">任务管理</option>
+                            <option value="14">Global</option>
+                            <option value="15">首顾科技</option>
+                            <option value="17">伊屋装饰网</option>
+                        </select>
+                    </span>
+                    <span style="font-size: 12px;"><a href="#" id="previous_project" style="display: inline">&lt;&lt;上一级</a> <span id="separator" style="display: inline">|</span> <a href="#" id="next_project" style="display: inline">下一级&gt;&gt;</a> </span>
+                    <input data-val="true" data-val-required="The SelectedProjectHasChild field is required." id="CurrentProject_SelectedProjectHasChild" name="CurrentProject.SelectedProjectHasChild" type="hidden" value="True" /><input data-val="true" data-val-required="The Id field is required." id="CurrentProject_TailSelectedProject_Id" name="CurrentProject.TailSelectedProject.Id" type="hidden" value="3" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    父任务：
+                </th>
+                <td colspan="3">
+                    <input id="TaskItem_Parent_Id" name="TaskItem.Parent.Id" type="text" value="" /><span>(编号)</span><a href="#" id="find">查找</a><br />
+                    <span class="field-validation-error" id="not_find" style="display: none">* 无法找到该编号的任务</span>
+                </td>
+            </tr>
+            <tr>
+                <th class="first_column">
+                    标题：
+                </th>
+                <td colspan="3">
+
+                    <img src="/Resource/Image/root-solid-empty.gif" /><text>根</text>
+                    <input data-val="true" data-val-length="* 标题的长度不能大于255" data-val-length-max="255" data-val-required="* 标题不能为空" id="TaskItem_LiteItem_Title" name="TaskItem.LiteItem.Title" style=" width: 406px;" type="text" value="添加权限过期/恢复功能" />
+                    [<a href="/Task/Relation/2413" name="relation" style="font-size: 12px;">关系</a>]
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="TaskItem.LiteItem.Title" data-valmsg-replace="true"></span>
+                </td>
+            </tr>
+            <tr>
+                <th class="top_align first_column">
+                    内容：
+                </th>
+                <td class="textarea" colspan="3">
+                    <textarea cols="20" id="TaskItem_Body" name="TaskItem.Body" rows="2" style="width:480px; height:100px;">
+                        doc: 1088
+                    </textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="first_column">
+                    难度：
+                </th>
+                <td class="second_column">
+                    <select id="TaskItem_Difficulty" name="TaskItem.Difficulty">
+                        <option value="">----</option>
+                        <option value="Easiest">很容易</option>
+                        <option value="Easy">容易</option>
+                        <option value="Common">一般</option>
+                        <option value="Hard">困难</option>
+                        <option value="Hardest">很困难</option>
+                    </select>
+                </td>
+                <th class="third_column">
+                    工时(分钟)：
+                </th>
+                <td class="fourth_column">
+                    <input id="TaskItem_ExpectedWorkPeriod" name="TaskItem.ExpectedWorkPeriod" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    优先级：
+                </th>
+                <td>
+                    <select id="TaskItem_Priority" name="TaskItem.Priority">
+                        <option value="">---</option>
+                        <option value="Lowest">最低</option>
+                        <option value="Low">低</option>
+                        <option value="Common">中</option>
+                        <option value="High">高</option>
+                        <option selected="selected" value="Highest">最高</option>
+                    </select>
+                </td>
+                <th>
+                    预计完成时间：
+                </th>
+                <td>
+
+                    <input class="date_picker" data-val="true" data-val-regex="* 日期格式错误" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" id="ExpectedComplete_Date" name="ExpectedComplete.Date" type="text" value="" />
+                    <span>
+                        <select data-val="true" data-val-required="The Hour field is required." id="ExpectedComplete_Hour" name="ExpectedComplete.Hour">
+                            <option selected="selected">0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                        </select> 时
+                        <select data-val="true" data-val-required="The Minute field is required." id="ExpectedComplete_Minute" name="ExpectedComplete.Minute">
+                            <option selected="selected">0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option>25</option>
+                            <option>26</option>
+                            <option>27</option>
+                            <option>28</option>
+                            <option>29</option>
+                            <option>30</option>
+                            <option>31</option>
+                            <option>32</option>
+                            <option>33</option>
+                            <option>34</option>
+                            <option>35</option>
+                            <option>36</option>
+                            <option>37</option>
+                            <option>38</option>
+                            <option>39</option>
+                            <option>40</option>
+                            <option>41</option>
+                            <option>42</option>
+                            <option>43</option>
+                            <option>44</option>
+                            <option>45</option>
+                            <option>46</option>
+                            <option>47</option>
+                            <option>48</option>
+                            <option>49</option>
+                            <option>50</option>
+                            <option>51</option>
+                            <option>52</option>
+                            <option>53</option>
+                            <option>54</option>
+                            <option>55</option>
+                            <option>56</option>
+                            <option>57</option>
+                            <option>58</option>
+                            <option>59</option>
+                            <option>60</option>
+                        </select> 分
+                    </span>
+                    <br />
+                    <span class="field-validation-valid" data-valmsg-for="ExpectedComplete.Date" data-valmsg-replace="true"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    验收人：
+                </th>
+                <td>
+                    <select id="TaskItem_Accepter_Id" name="TaskItem.Accepter.Id">
+                        <option value="">-----</option>
+                        <option selected="selected" value="2">叶子</option>
+                        <option value="1">dk</option>
+                        <option value="6">zl810881283</option>
+                        <option value="9">Chaosali</option>
+                        <option value="41">s1ihome</option>
+                    </select>
+                </td>
+                <th>
+                    虚任务：
+                </th>
+                <td>
+                    <input data-val="true" data-val-required="The Virtual field is required." id="TaskItem_LiteItem_Virtual" name="TaskItem.LiteItem.Virtual" type="checkbox" value="true" /><input name="TaskItem.LiteItem.Virtual" type="hidden" value="false" />
+                    <span class="field-validation-valid" data-valmsg-for="TaskItem.LiteItem.Virtual" data-valmsg-replace="true"></span>
+                </td>
+        </table>
+        <script type="text/javascript">
+            var editorBody;
+            $(document).ready(function () {
+                KindEditor.ready(function (K) {
+                    editorBody = K.create('textarea[name="TaskItem.Body"]', {
+                        allowFileManager: false,
+                        items:
+        [
+            'bold', 'italic', 'underline', 'strikethrough',
+            'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+            'insertunorderedlist', '|', 'emoticons', 'link', 'unlink'
+        ]
+                    });
+                    editorBody.readonly(true);
+                });
+
+                $("#find").hide();
+                $("#TaskItem_Parent_Id").focus(function () {
+                    onParentFocus($(this));
+                });
+
+                $("#find").click(function (event) {
+                    var taskId = $("#TaskItem_Parent_Id").val();
+                    findParentTask(event, taskId);
+                });
+
+                $("#TaskItem_LiteItem_Virtual").click(function () {
+                    markTaskIsVirtual($(this));
+                });
+            });
+
+            function refreshProject(event) {
+                var projectId = get_current_project_id($(event));
+                canPublish(projectId);
+                refreshOwner(projectId, "#TaskItem_Owner_Id");
+                refreshDifficulties(projectId, "#TaskItem_Difficulty");
+                refreshPriority(projectId, "#TaskItem_Priority");
+                refreshAccepter(projectId, "#TaskItem_Accepter_Id");
+            }
+        </script>
+    </div>
+</div>

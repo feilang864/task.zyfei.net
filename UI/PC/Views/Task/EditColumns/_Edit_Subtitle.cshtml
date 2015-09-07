@@ -1,0 +1,46 @@
+﻿@using Global.Core.ExtensionMethod
+@using FFLTask.GLB.Global.Enum
+@model TaskProcess
+<div class="subtitle_container">
+    @if (ViewBag.Edit != null && (bool)ViewBag.Edit)
+    {
+        <label>
+            <input type="checkbox" value="@Model" name="@(typeof(TaskProcess).Name)" edit="@Model" />编辑</label>
+    }
+    <span class="subtitle_text">
+        @Model.GetEnumDescription()
+    </span>
+</div>
+@if (false)
+{
+    <script src="/Resource/Scripts/jquery-2.1.0-vsdoc.js"></script>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var $inputs = $("#@Model").find("input,select,#previous_project,#next_project");
+        $inputs.attr("disabled", true);
+        $("[edit='@Model']").click(function () {
+            if ($(this).is(":checked")) {
+                $inputs.attr("disabled", false);
+                $("#dual_columns_big_input_submit_input").attr("disabled", false);
+                if (typeof editorBody != "undefined") {
+                    editorBody.readonly(false);
+                }
+            } else {
+                $inputs.attr("disabled", true);
+                if (typeof editorBody != "undefined") {
+                    editorBody.readonly(true);
+                }
+            }
+
+            if ($(this).val() == '@(TaskProcess.Remove)') {
+                if ($(this).is(":checked")) {
+                    $("[name='@(TaskProcess.InProcess)']").attr("disabled", "disabled");
+                }
+                else {
+                    $("[name='@(TaskProcess.InProcess)']").removeAttr("disabled");
+                }
+            }
+        });
+    })
+</script>

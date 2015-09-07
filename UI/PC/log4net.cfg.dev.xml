@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler,log4net"/>
+  </configSections>
+  <log4net>
+    <!--<logger name="KnownError">
+      <level value="Error"></level>
+      <appender-ref ref="KnownError"></appender-ref>
+    </logger>-->
+    <!--<logger name="CaughtError">
+      <level value="ERROR"/>
+      <appender-ref ref="CaughtErrorLogFile"/>
+    </logger>-->
+    <!--<logger name="NHibernate" additivity="false">
+      <level value="DEBUG" />
+      <appender-ref ref="NHibernateLogFile" />
+    </logger>-->
+    <logger name="NHibernate.SQL" additivity="false">
+      <level value="DEBUG"/>
+      <appender-ref ref="NHibernateLogFile"/>
+    </logger>
+    <logger name="ServiceInfo">
+      <level value="INFO" />
+      <appender-ref ref="ServiceInfo"/>
+    </logger>
+    <appender name="NHibernateLogFile" type="log4net.Appender.FileAppender">
+      <file value="Logs/NHibernate.log"/>
+      <appendToFile value="false"/>
+      <lockingModel type="log4net.Appender.FileAppender+MinimalLock"/>
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date{HH:mm:ss.fff} %m%n==========%n"/>
+      </layout>
+    </appender>
+    <appender name="ServiceInfo" type="log4net.Appender.RollingFileAppender,log4net">
+      <param name="File" value="Logs/srv.log" />
+      <param name="AppendToFile" value="true" />
+      <param name="RollingStyle" value="Size" />
+      <param name="MaxSizeRollBackups" value="10"/>
+      <param name="MaximumFileSize" value="100KB"/>
+      <param name="StaticLogFileName" value="true" />
+      <layout type="log4net.Layout.PatternLayout,log4net">
+        <param name="ConversionPattern" value="%d [%t] %-5p %c - %m%n" />
+      </layout>
+    </appender>
+    <!--<appender name="CaughtErrorLogFile" type="log4net.Appender.FileAppender">
+      <file value="../Logs/error.log"/>
+      <appendToFile value="false"/>
+      <lockingModel type="log4net.Appender.FileAppender+MinimalLock"/>
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date{yyyy-MM-dd HH:mm:ss.fff}%n %m%n %exception ==========%n"/>
+      </layout>
+    </appender>-->
+    <!--full details see the SDK Reference entry: log4net.Appender.AspNetTraceAppender.
+    The following example shows how to configure the AspNetTraceAppender to log messages to the ASP.NET TraceContext. 
+    The messages are written to the System.Web.TraceContext.Write method if they are below level WARN. 
+    If they are WARN or above they are written to the System.Web.TraceContext.Warn method.
+    -->
+    <!--<appender name="AspNetTraceAppender" type="log4net.Appender.AspNetTraceAppender" >
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+      </layout>
+    </appender>-->
+    <!--<appender name="KnownError" type="log4net.Appender.FileAppender" >
+      <file value="../Logs/KnownError.log"/>
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+      </layout>
+    </appender>-->
+  </log4net>
+</configuration>

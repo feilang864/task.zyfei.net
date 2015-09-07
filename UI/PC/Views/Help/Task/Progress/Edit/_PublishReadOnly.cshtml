@@ -1,0 +1,114 @@
+﻿@*inline width style*@
+<div class="code" style="width: 628px">
+    @*note: inline none-float style*@
+    <div id="dual_columns_big_input" style="float: none;">
+        <div class="subtitle_container">
+            <span class="subtitle_text">
+                发布
+            </span>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var $inputs = $("#Publish").find("input,select,#previous_project,#next_project");
+                $inputs.attr("disabled", true);
+                $("[edit='Publish']").click(function () {
+                    if ($(this).is(":checked")) {
+                        $inputs.attr("disabled", false);
+                        $("#dual_columns_big_input_submit_input").attr("disabled", false);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(false);
+                        }
+                    } else {
+                        $inputs.attr("disabled", true);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(true);
+                        }
+                    }
+                    if ($("[name='TaskProcess']:checked").length > 0) {
+                        $("#comment_to input").prop("disabled", true);
+                        $("#comment_to input[type='checkbox']").prop("checked", false);
+                    } else {
+                        $("#comment_to input").prop("disabled", false);
+                        $("#comment_to input[type='checkbox']").prop("checked", true);
+                    }
+
+                    if ($(this).val() == 'Remove') {
+                        if ($(this).is(":checked")) {
+                            $("[name='InProcess']").attr("disabled", "disabled");
+                        }
+                        else {
+                            $("[name='InProcess']").removeAttr("disabled");
+                        }
+                    }
+                });
+            })
+        </script>
+        <table id="Publish">
+            <tr>
+                <th class="first_column">
+                    项目：
+                </th>
+                <td colspan="3">
+                    <a href="">自由飞</a><span>>></span> <a href="">任务管理</a>
+                </td>
+            </tr>
+            <tr>
+                <th class="first_column">
+                    标题：
+                </th>
+                <td colspan="3">
+
+                    <img src="/Resource/Image/root-solid-empty.gif" /><text>根</text>
+                    添加权限过期/恢复功能
+                    [<a href="/Task/Relation/2413" name="relation" style="font-size: 12px;">关系</a>]
+                </td>
+            </tr>
+            <tr>
+                <th class="top_align first_column">
+                    内容：
+                </th>
+                <td class="textarea" colspan="3">
+                    doc: 1088
+                </td>
+            </tr>
+
+            <tr>
+                <th class="first_column">
+                    难度：
+                </th>
+                <td class="second_column">
+                    未指定
+                </td>
+                <th class="third_column">
+                    工时(分钟)：
+                </th>
+                <td class="fourth_column"></td>
+            </tr>
+            <tr>
+                <th>
+                    优先级：
+                </th>
+                <td>
+                    最高
+                </td>
+                <th>
+                    预计完成时间：
+                </th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>
+                    验收人：
+                </th>
+                <td>
+                    叶子
+                </td>
+                <th>
+                    虚任务：
+                </th>
+                <td>
+                    否
+                </td>
+        </table>
+    </div>
+</div>

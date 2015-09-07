@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "登录·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns.cshtml";
+}
+@model FFLTask.SRV.ViewModel.Account.LogonModel
+@section Introduction{
+    <ul>
+        <li>1、使用“用户名”（如zyfei）而不是“真实姓名”（胡平）。</li>
+        <li>2、如果您勾选了“记住我的登录状态”，您下次进入网站不用手工登录。但是登录所需的信息是存放在你浏览器的cookie中，如果您是在网吧等公共场所登录，请不要选择此选项。</li>
+        <li>3、如果您忘记了您的用户名或密码，请点击 @Html.ActionLink("忘记密码", "Forget", "Password")。</li>
+    </ul>
+}
+@using (Html.BeginForm())
+{
+    <h3>
+        用户登录</h3>
+    
+    string refuse = Request.Params["refuse"];
+    if (refuse == "1")
+    {
+        string prepageUrl = Request.Params["prepage"];
+        if (!string.IsNullOrEmpty(prepageUrl))
+        {
+            string absoluteUrl = Request.Url.GetLeftPart(UriPartial.Authority) + prepageUrl;
+    <div id="warn">
+        <span>您目前的权限不足以访问<a href="@prepageUrl">@absoluteUrl</a>页面</span>
+    </div>
+        }
+    }
+    <table>
+        <tr>
+            <td colspan="2">
+            </td>
+        </tr>
+        <tr>
+            <th>
+                用户名：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.UserName)
+                <br />
+                @Html.ValidationMessageFor(m => m.UserName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                密码：
+            </th>
+            <td>
+                @Html.PasswordFor(m => m.Password)
+                <br />
+                @Html.ValidationMessageFor(m => m.Password)
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                验证码：
+            </th>
+            <td>
+                @Html.Action("_ImageCode", "Shared", Model.ImageCode)
+            </td>
+        </tr>
+        <tr>
+            <th>
+            </th>
+            <td style="padding-bottom: 12px;">
+                <p>
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </p>
+            </td>
+        </tr>
+    </table>
+    <div id="dual_columns_input_submit">
+        <input type="submit" class="submit" id="dual_columns_input_submit_input" value="登录" />
+        <a href="#" target="_blank" id="dual_columns_input_submit_forgot_password">忘记密码</a>
+    </div>
+    <div style="margin: 4px auto; text-align: center; padding-top: 20px;">
+    </div>
+}

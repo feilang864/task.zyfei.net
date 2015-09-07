@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "使用说明·任务关系";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="help_container">
+    <h1>
+        任务关系
+        <span id="crumb">
+            <span id="outline">当前路径：</span>
+            <a href="/Help">使用说明</a> >> <a href="/Help/Task">任务</a> >> <a href="/Help/Task/Relation">关系</a>
+        </span>
+    </h1>
+    <ul>
+        <li>
+            <h2>入口</h2>
+            <ul>
+                <li>可以从父任务<span class="feature">/被关联任务</span>出发，新建一个子任务<span class="feature">/关联任务</span></li>
+                <li>也可以直接在子任务<span class="feature">/关联任务</span>中指定父任务<span class="feature">/被关联任务</span></li>
+                <li>
+                    @Html.Partial("Task/Relation/_Parent")
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="parent"></a>
+            <h2>父子关系</h2>
+            <ul>
+                <li>
+                    <a href="tree"></a>
+                    <h3>任务树</h3>
+                    <ul>
+                        <li>将任务通过父子关系相连，就可以形成任务树。任务树结构是任务切分后的自然结果，是我们系统的重要<a href="/Help" target="_blank">特色</a>之一。</li>
+                        <li>
+                            @Html.Partial("Task/Relation/_Tree")
+                        </li>
+                        <li>
+                            任务树可以帮助我们：
+                            <ul class="ul1">
+                                <li>按从大到小的顺序厘清思路</li>
+                                <li>井然有序的整理任务</li>
+                                <li><span class="future" title="该任务尚未实现">迅速的查找到任务</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="virtual"></a>
+                    <h3>虚任务</h3>
+                    <ul class="ul2">
+                        <li>很多父任务都可以是虚任务</li>
+                        <li>虚任务就像一个文件夹，可以作为“任务容器”使用</li>
+                        <li>
+                            当任务为虚任务时，它本身并不需要实际完成，而是可以依赖于它的子任务进展而自动进行：
+                            <ul class="ul1">
+                                <li>第一个子任务开始时，它也开始</li>
+                                <li>所有子任务完成时，它也完成</li>
+                                <li>所有子任务验收合格，它也验收合格</li>
+                            </ul>
+                        </li>
+                        <li><span class="future" title="该任务尚未实现">虚任务不会被计入任务统计中</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="icon"></a>
+                    <h3>任务图标</h3>
+                    <ul>
+                        <li>任务的图标可以显示任务的关系</li>
+                        <li>
+                            <h4>形状</h4>
+                            <ul>
+                                <li>
+                                    任务按层级分为：根、枝和叶，构成一个“任务树”，如下：
+                                </li>
+                                <li>
+                                    @Html.Partial("Task/Relation/_IconShape")
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <h4>边框/填充</h4>
+                            <ul>
+                                <li>在上表基础上，加入“虚任务”的考量，使用填充和边框以区别</li>
+                                <li>
+                                    <b>填充</b>（定：子任务）：
+                                    <ul class="ul1">
+                                        <li>有：有子任务</li>
+                                        <li>无：无子任务</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>边框</b>（定：虚实）：
+                                    <ul class="ul1">
+                                        <li>虚线：虚任务</li>
+                                        <li>实线：实际的任务</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>汇总如下</b>：
+                                    @Html.Partial("Task/Relation/_IconFull")
+                                </li>
+                            </ul>
+                    </ul>
+                </li>
+                <li>
+                    <a href="sequence"></a>
+                    <h3>任务次序</h3>
+                    <ul>
+                        <li>任务次序存在于同级（兄弟）任务之间</li>
+                        <li>次序可以用于说明，哪个任务先做哪个任务后做</li>
+                        <li>次序是可以调整的</li>
+                        <li>
+                            @Html.Partial("Task/Relation/_Sequence")
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2 class="feature"><span class="future" title="该功能尚未实现">关联任务</span></h2>
+        </li>
+    </ul>
+    <div id="flip">
+        <span>
+            <a href="/Help/Task/Message" target="_blank"> << 留言 </a> ：上一页
+        </span>
+        <span class="split"></span>
+        <span>
+            下一页：<a href="/Help/Task/Search" target="_blank"> 检索 >> </a>
+        </span>
+    </div>
+</div>

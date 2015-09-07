@@ -1,0 +1,18 @@
+﻿@model IList<FFLTask.SRV.ViewModel.Task.LiteItemModel>
+@using Global.Core.ExtensionMethod
+@if (!Model.IsNullOrEmpty())
+{
+    <ul>
+        @foreach (var task in Model)
+        {
+            <li>
+                @Html.RadioButton("selectedParentTaskId", task.Id)
+                <a href="/Task/Edit/@task.Id">@task.Title</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <span class="field-validation-error" id="not_find">* 无法找到以此开头的任务</span>
+}

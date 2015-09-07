@@ -1,0 +1,13 @@
+﻿@using FFLTask.SRV.ViewModel.Project
+@model LinkedList<LiteItemModel>
+@foreach (LiteItemModel project in Model)
+{
+    if (project != Model.Last())
+    {
+    <a href="/Project/Summary/@project.Id">@project.Name</a><span>>></span>
+    }
+    else
+    {
+    <a href="/Project/Summary/@project.Id">@project.Name</a>
+    }
+}

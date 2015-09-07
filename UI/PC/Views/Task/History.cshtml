@@ -1,0 +1,26 @@
+﻿@model IList<FFLTask.SRV.ViewModel.Task.TaskHistoryItemModel>
+@using Global.Core.ExtensionMethod
+<table id="task_history" style="margin-top: 16px;">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <tr>
+            <td style="width:118px;">
+                @Model[i].CreateTime.ToChinese()
+            </td>
+            <td >
+                @Html.Partial("_UserLink", Model[i].Executor)
+            </td>
+            <td style="width:90px; text-align:left; padding-left: 5px;">
+                @Model[i].Description
+            </td>
+        </tr>
+        if (!string.IsNullOrEmpty(Model[i].Comment))
+        {
+        <tr>
+            <td colspan="3">
+                <div class="reminder" style="border: 1px dashed green; padding: 4px">@Html.Raw(Model[i].Comment)</div>
+            </td>
+        </tr>
+        }
+    }
+</table>

@@ -1,0 +1,113 @@
+﻿<ul>
+    <li>
+        <h3>项目</h3>
+        <ul>
+            <li><a href="/Task/List">任务列表</a>是基于项目的：检索的范围始终是限定在某个（些）项目中的。</li>
+            <li>选中某一项目，意味着在该项目<strong>及其所有子孙项目</strong>中查找</li>
+            <li style="width: 368px;">
+                @Html.Partial("Project/_LinkedDropdownList")
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h3>辅助功能</h3>
+        <ul>
+            <li>在列表页面的右上方，有一排链接。为任务列表提供了一些有用的辅助功能</li>
+            <li>
+                @Html.Partial("Task/Search/List/_Auxiliary")
+            </li>
+            <li>
+                <h4>即时刷新</h4>
+                <ul>
+                    <li>
+                        勾选
+                        <input name="checkbox4232" type="checkbox" value="checkbox" checked="checked" />
+                        即时刷新 之后，页面所有属性的变动都将导致页面刷新；否则，需要点击
+                        <input type="submit" name="Submit22" value="提交" />
+                        才能开始筛选
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a name="columns"></a>
+                <h4>设置显示列</h4>
+                <ul>
+                    <li>列表页默认显示任务的所有属性，所以共有20列，显得比较宽</li>
+                    <li>但实际上你可能并不总是需要知道这么多信息，所以我们你可以通过点击<a href="#columns">设置显示列</a>来指定需要显示那些列</li>
+                    <li>
+                        @Html.Partial("Task/Search/List/_Columns")
+                    </li>
+                    <li>看看自定义之后的，是不是清爽很多？</li>
+                    <li>
+                        @Html.Partial("Task/Search/List/_PartColumns")
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a name="timespan"></a>
+                <h4>时间</h4>
+                <ul>
+                    <li>为了快速查找，或者统计的需要，有时候我们需要<strong>在某一个时间段内</strong>进行查询，</li>
+                    <li>时间：后点击<a href="#timespan">展开</a>，显示以下表单：</li>
+                    <li>
+                        @Html.Partial("Task/Search/List/_TimeSpan")
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a name="sum"></a>
+                <h4>统计</h4>
+                <ul>
+                    <li>统计：后点击<a href="#sum">开始</a>，可以显示当前筛选条件下的任务统计结果：</li>
+                    <li>
+                        @Html.Partial("Task/Search/List/_Statistics")
+                    </li>
+                    <li><span class="future" title="该功能尚未实现">统计结果不会包含虚任务</span></li>
+                </ul>
+            </li>
+        </ul>
+    <li>
+        <h3>列表项</h3>
+    </li>
+    <li>
+        @Html.Partial("Task/Search/List/_FullColumns")
+    </li>
+    <li>
+        <h4>筛选</h4>
+        <ul class="ul1">
+            <li>所有下拉列表可以作为筛选条件</li>
+            <li>
+                <span class="future" title="该功能尚未实现">
+                    <input name="checkbox4233" type="checkbox" value="checkbox" checked="checked" />
+                    虚/实 是指是否包含虚任务
+                </span>
+            </li>
+            <li>
+                <select name="select">
+                    <option value="" selected="selected">状态</option>
+                    <option value="1">发布</option>
+                    <option value="2">分配</option>
+                    <option value="3">承接</option>
+                    <option value="31">开始</option>
+                    <option value="32">暂停</option>
+                    <option value="33">完成</option>
+                    <option value="34">放弃</option>
+                    <option value="35">拒绝</option>
+                    <option value="36">更新</option>
+                    <option value="37">取消</option>
+                    <option value="41">合格</option>
+                    <option value="42">不合格</option>
+                </select>
+                里的
+                <a href="../../Prefer/Status.html" class="STYLE3">多选</a> 可以选择多个状态 <span class="future" title="该功能尚未实现">（以后会用<a href="../../../../Knowledge/Learn/multiselect.html">多选下拉列表</a>代替） </span>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h4>排序</h4>
+        <ul class="ul1">
+            <li>点击上下箭头即可切换，即：当前箭头向下，点击之后变成向上；再点击，变成向下；再点击，变成向上……</li>
+            <li>目前只支持单项排序，即：点击上下箭头时，将<strong>仅</strong>按该属性字段进行排序；然后再点击另外一个上下箭头，将忽略之前的排序，<strong>仅</strong>按现在该属性字段进行排序</li>
+        </ul>
+    </li>
+</ul>

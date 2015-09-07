@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "使用说明·团队";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="help_container">
+    <h1>
+        团队
+        <span id="crumb">
+            <span id="outline">当前路径：</span>
+            <a href="/Help">使用说明</a> >> <a href="/Help/Team">团队</a>
+        </span>
+    </h1>
+    <ul>
+        <li>
+            <a name="auth"></a>
+            <h2>授权</h2>
+            <ul>
+                <li>
+                    项目创始人/管理员需要对加入自己项目的用户进行授权，然后被授权用户才能进行相应的活动。
+                </li>
+                <li>
+                    首先勾选：<input type="checkbox" checked="checked" /> 编辑，才能开始对该行的用户进行授权操作。
+                </li>
+                <li>
+                    @Html.Partial("Team/_Auth")
+                </li>
+                <li>
+                    权限包括：
+                    <ul class="ul1">
+                        <li><b>发布</b>：能够发布任务。</li>
+                        <li><b>承接</b>：能够承接任务。</li>
+                        <li><span class="future" title="该功能尚未实现，目前的逻辑是发布人自然具有验收权限"><b>验收</b>：能够发布任务。</span></li>
+                        <li><b>管理</b>：能够对项目进行管理，如：授权、<span class="future" title="该功能尚未实现">设置项目属性</span>。</li>
+                    </ul>
+                </li>
+                <li><span class="future" title="该功能尚未实现">根据项目的设置，授权具有一定的时效（默认为28天），该时效对用户来说是透明的</span></li>
+            </ul>
+        </li>
+        <li class="future" title="该功能尚未实现">
+            <h2>离开项目</h2>
+            <ul>
+                <li>实质上是授权被取消，用户本身的信息不会被删除</li>
+                <li>会生成一个快照（尚未实现），记录该用户在该项目中的工作情况</li>
+            </ul>
+        </li>
+    </ul>
+    <div id="flip">
+        <span>
+            <a href="/Help/Task/Search" target="_blank"> << 任务检索 </a> ：上一页
+        </span>
+        <span class="split"></span>
+        <span>
+            下一页：<a href="/Help" target="_blank"> 使用说明 >> </a>
+        </span>
+    </div>
+</div>

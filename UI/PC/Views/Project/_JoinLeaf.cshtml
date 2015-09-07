@@ -1,0 +1,12 @@
+﻿@model FFLTask.SRV.ViewModel.Project.JoinModel
+@if (!Model.HasJoined)
+{
+    @Html.CheckBoxFor(m => Model.Selected)
+    @Html.HiddenFor(m => Model.Item.LiteItem.Id)
+    <a href="/Project/Summary/@Model.Item.LiteItem.Id">@Model.Item.LiteItem.Name</a>
+}
+else
+{
+    @Html.CheckBoxFor(m => Model.HasJoined, new { disabled = "disabled" })
+    <a href="/Project/Summary/@Model.Item.LiteItem.Id">@Model.Item.LiteItem.Name</a><span style="margin-left: 8px;" class="reminder">(已加入)</span>
+}

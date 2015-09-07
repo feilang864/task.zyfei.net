@@ -1,0 +1,73 @@
+﻿@*inline width style*@
+<div class="code" style="width: 628px">
+    <div id="dual_columns_big_input" style="float: none;">
+        @*note: inline none-float style*@
+        <div class="subtitle_container">
+            <label>
+                <input type="checkbox" value="Assign" name="TaskProcess" edit="Assign" />编辑
+            </label>
+            <span class="subtitle_text">
+                分配/承接
+            </span>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var $inputs = $("#Assign").find("input,select,#previous_project,#next_project");
+                $inputs.attr("disabled", true);
+                $("[edit='Assign']").click(function () {
+                    if ($(this).is(":checked")) {
+                        $inputs.attr("disabled", false);
+                        $("#dual_columns_big_input_submit_input").attr("disabled", false);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(false);
+                        }
+                    } else {
+                        $inputs.attr("disabled", true);
+                        if (typeof editorBody != "undefined") {
+                            editorBody.readonly(true);
+                        }
+                    }
+                    if ($("[name='TaskProcess']:checked").length > 0) {
+                        $("#comment_to input").prop("disabled", true);
+                        $("#comment_to input[type='checkbox']").prop("checked", false);
+                    } else {
+                        $("#comment_to input").prop("disabled", false);
+                        $("#comment_to input[type='checkbox']").prop("checked", true);
+                    }
+
+                    if ($(this).val() == 'Remove') {
+                        if ($(this).is(":checked")) {
+                            $("[name='InProcess']").attr("disabled", "disabled");
+                        }
+                        else {
+                            $("[name='InProcess']").removeAttr("disabled");
+                        }
+                    }
+                });
+            })
+        </script>
+        <table id="Assign">
+            <tr>
+                <th class="first_column">
+                    分配给：
+                </th>
+                <td>
+                    <select id="TaskItem_Owner_Id" name="TaskItem.Owner.Id">
+                        <option value="">------</option>
+                        <option selected="selected" value="2">叶子</option>
+                        <option value="1">dk</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#TaskItem_Owner_Id").change(function () {
+                    if ($("[name='InProcess']")) {
+                        $("[name='InProcess']").remove();
+                    }
+                })
+            })
+        </script>
+    </div>
+</div>

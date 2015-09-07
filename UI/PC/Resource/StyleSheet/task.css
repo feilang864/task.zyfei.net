@@ -1,0 +1,292 @@
+﻿/* ------------------------------------------- */
+/* general ------------------------------------*/
+/* ------------------------------------------- */
+* {
+    /*border: 1px solid blue;*/
+    margin: 0;
+    padding: 0;
+}
+
+/*TODO: not reasonable, should be removed*/
+h3 span {
+    font: 12px normal;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    vertical-align: top;
+    padding-top: 2px;
+}
+
+td {
+    vertical-align: top;
+}
+
+ul {
+    list-style: none;
+}
+
+.textbox {
+    border: 1px solid #051615;
+    background-color: #FFFFFF;
+    height: 20px;
+}
+
+.reminder {
+    font-size: 12px;
+    color: Green;
+}
+
+.wrap_datetime {
+    width: 80px;
+}
+
+.navigator_current_page {
+    background-image: url(../../Resource/Image/current_location.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    color: White;
+}
+
+.owner_opt {
+    border: 1px dashed #008000;
+    background-color: #B3C5D0;
+    padding: 2px 8px;
+    text-decoration: none;
+}
+
+.list_title > span {
+    position: relative;
+    right: 0px;
+    float: right;
+    font-size: 12px;
+}
+
+.unread {
+    font-weight: bold;
+}
+
+.list th {
+    padding: 2px 4px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-left-style: dashed;
+    border-right-style: dashed;
+    border-width: 1px;
+}
+
+.list td {
+    padding: 2px;
+    vertical-align: top;
+    text-align: left;
+    border: dashed 1px;
+}
+
+#body {
+    height: auto;
+    width: auto;
+}
+
+#joined_projects {
+    width: 600px;
+    clear: both;
+    margin-top: 10px;
+}
+
+    #joined_projects h4 {
+        font-size: 16px;
+        font-family: '微软雅黑';
+        margin-left: 30px;
+        margin-bottom: 20px;
+    }
+
+    #joined_projects table {
+        background-color: #DDDDFF;
+        width: 100%;
+        margin-left: 10px;
+    }
+
+        #joined_projects table th #rightest {
+            border-bottom: 1px solid black;
+            text-align: center;
+        }
+
+        #joined_projects table th {
+            border-bottom: 1px solid black;
+            border-right: 1px dashed #000;
+            text-align: center;
+        }
+
+        #joined_projects table td {
+            border-bottom: 1px dashed #000;
+            border-right: 1px dashed #000;
+            height: 35px;
+        }
+
+
+
+.subtitle_container label {
+    float: left;
+    margin-left: 12px;
+}
+
+
+td.textarea {
+    padding-bottom: 24px;
+}
+
+
+
+.short_textbox {
+    width: 45px;
+}
+
+.long_textbox {
+    width: 500px;
+}
+
+
+
+#warn {
+    margin-top: 20px;
+}
+
+    #warn span {
+        color: Red;
+        border: 1px dashed #4C9ED9;
+        font-size: 14px;
+        text-align: center;
+        padding: 7px;
+    }
+
+#task_list {
+    width: 100%;
+}
+
+    #task_list th {
+        border-top: 1px solid;
+        padding: 2px 4px;
+        border-width: 1px;
+        border-bottom-style: solid;
+        border-left-style: dashed;
+        border-right-style: dashed;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    #task_list td {
+        padding: 2px 4px;
+        border-width: 1px;
+        border-bottom-style: solid;
+        border-left-style: dashed;
+        border-right-style: dashed;
+    }
+
+.multiple_status {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.current_page {
+    border: 1px dashed #914800;
+    padding: 2px 2px 0 2px;
+}
+
+.pager li {
+    float: left;
+    margin-left: 8px;
+}
+
+/*-----------------------------------------------------------*/
+/* Styles for /Task/List         ----------------------------*/
+/*-----------------------------------------------------------*/
+
+#search_table, #sum_table {
+    margin-top: 4px;
+    font-size: 12px;
+    border: 1px dashed green;
+    width: 100%;
+}
+
+    #search_table th {
+        text-align: right;
+        padding-left: 2px;
+    }
+
+    #search_table td {
+        padding: 1px;
+    }
+
+    #sum_table th {
+        border-bottom: solid 1px;
+    }
+
+    #sum_table th, #sum_table td {
+        padding: 2px 8px;
+        text-align: left;
+        border-right: dashed 1px;
+    }
+
+/*-----------------------------------------------------------*/
+/* Styles for validation helpers ----------------------------*/
+/*-----------------------------------------------------------*/
+.field-validation-error {
+    color: #ff0000;
+    font-size: 12px;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-size: 12px;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/*-----------------------------------------------------------*/
+/* for /Task/Edit                ----------------------------*/
+/*-----------------------------------------------------------*/
+#add_child_task {
+    float: right;
+}
+
+#remove_and_resume {
+    float: left;
+    margin: 5px;
+}
+
+#task_history td {
+    padding: 2px;
+    *padding: 4px;
+}
+/*-----------------------------------------------------------*/
+/* patches for IE                ----------------------------*/
+/*-----------------------------------------------------------*/
+.no_border {
+    text-decoration: none;
+    border: none;
+}
+
+th.top_align {
+    vertical-align: top;
+}
+
+
+
+.date_picker {
+    width: 80px;
+}

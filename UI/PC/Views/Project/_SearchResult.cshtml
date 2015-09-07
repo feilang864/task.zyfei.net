@@ -1,0 +1,26 @@
+﻿@using FFLTask.SRV.ViewModel.Project
+@using FFLTask.SRV.ViewModel.Shared
+@model _SearchModel
+@if (Model.Projects != null)
+{
+    if (Model.Projects.Count > 0)
+    {
+        foreach (_LiteralLinkedModel project in Model.Projects)
+        {
+            @Html.RadioButton("selectedProject", project.TailedId, project == Model.Projects.First())
+            <span>@Html.Partial("_LiteralLinkedProject", project.LinkedList)</span>
+            <br />
+        }
+    }
+    else
+    {
+        if (Model.IdOrName)
+        {
+            <span class="field-validation-error">* 没有找到ID为“@Model.Input”的项目</span>
+        }
+        else
+        {
+            <span class="field-validation-error">* 没有找到名称为“@Model.Input”的项目</span>
+        }
+    }
+}

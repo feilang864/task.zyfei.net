@@ -1,0 +1,6 @@
+﻿@model Dictionary<string, int>
+@foreach (var item in Model)
+{
+    <span>@item.Key：</span><span>@item.Value</span>
+    <br />
+}

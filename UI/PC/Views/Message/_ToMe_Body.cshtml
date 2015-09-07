@@ -1,0 +1,35 @@
+﻿@using Global.Core.ExtensionMethod
+@using FFLTask.SRV.ViewModel.Message
+@model ToMeModel
+@for (int i = 0; i < Model.Messages.Count; i++)
+{
+    ToMeItemModel item = Model.Messages[i];
+    <tr class="@(item.ReadTime.HasValue ? "read" : "unread")">
+        <td>
+            @Html.CheckBoxFor(m => m.Messages[i].Checked)
+            @Html.HiddenFor(m => m.Messages[i].Id)
+        </td>
+        <td class="wrap_datetime">
+            @item.PublishTime.ToChinese()
+        </td>
+        <td>
+            @item.Project.GetText()
+        </td>
+        <td>
+            @Html.ActionLink(item.Task.Title, "Edit", "Task", new { taskId = item.Task.Id.Value }, new { @class = "task_edit", target = "_blank" })
+        </td>
+        <td>
+            @item.Addresser.Name
+        </td>
+        <td>
+            @Html.Raw(item.Content)
+        </td>
+    </tr>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".unread .task_edit").click(function (event) {
+            $(this).parent().parent().find("input[type='checkbox']").attr("checked", "checked");
+        });
+    });
+</script>

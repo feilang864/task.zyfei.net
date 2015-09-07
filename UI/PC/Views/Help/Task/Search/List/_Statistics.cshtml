@@ -1,0 +1,341 @@
+﻿@*Note: inline style width*@
+<div class="code" id="time_span_and_sum" style="width:828px;">
+    <table id="search_table" style="display: none;">
+        <tbody>
+            <tr>
+                <th>
+                    发布日期：
+                </th>
+                <td>
+                    从
+                    <input type="text" value="" name="TimeSpan.FromPublish" id="TimeSpan_FromPublish" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val="true" class="date_picker hasDatepicker textbox">
+                    到
+                    <input type="text" value="" name="TimeSpan.ToPublish" id="TimeSpan_ToPublish" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val-comparetopublish-frompublish="FromPublish" data-val-comparetopublish="* 截止时间小于开始时间" data-val="true" class="date_picker hasDatepicker textbox">
+                    <br>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.FromPublish" class="field-validation-valid"></span>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.ToPublish" class="field-validation-valid"></span>
+
+                    <script type="text/javascript">
+                        $.validator.addMethod("comparetimespan_topublish", function (value, element, param) {
+                            if (value == "") {
+                                return true;
+                            }
+                            var valueOther = $("#" + param).val();
+                            if (valueOther == "") {
+                                return true;
+                            }
+                            var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                            var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                            return val1 &gt; val2;
+                        });
+                        $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_topublish", "timespan_frompublish");
+                    </script>
+                </td>
+                <th>
+                    分配日期：
+                </th>
+                <td>
+                    从
+                    <input type="text" value="" name="TimeSpan.FromAssign" id="TimeSpan_FromAssign" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val="true" class="date_picker hasDatepicker textbox">
+                    到
+                    <input type="text" value="" name="TimeSpan.ToAssign" id="TimeSpan_ToAssign" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val-comparetoassign-fromassign="FromAssign" data-val-comparetoassign="* 截止时间小于开始时间" data-val="true" class="date_picker hasDatepicker textbox">
+                    <br>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.FromAssign" class="field-validation-valid"></span>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.ToAssign" class="field-validation-valid"></span>
+
+                    <script type="text/javascript">
+                        $.validator.addMethod("comparetimespan_toassign", function (value, element, param) {
+                            if (value == "") {
+                                return true;
+                            }
+                            var valueOther = $("#" + param).val();
+                            if (valueOther == "") {
+                                return true;
+                            }
+                            var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                            var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                            return val1 &gt; val2;
+                        });
+                        $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_toassign", "timespan_fromassign");
+                    </script>
+                </td>
+                <th>
+                    承接日期：
+                </th>
+                <td>
+                    从
+                    <input type="text" value="" name="TimeSpan.FromOwn" id="TimeSpan_FromOwn" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val="true" class="date_picker hasDatepicker textbox">
+                    到
+                    <input type="text" value="" name="TimeSpan.ToOwn" id="TimeSpan_ToOwn" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val-comparetoown-fromown="FromOwn" data-val-comparetoown="* 截止时间小于开始时间" data-val="true" class="date_picker hasDatepicker textbox">
+                    <br>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.FromOwn" class="field-validation-valid"></span>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.ToOwn" class="field-validation-valid"></span>
+
+                    <script type="text/javascript">
+                        $.validator.addMethod("comparetimespan_toown", function (value, element, param) {
+                            if (value == "") {
+                                return true;
+                            }
+                            var valueOther = $("#" + param).val();
+                            if (valueOther == "") {
+                                return true;
+                            }
+                            var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                            var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                            return val1 &gt; val2;
+                        });
+                        $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_toown", "timespan_fromown");
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    预计完成日期：
+                </th>
+                <td>
+                    从
+                    <input type="text" value="" name="TimeSpan.FromExpectComplete" id="TimeSpan_FromExpectComplete" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val="true" class="date_picker hasDatepicker textbox">
+                    到
+                    <input type="text" value="" name="TimeSpan.ToExpectComplete" id="TimeSpan_ToExpectComplete" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val-comparetoexpectcomplete-fromexpectcomplete="FromExpectComplete" data-val-comparetoexpectcomplete="* 截止时间小于开始时间" data-val="true" class="date_picker hasDatepicker textbox">
+                    <br>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.FromExpectComplete" class="field-validation-valid"></span>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.ToExpectComplete" class="field-validation-valid"></span>
+
+                    <script type="text/javascript">
+                        $.validator.addMethod("comparetimespan_toexpectcomplete", function (value, element, param) {
+                            if (value == "") {
+                                return true;
+                            }
+                            var valueOther = $("#" + param).val();
+                            if (valueOther == "") {
+                                return true;
+                            }
+                            var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                            var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                            return val1 &gt; val2;
+                        });
+                        $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_toexpectcomplete", "timespan_fromexpectcomplete");
+                    </script>
+                </td>
+                <th>
+                    实际完成日期：
+                </th>
+                <td>
+                    从
+                    <input type="text" value="" name="TimeSpan.FromActualComplete" id="TimeSpan_FromActualComplete" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val="true" class="date_picker hasDatepicker textbox">
+                    到
+                    <input type="text" value="" name="TimeSpan.ToActualComplete" id="TimeSpan_ToActualComplete" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val-comparetoactualcomplete-fromactualcomplete="FromActualComplete" data-val-comparetoactualcomplete="* 截止时间小于开始时间" data-val="true" class="date_picker hasDatepicker textbox">
+                    <br>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.FromActualComplete" class="field-validation-valid"></span>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.ToActualComplete" class="field-validation-valid"></span>
+
+                    <script type="text/javascript">
+                        $.validator.addMethod("comparetimespan_toactualcomplete", function (value, element, param) {
+                            if (value == "") {
+                                return true;
+                            }
+                            var valueOther = $("#" + param).val();
+                            if (valueOther == "") {
+                                return true;
+                            }
+                            var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                            var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                            return val1 &gt; val2;
+                        });
+                        $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_toactualcomplete", "timespan_fromactualcomplete");
+                    </script>
+                </td>
+                <th>
+                    最后更新时间：
+                </th>
+                <td>
+                    从
+                    <input type="text" value="" name="TimeSpan.FromLastestUpdateTime" id="TimeSpan_FromLastestUpdateTime" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val="true" class="date_picker hasDatepicker textbox">
+                    到
+                    <input type="text" value="" name="TimeSpan.ToLastestUpdateTime" id="TimeSpan_ToLastestUpdateTime" data-val-regex-pattern="\d{4}-\d{2}-\d{2}" data-val-regex="* 日期格式错误" data-val-comparetolastestupdatetime-fromlastestupdatetime="FromLastestUpdateTime" data-val-comparetolastestupdatetime="* 截止时间小于开始时间" data-val="true" class="date_picker hasDatepicker textbox">
+                    <br>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.FromLastestUpdateTime" class="field-validation-valid"></span>
+                    <span data-valmsg-replace="true" data-valmsg-for="TimeSpan.ToLastestUpdateTime" class="field-validation-valid"></span>
+
+                    <script type="text/javascript">
+                        $.validator.addMethod("comparetimespan_tolastestupdatetime", function (value, element, param) {
+                            if (value == "") {
+                                return true;
+                            }
+                            var valueOther = $("#" + param).val();
+                            if (valueOther == "") {
+                                return true;
+                            }
+                            var val1 = (isNaN(value) ? Date.parse(value) : eval(value));
+                            var val2 = (isNaN(valueOther) ? Date.parse(valueOther) : eval(valueOther));
+
+                            return val1 &gt; val2;
+                        });
+                        $.validator.unobtrusive.adapters.addSingleVal("comparetimespan_tolastestupdatetime", "timespan_fromlastestupdatetime");
+                    </script>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        var showText = "隐藏";
+        var hideText = "展开";
+        $(document).ready(function () {
+            if ($("#search_table input[type='text'][value!='']").length &gt; 0) {
+                $("#show_hide").text(showText);
+            }
+        else {
+                $("#search_table").hide();
+            $("#show_hide").text(hideText);
+        }
+
+            $("#show_hide").click(function (event) {
+                event.preventDefault();
+                if ($("#show_hide").text() == hideText) {
+                    $("#search_table").show();
+                    $("#show_hide").text(showText);
+                }
+                else if ($("#show_hide").text() == showText) {
+                    $("#search_table").hide();
+                    $("#search_table input[type='text']").val('');
+                    $("#show_hide").text(hideText);
+                }
+            });
+        })
+    </script>
+    <table id="sum_table">
+        <tbody>
+            <tr>
+                <th>
+                    任务种类
+                </th>
+                <th>
+                    发布
+                </th>
+                <th>
+                    承接
+                </th>
+                <th>
+                    验收
+                </th>
+                <th>
+                    优先级
+                </th>
+                <th>
+                    难度
+                </th>
+                <th>
+                    耗时(分钟)
+                </th>
+                <th>
+                    状态
+                </th>
+                <th>
+                    超期
+                </th>
+                <th>
+                    质量
+                </th>
+                <th>
+                    质疑
+                </th>
+                <th>
+                    拒绝验收
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <span>虚：</span><span>2</span>
+                    <br>
+                    <span>实：</span><span>14</span>
+                    <br>
+                </td>
+                <td>
+                    <span>叶子：</span><span>12</span>
+                    <br>
+                    <span>dk：</span><span>4</span>
+                    <br>
+                </td>
+                <td>
+                    <span>未指定：</span><span>3</span>
+                    <br>
+                    <span>叶子：</span><span>10</span>
+                    <br>
+                    <span>dk：</span><span>3</span>
+                    <br>
+                </td>
+                <td>
+                    <span>叶子：</span><span>9</span>
+                    <br>
+                    <span>dk：</span><span>7</span>
+                    <br>
+                </td>
+                <td>
+                    <span>最低：</span><span>3</span>
+                    <br>
+                    <span>高：</span><span>2</span>
+                    <br>
+                    <span>中：</span><span>4</span>
+                    <br>
+                    <span>低：</span><span>1</span>
+                    <br>
+                    <span>最高：</span><span>3</span>
+                    <br>
+                    <span>未指定：</span><span>3</span>
+                    <br>
+                </td>
+                <td>
+                    <span>一般：</span><span>7</span>
+                    <br>
+                    <span>困难：</span><span>2</span>
+                    <br>
+                    <span>未指定：</span><span>7</span>
+                    <br>
+                </td>
+                <td>
+                    <span>预计：</span><span>190</span>
+                    <br>
+                    <span>实际：</span><span>112882</span>
+                    <br>
+                </td>
+                <td>
+                    <span>发布：</span><span>3</span>
+                    <br>
+                    <span>更新：</span><span>1</span>
+                    <br>
+                    <span>分配：</span><span>9</span>
+                    <br>
+                    <span>开始：</span><span>3</span>
+                    <br>
+                </td>
+                <td>
+                    <span>条数：</span><span>1</span>
+                    <br>
+                    <span>时间：</span><span>29</span>
+                    <br>
+                </td>
+                <td>
+                    <span>未指定：</span><span>16</span>
+                    <br>
+                </td>
+                <td>
+                    <span>条数：</span><span>1</span>
+                    <br>
+                    <span>次数：</span><span>1</span>
+                    <br>
+                </td>
+                <td>
+                    <span>条数：</span><span>2</span>
+                    <br>
+                    <span>次数：</span><span>4</span>
+                    <br>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

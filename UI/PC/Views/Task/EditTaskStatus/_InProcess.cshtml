@@ -1,0 +1,20 @@
+﻿@using FFLTask.GLB.Global.Enum
+@model FFLTask.SRV.ViewModel.Task.EditModel
+<div name="@TaskProcess.InProcess">
+@if (Model.TaskItem.Owner != null
+     && Model.CurrentUser.Id == Model.TaskItem.Owner.Id)
+{
+    if (Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Assign
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Own
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.BeginWork
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Pause
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Doubt
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Update
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Complete
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.RefuseAccept
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Dissent)
+    {
+        @Html.EditorFor(m => m, "_Edit_InProcess")
+    }
+}
+</div>

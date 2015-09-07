@@ -1,0 +1,11 @@
+﻿@using FFLTask.GLB.Global.Enum
+@model FFLTask.SRV.ViewModel.Task.EditModel   
+@if (Model.CurrentUser.Id == Model.TaskItem.Accepter.Id)
+{
+    if (Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Complete
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.RefuseAccept
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Dissent)
+    { 
+        @Html.EditorFor(m => m, "_Edit_Accept_Editable")
+    }
+}

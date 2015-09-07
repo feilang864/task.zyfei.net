@@ -1,0 +1,132 @@
+﻿@{    
+    ViewBag.Title = "当前任务列表·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using FFLTask.UI.PC
+@model FFLTask.SRV.ViewModel.Task.ListModel
+@using (Html.BeginForm())
+{
+    <div style="margin: 12px 30px 4px auto; float: right; font-size: 12px;">
+        <label>@Html.CheckBoxFor(m=>m.SyncRefresh, new { style = "position: relative; top:2px;" })即时刷新</label>
+        <span>|</span> 时间：<a href="#" id="show_hide">展开</a>
+        <span>|</span> 统计：<a href="#" id="sum">开始</a>
+        <span>|</span> <a href="/Task/List?setShownColoumns=true">设置显示列</a>
+    </div>
+    <div id="time_span_and_sum" style="float:right; clear:both; margin-bottom:8px;">
+        @Html.Partial("~/Views/Task/List/_TimeSpan.cshtml")
+    </div>
+    <div style="margin-left: 8px; margin-bottom: 6px; clear: both;">
+        <span style="font-weight: bold;">项目组：</span>
+        @Html.EditorFor(m => m.CurrentProject, "Project/_DropDownListLinkedProject")
+        <input type="submit" value="提交" style="margin-left:32px;" />
+    </div>
+    <table id="task_list">
+        @if (Model.SetShownColoumns)
+        {
+            @Html.Partial("~/Views/Task/List/_List_Display.cshtml")
+        }
+        @Html.Partial("~/Views/Task/List/_List_Header.cshtml", Model)
+        @Html.Partial("~/Views/Task/List/_List_Body.cshtml", Model)
+    </table>
+    @Html.HiddenFor(m => m.PageIndex)
+    @Html.Hidden("SortType", (object)ViewBag.SortType)
+    @Html.Hidden("Direction",(object)ViewBag.Direction)
+    <div class="pager" style="margin: 8px auto 10px auto; height: 30px;">@Html.Action("_Pager", "Shared", Model.Pager)</div>
+}
+@if (false)
+{
+    <script type="text/javascript" src="/Resource/Scripts/jquery-2.1.0-vsdoc.js"></script>
+}
+@section JavaScript{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#task_list select").change(function () {
+                if ($("#@Html.IdFor(m => m.SyncRefresh)").attr("checked")) {
+                    if ($(this).attr("id") == "dropdownlist_status") {
+                        if ($.cookie('@CookieKey.PreferStatus')) {
+                            $.removeCookie('@CookieKey.PreferStatus', { path: '/' });
+                        }
+                    }
+                    $("form").submit();
+                }
+            });
+            $(".pager a").click(function (event) {
+                var $currentUrl = $(this)[0].id;
+                $("#PageIndex").val($currentUrl);
+                event.preventDefault();
+                $("#PageIndex").val();
+                $("form").submit();
+            });
+            $("a.sort").click(function (event) {
+                event.preventDefault();
+                $('#@Html.Id("SortType")').val($(this).attr("SortType"));
+                if ($(this).attr("Direction") == "True") {
+                    $('#@Html.Id("Direction")').val("False");
+                } else {
+                    $('#@Html.Id("Direction")').val("True");
+                }
+                $("form").submit();
+            });
+
+            var noSum = true;
+            $("#sum").click(function (event) {
+                event.preventDefault();
+                if ($("#sum").text() == "开始") {
+                    if (noSum) {
+                        $("#sum").html("处理中…");
+                        $.ajax({
+                            url: "/Task/_Sum",
+                            type: "POST",
+                            dataType: "html",
+                            data: $("form").serialize(),
+                            success: function (data) {
+                                $("#time_span_and_sum").append(data);
+                                $("#sum").text("隐藏");
+                            }
+                        });
+                        noSum = false;
+                    }
+                    else {
+                        $("#sum_table").show();
+                    }
+                }
+                else if ($("#sum").text() == "隐藏") {
+                    $("#sum_table").hide();
+                    $("#sum").text("开始");
+                }
+            });
+
+            $(".date_picker").datepicker();
+
+            $("a[name='own']").click(function (event) {
+                event.preventDefault();
+                var $link = $(this);
+                var id = this.id;
+                $.ajax({
+                    url: "/Task/AjaxOwn",
+                    type: "GET",
+                    data: { 'taskId': id },
+                    beforeSend: function () { $link.hide(); },
+                    success: function (data) {
+                        $link.text(data).removeAttr("href");
+                    },
+                    complete: function () {
+                        $link.show();
+                    }
+                });
+            });
+
+            $("a[name='history']").click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr("href");
+                openWindow(url, "任务历史", 600, 500);
+            });
+
+            $("a[name='relation']").click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr("href");
+                openWindow(url, "任务关系", 600, 500);
+            });
+        });
+    </script>
+}

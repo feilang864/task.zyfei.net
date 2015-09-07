@@ -1,0 +1,34 @@
+﻿<div id="upload_files">
+    <input type="file" name="file" onchange="uploadChange(this)" />
+    <span class="reminder">（* 页面提交时上传文件）</span><a href="#" id="upload">继续上传</a><br />
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#upload").hide();
+        $("#upload").click(function (event) {
+            event.preventDefault();
+            addUploadFile();
+            $("#upload").hide();
+        });
+    });
+
+    function uploadChange(event) {
+        $("#upload").show();
+        $("input[name=file]").each(function () {
+            if ($(this).val() == "") {
+                $("#upload").hide();
+            }
+        });
+    }
+
+    function addUploadFile() {
+        var uploadInput = "<span><input type='file' name='file' onchange='uploadChange(this)' /> <span class='reminder'>（* 页面提交时上传文件）</span><a href='#' class='delete_upload_file'>删除</a></span><br />";
+        $("#upload_files").append(uploadInput);
+        $("a.delete_upload_file").click(function (event) {
+            event.preventDefault();
+            $(this).parent().next().remove();
+            $(this).parent().remove();
+            uploadChange();
+        });
+    }
+</script>

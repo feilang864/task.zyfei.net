@@ -1,0 +1,59 @@
+﻿@{    
+    ViewBag.Title = "当前任务列表·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using FFLTask.SRV.ViewModel.Message
+@using Global.Core.ExtensionMethod
+@using FFLTask.GLB.Global.Enum
+@model ToMeModel
+<div id="dual_columns_big">
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("_ToMeOperater")
+        <table id="messages" class="list">
+            @Html.Partial("_ToMe_Header", Model)
+            @if (Model.Messages.IsNullOrEmpty())
+            {
+                <tr>
+                    <td colspan="6">
+                        当前没有给你的留言
+                    </td>
+                </tr> 
+            }
+            else
+            {
+                @Html.Partial("_ToMe_Body", Model)
+            }
+        </table>
+        @Html.Partial("_ToMeOperater", Model)
+    }
+    <div class="pager" style="margin: 8px auto 10px auto; height: 30px;">@Html.Action("_Pager", "Shared", Model.Pager)</div>
+</div>
+<div style="clear: both;">
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".select_read").click(function () {
+            $(".read").find("input:checkbox").attr("checked", $(this).is(":checked"));
+        });
+        $(".select_unread").click(function () {
+            $(".unread").find("input:checkbox").attr("checked", $(this).is(":checked"));
+        });
+        $("#messages select").change(function () {
+            $("form").submit();
+        });
+
+        $("form").submit(function (event) {
+            if ($("#@Html.IdFor(m => m.MessageMark):checked").val() == "Delete") {
+                if ($(".unread input[type='checkbox']:checked").length > 0) {
+                    if (confirm("你勾选了若干未读留言但没有提交，需要将他们自动标记为已读么？")) {
+                        //TODO:
+                    }
+                    else {
+                        event.preventDefault();
+                    }
+                }
+            }
+        });
+    });
+</script>

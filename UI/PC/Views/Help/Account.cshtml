@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "使用说明·用户";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="help_container">
+    <h1>
+        用户
+        <span id="crumb">
+            <span id="outline">当前路径：</span>
+            <a href="/Help">使用说明</a> >> <a href="/Help/Account">用户</a>
+        </span>
+    </h1>
+    <h2><a href="/Register">注册</a></h2>
+    <ul>
+        <li>只需要填写一个用户名和密码即可完成注册，注册完成之后，会提示你加入/创建<a href="/Help/Project" target="_blank">项目</a></li>
+        <li>
+            @Html.Partial("Account/_Register")
+        </li>
+    </ul>
+    <h2><span class="future" title="该功能尚未实现">个人信息</span></h2>
+    <ul class="future" title="该功能尚未实现">
+        <li>注册之后，建议你填写一些个人资料（如真实姓名、年龄、性别、爱好特长等），以便于别人更好的了解你。</li>
+        <li>你的个人信息将显示在<a href="#">个人信息</a>页面</li>
+        <li></li>
+        <li></li>
+    </ul>
+    <h2><a href="/Log/On">登录</a></h2>
+    <ul>
+        <li>使用用户名和密码登录，登录信息可以保存14天</li>
+        <li>
+            @Html.Partial("Account/_LogOn")
+        </li>
+    </ul>
+    <h2><span class="future" title="该功能尚未实现">找回密码</span></h2>
+    <div id="flip">
+        <span>
+            <a href="/Help" target="_blank"><< 帮助首页</a> ：上一页
+        </span>
+        <span class="split"></span>
+        <span>
+            下一页：<a href="/Help/Project" target="_blank"> 项目 >> </a>
+        </span>
+    </div>
+</div>

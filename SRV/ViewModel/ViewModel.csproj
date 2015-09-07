@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2C6BFABA-4966-4AC1-BC55-069249BBCE75}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FFLTask.SRV.ViewModel</RootNamespace>
+    <AssemblyName>FFLTask.SRV.ViewModel</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auth\ProjectAuthorizationModel .cs" />
+    <Compile Include="Message\FromMeItemModel.cs" />
+    <Compile Include="Message\FromMeModel.cs" />
+    <Compile Include="Message\ToMeItemModel.cs" />
+    <Compile Include="Message\ToMeModel.cs" />
+    <Compile Include="Project\EditModel.cs" />
+    <Compile Include="Project\LiteItemModel.cs" />
+    <Compile Include="Project\FullItemModel.cs" />
+    <Compile Include="Account\LogonModel.cs" />
+    <Compile Include="Account\UserModel.cs" />
+    <Compile Include="Project\CreateModel.cs" />
+    <Compile Include="Project\JoinModel.cs" />
+    <Compile Include="Project\_DropdownlistLinkedNodeModel.cs" />
+    <Compile Include="Project\ProjectMemberModel.cs" />
+    <Compile Include="Project\_SearchModel.cs" />
+    <Compile Include="Project\SummaryModel.cs" />
+    <Compile Include="Project\_LiteralLinkedModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Account\RegisterModel.cs" />
+    <Compile Include="Shared\AbstractModel.cs" />
+    <Compile Include="Project\_DropdownlistLinkedModel.cs" />
+    <Compile Include="Shared\ImageCodeModel.cs" />
+    <Compile Include="Shared\PagerModel.cs" />
+    <Compile Include="Shared\SplitDateTimeModel.cs" />
+    <Compile Include="Shared\_NavigatorModel.cs" />
+    <Compile Include="Task\AttachmentModel.cs" />
+    <Compile Include="Task\EditModel.cs" />
+    <Compile Include="Task\LiteItemModel .cs" />
+    <Compile Include="Task\SearchModel.cs" />
+    <Compile Include="Task\SequenceModel.cs" />
+    <Compile Include="Task\StatusModel.cs" />
+    <Compile Include="Task\FullItemModel..cs" />
+    <Compile Include="Task\ListModel.cs" />
+    <Compile Include="Task\NewModel.cs" />
+    <Compile Include="Task\TaskHistoryItemModel.cs" />
+    <Compile Include="Task\TaskRelationModel.cs" />
+    <Compile Include="Task\_SumModel.cs" />
+    <Compile Include="Task\_TimeSpanModel.cs" />
+    <Compile Include="Team\SearchModel.cs" />
+    <Compile Include="Team\TansferModel.cs" />
+    <Compile Include="Test\UserLogonModel.cs" />
+    <Compile Include="Validations\FflBlogUrlValidateAttribute.cs" />
+    <Compile Include="Validations\FflDateValidationAttribute.cs" />
+    <Compile Include="Validations\FflEmailValidationAttribute.cs" />
+    <Compile Include="Validations\FflNumberValidationAttribute.cs" />
+    <Compile Include="Validations\FflRequiredAttribute.cs" />
+    <Compile Include="Validations\FflStringLengthAttribute.cs" />
+    <Compile Include="Validations\FflUrlValidationAttribute.cs" />
+    <Compile Include="Validations\GreaterThanAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GLB\Global\Global.csproj">
+      <Project>{2709CC0B-3483-4CAE-AB5C-1E388A9DC32F}</Project>
+      <Name>Global</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

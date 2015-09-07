@@ -1,0 +1,369 @@
+﻿@*inline width style*@
+<div class="code" style="width:948px;">
+    @*Note: add this div to distinguish _ToMe and _FromMe in js code*@
+    <div class="fromMe">
+        @*Note: add prefix in class to distinguish _ToMe and _FromMe in js code*@
+        <label><input type="checkbox" class="fromMe_select_read" />已读</label>
+        <label><input type="checkbox" class="fromMe_select_unread" />未读</label>
+        <input type="submit" value="删除" />
+        <table id="messages" class="list">
+            <tr>
+                <th>
+                </th>
+                <th>
+                    <a class="sort" href="/Message/FromMe?sort=PublishTime&amp;des=false">
+                        <img src="/Resource/Image/sort_down.png" class="no_border" />
+                        发布时间
+                    </a>
+                </th>
+                <th>
+                    <select id="SelectedProjectId" name="SelectedProjectId">
+                        <option value="">项目</option>
+                        <option value="3">自由飞&gt;&gt;任务管理</option>
+                        <option value="9">自由飞&gt;&gt;任务管理&gt;&gt;前台</option>
+                        <option value="10">自由飞&gt;&gt;任务管理&gt;&gt;后台</option>
+                        <option value="12">自由飞&gt;&gt;任务管理&gt;&gt;集成</option>
+                        <option value="4">自由飞&gt;&gt;创业家园&gt;&gt;前台</option>
+                        <option value="7">自由飞&gt;&gt;创业家园&gt;&gt;集成</option>
+                        <option value="8">自由飞&gt;&gt;创业家园&gt;&gt;管理</option>
+                        <option value="2">自由飞&gt;&gt;创业家园</option>
+                        <option value="5">自由飞&gt;&gt;创业家园&gt;&gt;后台</option>
+                        <option value="14">自由飞&gt;&gt;Global</option>
+                        <option value="17">自由飞&gt;&gt;伊屋装饰网</option>
+                        <option value="1">自由飞</option>
+                        <option value="15">自由飞&gt;&gt;首顾科技</option>
+                    </select>
+                </th>
+                <th>
+                    任务名称
+                </th>
+                <th>
+                    <a class="sort" href="/Message/FromMe?sort=ReadTime&amp;des=false">
+                        <img src="/Resource/Image/sort_down.png" class="no_border" />
+                        读取时间
+                    </a>
+                </th>
+                <th>
+                    <select id="SelectedAddresseeId" name="SelectedAddresseeId">
+                        <option value="">收信人</option>
+                        <option value="1">dk</option>
+                        <option value="5">yfei</option>
+                    </select>
+                </th>
+                <th>
+                    内容
+                </th>
+            </tr>
+            <tr class="unread">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_0__Checked" name="Messages[0].Checked" type="checkbox" value="true" /><input name="Messages[0].Checked" type="hidden" value="false" />
+                <td class="wrap_datetime">
+                    2015-08-05 17:14
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2360" target="_blank">总是在ajax异常时返回提示信息</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-06 09:06
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    doc: 1050<br />
+                </td>
+            </tr>
+            <tr class="unread">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_1__Checked" name="Messages[1].Checked" type="checkbox" value="true" /><input name="Messages[1].Checked" type="hidden" value="false" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-05 15:32
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2360" target="_blank">总是在ajax异常时返回提示信息</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-06 09:06
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    code: 1362<br />
+                </td>
+            </tr>
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_2__Checked" name="Messages[2].Checked" type="checkbox" value="true" /><input name="Messages[2].Checked" type="hidden" value="false" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-05 09:39
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2315" target="_blank">实现前台用户修改注册信息页面提交的功能</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-05 11:59
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    发现：手机验证码提示过期，但手机号码仍然被改了！？
+                </td>
+            </tr>
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_3__Checked" name="Messages[3].Checked" type="checkbox" value="true" /><input name="Messages[3].Checked" type="hidden" value="false" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-05 09:15
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2362" target="_blank">bug: /account/Register页面未显示已生成的手机验证码</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-05 11:14
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    <p>
+                        似乎是生成了验证码的，但：
+                    </p>
+                    <p>
+                        1、没有显示
+                    </p>
+                    <p>
+                        2、总是显示验证码已过期。
+                    </p>
+                    <p>
+                        <br />
+                    </p>
+                    <p>
+                        该任务请优先！
+                    </p>
+                </td>
+            </tr>
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_4__Checked" name="Messages[4].Checked" type="checkbox" value="true" /><input name="Messages[4].Checked" type="hidden" value="false" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-04 21:30
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2314" target="_blank">引入前台用户修改注册页面Get的呈现，包含内容，不包含css和js</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-05 13:20
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    <p>
+                        我还是没在文档上找到应该以哪个手机号能够登录。
+                    </p>
+                    <p>
+                        文档/builddatabase/HouseOwner里有：
+                    </p>
+                    <p>
+                        李建国 手机号码：13823488888<br />
+                        昵称：坚果<br />
+                        登录密码：1234<br />
+                        房屋：枫林椰岛A幢18-2-906
+                    </p>
+                    <p>
+                        但无法登录。
+                    </p>
+                    <p>
+                        且：用户名密码错误仍然无提示。
+                    </p>
+                </td>
+            </tr>
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_5__Checked" name="Messages[5].Checked" type="checkbox" value="true" /><input name="Messages[5].Checked" type="hidden" value="false" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-04 20:46
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2358" target="_blank">把city和agent相关的文档代码都清理掉</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-05 13:19
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    <p>
+                        不需要专门来做这个任务。
+                    </p>
+                    <p>
+                        以后如果碰到了，就按这个方案处理。
+                    </p>
+                </td>
+            </tr>
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_11__Checked" name="Messages[11].Checked" type="checkbox" value="true" /><input name="Messages[11].Checked" type="hidden" value="false" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-03 11:16
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2324" target="_blank">重构前用户后台用户，注册，登录相关的功能</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-03 12:13
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    <p>
+                        doc:
+                    </p>
+                    <p>
+                        1020
+                    </p>
+                    <p>
+                        1021
+                    </p>
+                </td>
+            </tr>
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_14__Checked" name="Messages[14].Checked" type="checkbox" value="true" /><input name="Messages[14].Checked" type="hidden" value="false" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-01 00:41
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2274" target="_blank">引入页面需要的model并映射</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-08-06 09:06
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    <p>
+                        见1269。
+                    </p>
+                    <p>
+                        另：面积（Area）应该添加限制：大于0的整数/小数。
+                    </p>
+                </td>
+            </tr>
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_18__Checked" name="Messages[18].Checked" type="checkbox" value="true" /><input name="Messages[18].Checked" type="hidden" value="false" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-07-23 11:42
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2015" target="_blank">在UserHelper里面添加一个FrontUser属性，实现Get属性</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-07-28 09:13
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    <p>
+                        <span style="color:#008000;font-family:楷体;line-height:normal;white-space:normal;"><span style="white-space:nowrap;">1、PhoneKey和<span style="white-space:nowrap;">PhoneKeyCreateTime移除掉</span></span></span>
+                    </p>
+                    <p>
+                        <span style="color:#008000;font-family:楷体;line-height:normal;white-space:normal;"><span style="white-space:nowrap;"><span style="white-space:nowrap;">2、其他属性写明//TOOO原因：Logon时需要进行验证</span></span></span>
+                    </p>
+                    <p>
+                        <span style="color:#008000;font-family:楷体;line-height:normal;white-space:normal;">
+                            <span style="white-space:nowrap;">
+                                <span style="white-space:nowrap;">
+                                    3、其他自行发布任务<br />
+                                </span>
+                            </span>
+                        </span>
+                    </p>
+                </td>
+            </tr>
+            <tr class="read">
+                <td>
+                    <input data-val="true" data-val-required="The Checked field is required." id="Messages_19__Checked" name="Messages[19].Checked" type="checkbox" value="true" /><input name="Messages[19].Checked" type="hidden" value="false" />
+                </td>
+                <td class="wrap_datetime">
+                    2015-07-23 09:01
+                </td>
+                <td>
+                    自由飞>>伊屋装饰网
+                </td>
+                <td>
+                    <a href="/Task/Edit/2175" target="_blank">文档，补全代理商合同页面的输入验证，说明，进入权限</a>
+                </td>
+                <td class="wrap_datetime">
+                    2015-07-23 10:40
+                </td>
+                <td>
+                    dk
+                </td>
+                <td>
+                    <p>
+                        优先级：中
+                    </p>
+                    <p>
+                        doc：996
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <label><input type="checkbox" class="fromMe_select_read" />已读</label>
+        <label><input type="checkbox" class="fromMe_select_unread" />未读</label>
+        <input type="submit" value="删除" />
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fromMe_select_read").click(function () {
+            $("div.fromMe .read").find("input:checkbox").attr("checked", $(this).is(":checked"));
+        });
+        $(".fromMe_select_unread").click(function () {
+            $("div.fromMe .unread").find("input:checkbox").attr("checked", $(this).is(":checked"));
+        });
+    });
+</script>

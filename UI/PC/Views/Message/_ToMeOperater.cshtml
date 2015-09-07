@@ -1,0 +1,8 @@
+﻿@using FFLTask.GLB.Global.Enum
+@model FFLTask.SRV.ViewModel.Message.ToMeModel
+<label><input type="checkbox" class="select_read" />已读</label>
+<label><input type="checkbox" class="select_unread" />未读</label>
+<b>标记为：</b>
+<label>@Html.RadioButtonFor(m => m.MessageMark, MessageMark.Read)已读</label>
+<label>@Html.RadioButtonFor(m => m.MessageMark, MessageMark.Delete)删除</label>
+<input type="submit" value="提交" />

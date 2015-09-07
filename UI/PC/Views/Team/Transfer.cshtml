@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "工作交接·自由飞任务管理系统";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns_Big.cshtml";
+}
+@using Global.Core.ExtensionMethod
+@using FFLTask.GLB.Global.Enum
+@model FFLTask.SRV.ViewModel.Team.TransferModel
+@section RightTitle{
+    <h2>
+        说明
+    </h2>
+}
+@section Introduction{
+}
+<h3>
+    工作交接
+</h3>
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>
+                项目：@Html.Action("_LiteralLinkedProject", "Project", new { projectId = Model.ProjectId })
+            </td>
+            <td>
+                @Model.CurrentRole.GetEnumDescription()：@Html.Partial("_UserLink", Model.Predecessor)
+            </td>
+            @*<td>
+                    <input type="checkbox" />显示全部
+                </td>*@
+        </tr>
+    </table>
+    <table style="margin: 16px auto">
+        <tr>
+            <th>
+            </th>
+            <th>
+                任务
+            </th>
+            <th>
+                @Html.EnumDropDownListFor(m => m.SelectedStatus, new SelectList(Model.AllStatus), "状态")
+            </th>
+        </tr>
+        @for (int i = 0; i < Model.Tasks.Count; i++)
+        {
+            var item = Model.Tasks[i];
+            <tr>
+                <td>
+                    @Html.CheckBoxFor(m => m.Tasks[i].Selected)
+                    @Html.HiddenFor(m => m.Tasks[i].Id)
+                </td>
+                <td>
+                    <a href="/Task/Edit/@item.Id" target="_blank">@item.Title</a>
+                </td>
+                <td>
+                    @item.CurrentStatus.GetEnumDescription()
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        <label>
+            <input type="checkbox" />全选
+        </label>
+        <label>
+            移交给：@Html.TextBoxFor(m => m.SuccessorName)
+            @Html.ValidationMessageFor(m => m.SuccessorName)
+        </label>
+        <label>
+            <input type="submit" value="提交" />
+        </label>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $("select").change(function () {
+            var status = $(this).val();
+            if (status != "") {
+                location.href = location.href.split("?")[0] + "?status=" + status;
+            } else {
+                location.href = location.href.split("?")[0];
+            }
+        });
+    })
+</script>

@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "编辑任务·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns_Big.cshtml";
+}
+@using FFLTask.GLB.Global.Enum
+@model FFLTask.SRV.ViewModel.Task.EditModel
+@using Global.Core.ExtensionMethod
+<div class="title">
+    <span class="h3">编辑任务</span><span>发布人:</span>@Html.Partial("_UserLink", Model.TaskItem.Publisher)
+    @if (Model.TaskItem.Owner != null)
+    {
+        <span>承接人：</span>@Html.Partial("_UserLink", Model.TaskItem.Owner)
+    }
+    <span>验收人:</span>@Html.Partial("_UserLink", Model.TaskItem.Accepter)
+    <a href="/Task/New?parentId=@Model.TaskItem.LiteItem.Id" class="owner_opt" id="add_child_task">
+        添加子任务
+    </a>
+</div>
+@using (Html.BeginForm("Edit", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("EditTaskStatus/_Publish", Model)
+    @Html.Partial("EditTaskStatus/_AssignOwn", Model)
+    @Html.Partial("EditTaskStatus/_RemoveResume", Model)
+    @Html.Partial("EditTaskStatus/_InProcess", Model)
+    @Html.Partial("EditTaskStatus/_Accept", Model)
+    @Html.EditorFor(m => m, "_Edit_Comment")
+    <div id="dual_columns_big_input_submit">
+        <input type="submit" value="提交" id="dual_columns_big_input_submit_input" />
+        <img alt="处理中..." src="/Resource/Image/waiting.gif" id="submitting" style="margin-top: 20px;" />
+        @Html.HiddenFor(m => m.CanAutoCompleteParent)
+        @Html.HiddenFor(m => m.AutoCompleteParent)
+        @Html.HiddenFor(m => m.CanAutoAccepterParent)
+        @Html.HiddenFor(m => m.AutoAcceptParent)
+        转到：
+        <label>
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.Current) 当前
+        </label>
+        @if (Model.PreviousTaskId.HasValue)
+        {
+            @Html.HiddenFor(m => m.PreviousTaskId)
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.Previous)
+            <a href="/Task/Edit/@Model.PreviousTaskId" target="_blank">上个</a>
+        }
+        @if (Model.NextTaskId.HasValue)
+        {
+            @Html.HiddenFor(m => m.NextTaskId)
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.Next)
+            <a href="/Task/Edit/@Model.NextTaskId" target="_blank">下个</a>
+        }
+        @{string parentUrl = Model.TaskItem.Parent != null ?
+              "/Task/Edit/" + Model.TaskItem.Parent.Id :
+              string.Empty;}
+        @if (Model.TaskItem.Parent != null)
+        {
+            @Html.HiddenFor(m => m.TaskItem.Parent.Id)
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.Parent)
+
+            <a href="@parentUrl" target="_blank">父</a>
+        }
+        任务|<label>
+            @Html.RadioButtonFor(m => m.Redirect, RedirectPage.Close) 关闭
+        </label>
+    </div>
+    <div id="ParentCanAutoCompleteReminider" title="父任务自动完成" style="display: none">
+        <p>
+            该任务的<a href="@parentUrl" target="_blank">父任务</a>为虚任务，且其他兄弟任务都已完成，是否自动完成其父任务
+        </p>
+    </div>
+    <div id="ParentCanAutoAcceptReminider" title="父任务自动验收" style="display: none">
+        <p>
+            该任务的<a href="@parentUrl" target="_blank">父任务</a>为虚任务，且其他兄弟任务都已验收合格，是否自动验收其父任务
+        </p>
+    </div>
+}
+@section RightTitle{
+    <h2>
+        任务历史
+        <span style="font: 12px normal; margin-left: 24px" class="owner_opt">当前状态：@Model.TaskItem.LiteItem.CurrentStatus.Name</span>
+    </h2>
+}
+@section Introduction{
+    @Html.Action("History", Model.TaskItem.LiteItem.Id)
+}
+@section JavaScript{
+    <script src="@Url.Content("~/Resource/kindeditor-v4.1/kindeditor-min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Resource/kindeditor-v4.1/lang/zh_CN.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        var editorComment;
+        var isSubmit = false;
+        window.onbeforeunload = function () {
+            editorComment.sync();
+            if (!isSubmit && $("#@Html.IdFor(m => m.Comment)").val() != "") {
+                return "页面内容还没有被保存，确认要离开？";
+            }
+        }
+
+        function normalSubmit(trigger, event){
+            editorComment.sync();
+            isSubmit = true;
+            if ($("[name='@Html.NameFor(m => m.TaskItem.HasAccepted)'][value='False']").is(":checked") &&
+                $("#@Html.IdFor(m => m.Comment)").val() == "") {
+                $("[data-valmsg-for='Comment']").text("* 拒绝验收时必须说明原因。").addClass("field-validation-error").show();
+                event.preventDefault();
+                return false;
+            };
+            $("form").submit();
+            preventDuplicatedSubmit(trigger);
+        }
+
+        function canAutoComplete(){
+            return $("[type='checkbox'][value='@TaskProcess.InProcess']").is(":checked") &&
+                   $("#@Html.IdFor(m => m.CanAutoCompleteParent)").val()=="True" &&
+                   $("#@Html.IdFor(m => m.SelectedQualifiedStatus.Stage) ").val() == @((int)Status.Complete);
+        }
+
+        function canAutoAccept(){
+            return $("[type='checkbox'][value='@TaskProcess.Accept']").is(":checked") &&
+                   $("#@Html.IdFor(m => m.CanAutoAccepterParent)").val()=="True" &&
+                   $("#@Html.IdFor(m => m.TaskItem.HasAccepted):checked").val() =="True";
+        }
+
+        $(document).ready(function () {
+            $("#submitting").hide();
+
+            KindEditor.ready(function (K) {
+                editorComment = K.create('textarea[name="Comment"]', {
+                    allowFileManager: false,
+                    @Html.Partial("KindEditorItems/_Simple")
+                });
+            });
+
+            $("#removeOrResume").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#dual_columns_big_input_submit_input").attr("disabled", false);
+                }
+            });
+
+            $("#@Html.IdFor(m => m.CurrentProject.TailSelectedProject.Id)").attr("disabled", false);
+
+            preventEnterSubmit();
+
+            $("#dual_columns_big_input_submit_input").click(function (event) {
+                $button = $(this);
+                if (canAutoComplete()) {
+                    event.preventDefault();
+                    dialogConfirm($("#ParentCanAutoCompleteReminider")).then(function(answer){
+                        if (answer=="true") {
+                            $("#@Html.IdFor(m => m.AutoCompleteParent)").val("True");
+                        }else{
+                            $("#@Html.IdFor(m => m.AutoCompleteParent)").val("False");
+                        }
+                        normalSubmit($button, event);
+                    });
+                }else if(canAutoAccept()){
+                    event.preventDefault();
+                    dialogConfirm($("#ParentCanAutoAcceptReminider")).then(function(answer){
+                        if (answer=="true") {
+                            $("#@Html.IdFor(m => m.AutoAcceptParent)").val("True");
+                        }else{
+                            $("#@Html.IdFor(m => m.AutoAcceptParent)").val("False");
+                        }
+                        normalSubmit($button, event);
+                    });
+                }else{
+                    normalSubmit(this, event);
+                }
+            });
+
+            $(".date_picker").datepicker();
+
+            $(".history").click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr("href");
+                openWindow(url, "任务历史", 600, 500);
+            });
+            $("a[name='relation']").click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr("href");
+                openWindow(url, "任务关系", 600, 500);
+            });
+        })
+    </script>
+}

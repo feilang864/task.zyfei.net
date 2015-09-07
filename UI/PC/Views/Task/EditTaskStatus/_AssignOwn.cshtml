@@ -1,0 +1,20 @@
+﻿@using FFLTask.GLB.Global.Enum
+@model FFLTask.SRV.ViewModel.Task.EditModel
+@if (Model.CurrentUser.Id == Model.TaskItem.Publisher.Id)
+{
+    if (Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Publish
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Assign
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Own
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Quit)
+    {
+        @Html.EditorFor(m => m, "_Edit_Assign_Editable")        
+    }
+}
+else if (Model.CanOwn)
+{
+    if (Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Publish
+        || Model.TaskItem.LiteItem.CurrentStatus.Stage == (int)Status.Quit)
+    {
+        @Html.Partial("EditColumns/_Edit_Ownable", Model)
+    }
+}

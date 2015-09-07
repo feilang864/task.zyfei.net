@@ -1,0 +1,49 @@
+﻿@model FFLTask.SRV.ViewModel.Task.SequenceModel
+<head>
+    <title>任务次序</title>
+    <script type="text/javascript" src="/Resource/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="@Url.Content("~/Resource/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Resource/Scripts/task.js")" type="text/javascript"></script>
+</head>
+<body>
+    @using (Ajax.BeginForm(new AjaxOptions { OnComplete = "closeWindow('refresh')" }))
+    {
+        @Html.ActionLink(Model.Parent.Title, "Edit", new { taskId = Model.Parent.Id })
+        <div>
+            @Html.ListBoxFor(x => x.SelectedChildrenSequences, new SelectList(Model.Children, "Id", "Title"), new { style = "float:left; vertical-align:middle" })
+            <div style="float: left">
+                <a href="#" id="up">上移</a>
+                <br />
+                <a href="#" id="down">下移</a>
+            </div>
+        </div>
+        <div style="clear: both">
+            <input type="submit" value="提交" />
+        </div>
+    }
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //TODO: still issue:
+        //1. up and down will generate duplicated new line
+        //2. generate mulitiple options when choosing multiple lines
+        $("#up").click(function () {
+            var $selected = $("#@Html.IdFor(m => m.SelectedChildrenSequences) option:selected");
+            if ($selected.index() > 0) {
+                $selected.prev().append("\n").before("<option value=" + $selected.val() + "> " + $selected.text() + "</option>");
+                $selected.remove();
+            }
+        })
+        $("#down").click(function () {
+            var $selected = $("#@Html.IdFor(m => m.SelectedChildrenSequences) option:selected");
+            var totalNumber = $("#@Html.IdFor(m => m.SelectedChildrenSequences) option").length;
+            if ($selected.index() < totalNumber - 1) {
+                $selected.next().append("\n").after("<option value=" + $selected.val() + "> " + $selected.text() + "</option>");
+                $selected.remove();
+            }
+        })
+        $("form").submit(function () {
+            $('#@Html.IdFor(m => m.SelectedChildrenSequences) option').prop('selected', true);
+        })
+    })
+</script>

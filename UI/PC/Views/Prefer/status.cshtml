@@ -1,0 +1,53 @@
+﻿@using FFLTask.UI.PC
+@model IList<FFLTask.SRV.ViewModel.Task.StatusModel>
+<ul>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <li>
+            @Html.CheckBoxFor(m => m[i].Checked, new { value = Model[i].Stage, candidate = "candidate" })
+            @Model[i].Name
+        </li>
+    }
+</ul>
+<label>
+    <input type="checkbox" id="select_all" />全选</label>
+<label>
+    <input type="checkbox" id="publisher" />发布人</label>
+<label>
+    <input type="checkbox" id="owner" />承接人</label>
+<label>
+    <input type="checkbox" id="accepter" />验收人</label>
+<input type="button" value="确定" id="submit" />
+@if (false)
+{
+    <script type="text/javascript" src="/Resource/Scripts/jquery-2.1.0-vsdoc.js"></script>
+}
+<script src="@Url.Content("~/Resource/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Resource/Scripts/jquery.cookie.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Resource/Scripts/task.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#select_all").click(function () {
+            if ($(this).attr("checked")) {
+                $("input:checkbox").attr("checked", true);
+            } else {
+                $("input:checkbox").attr("checked", false);
+            }
+        })
+        @Html.Partial("_JsPartialSelected", new ViewDataDictionary { { "Id", "publisher" }, { "Status", "34,38" } })
+        @Html.Partial("_JsPartialSelected", new ViewDataDictionary { { "Id", "owner" }, { "Status", "1,2,3,31,32,36,42" } })
+        @Html.Partial("_JsPartialSelected", new ViewDataDictionary { { "Id", "accepter" }, { "Status", "33,43" } })
+        $("#submit").click(function () {
+            $.cookie('@CookieKey.PreferStatus', set_checked_value(), { path: '/' });
+            closeWindow("submit");
+        })
+    })
+    function set_checked_value() {
+        var cookie_value = "";
+        $("input[type='checkbox']:checked[candidate]").each(function () {
+            cookie_value += $(this).attr("value");
+            cookie_value += ",";
+        })
+        return cookie_value;
+    }
+</script>

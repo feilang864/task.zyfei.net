@@ -1,0 +1,37 @@
+﻿@model FFLTask.SRV.ViewModel.Project.SummaryModel
+@Html.Partial("_Abstract", Model.Abstract)
+<table>
+    <tr>
+        <th>
+            用户
+        </th>
+        <th>
+            管理员
+        </th>
+        <th>
+            发布
+        </th>
+        <th>
+            承接
+        </th>
+    </tr>
+    @for (int i = 0; i < Model.Authorizations.Count; i++)
+    {
+        var auth = Model.Authorizations[i];
+        <tr>
+            <td>
+                @Html.Partial("_UserLink", auth.User)
+            </td>
+            <td>
+                @auth.CanAdmin
+            </td>
+            <td>
+                @auth.CanPublish
+            </td>
+            <td>
+                @auth.CanOwn
+            </td>
+        </tr>
+    }
+</table>
+@Html.Partial("_ProjectTree", Model.Projects);
