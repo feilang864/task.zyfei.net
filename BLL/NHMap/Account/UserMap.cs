@@ -8,6 +8,7 @@ namespace FFLTask.BLL.NHMap.Account
         {
             Map(m => m.Name).Index("IX_Name");
             Map(m => m.Password);
+            Component(m => m.Profile);
             Map(m => m.RealName);
             Map(m => m.AuthenticationCode);
             HasMany(m => m.Authorizations).KeyColumn("User_id").Inverse()

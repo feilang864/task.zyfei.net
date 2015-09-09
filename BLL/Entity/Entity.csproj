@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\Authorization.cs" />
+    <Compile Include="Account\Profile.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Constants.cs" />

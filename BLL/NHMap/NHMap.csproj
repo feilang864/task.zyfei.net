@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AuthorizationMap.cs" />
+    <Compile Include="Account\ProfileMap.cs" />
     <Compile Include="ConfigurationProvider.cs" />
     <Compile Include="MessageMap.cs" />
     <Compile Include="Project\ProjectConfigMap.cs" />

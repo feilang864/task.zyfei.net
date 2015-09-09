@@ -17,6 +17,8 @@ namespace FFLTask.BLL.Entity
         public virtual IList<Message> MessagesToMe { get; set; }
         public virtual IList<Message> MessagesFromMe { get; set; }
 
+        public virtual Profile Profile { get; set; }
+        
         #endregion
 
         #region UnMapped
