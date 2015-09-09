@@ -1,0 +1,26 @@
+﻿<select id="Province" name="Province" onchange="findCity()">
+    <option>------</option>
+</select>省
+<select id="City" name="City">
+    <option>--------</option>
+</select>市
+
+<script type="text/javascript" src="/Resource/Scripts/task-city.js"></script>
+<script>
+    $(document).ready(function () {
+        for (var i = 0; i < prolist.ps.length; i++) {
+            $("#Province").append("<option value='" + prolist.ps[i].pid + "'>" + prolist.ps[i].pname + "</option>");
+        }
+    });
+    function findCity() {
+        var pid = $("#Province").val();
+        $("#City").empty();
+        for (var i = 0; i < prolist.ps.length; i++) {
+            if (prolist.ps[i].pid == pid) {
+                for (var j = 0; j < prolist.ps[i].cities.length; j++) {
+                    $("#City").append("<option value='" + prolist.ps[i].cities[j].cname + "'>" + prolist.ps[i].cities[j].cname + "</option>");
+                }
+            }
+        }
+    }
+</script>

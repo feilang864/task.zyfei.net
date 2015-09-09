@@ -2,6 +2,7 @@
 using FFLTask.SRV.ServiceInterface;
 using FFLTask.UI.PC.Filter;
 using FFLTask.SRV.ViewModel.User;
+using FFLTask.GLB.Global;
 
 namespace FFLTask.UI.PC.Controllers
 {
@@ -32,12 +33,21 @@ namespace FFLTask.UI.PC.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //[NeedAuthorized]
-        //public ActionResult Profile()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        [NeedAuthorized]
+        public new ActionResult Profile(ProfileModel model)
+        {
+            model.Province = model.Province == "------" ?
+                null :
+                AddressHelper.GetLiteral(model.Province);
+
+            if (model.City == "--------")
+            {
+                model.City = null;
+            }
+
+            return View(model);
+        }
 
         #endregion
 

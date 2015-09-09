@@ -31,17 +31,17 @@
                 生日：
             </th>
             <td>
-                @Html.TextBoxFor(m => m.Birthday, new{@class="date_picker"})
+                @Html.TextBoxFor(m => m.Birthday, new { @class = "date_picker" })
                 <br />
                 @Html.ValidationMessageFor(m => m.Birthday)
             </td>
         </tr>
         <tr>
             <th>
-                所在城市：
+                所在城：
             </th>
             <td>
-                @*@Html.DropDownListFor(m=>m.City, ne)*@
+                @Html.Partial("_CityDropdownList")
             </td>
         </tr>
         <tr>
@@ -103,5 +103,5 @@
 <script>
     $(document).ready(function () {
         $(".date_picker").datepicker();
-    })
+    });
 </script>
