@@ -2,10 +2,106 @@
     ViewBag.Title = "个人资料·自由飞·任务管理系统";
     Layout = "~/Views/Shared/_Layout_Dual_Columns.cshtml";
 }
-
-<h2>个人资料</h2>
+@model FFLTask.SRV.ViewModel.User.ProfileModel
+<h3>个人资料</h3>
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <th style="width: 96px">
+                称谓/昵称：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.Greet)
+                <br />
+                @Html.ValidationMessageFor(m => m.Greet)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                性别：
+            </th>
+            <td>
+                <label> @Html.RadioButtonFor(m => m.Female, true) 男</label>
+                <label> @Html.RadioButtonFor(m => m.Female, false) 女</label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                生日：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.Birthday, new{@class="date_picker"})
+                <br />
+                @Html.ValidationMessageFor(m => m.Birthday)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                所在城市：
+            </th>
+            <td>
+                @*@Html.DropDownListFor(m=>m.City, ne)*@
+            </td>
+        </tr>
+        <tr>
+            <th>
+                手机：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.Phone)
+                <br />
+                @Html.ValidationMessageFor(m => m.Phone)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                QQ：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.QQ)
+                <br />
+                @Html.ValidationMessageFor(m => m.QQ)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                其他联系：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.OtherContact)
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 96px">
+                感兴趣技术：
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.Interested)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                自我介绍：
+            </th>
+            <td>
+                @Html.TextAreaFor(m => m.SelfDescription, new { style = "height: 64px; width: 260px;" })
+            </td>
+        </tr>
+    </table>
+    <div id="dual_columns_input_submit">
+        <input type="submit" class="submit" id="dual_columns_input_submit_input" value="提交" />
+        <a href="#">跳过</a>
+    </div>
+}
 @section Introduction{
     <ul>
         <li>1、称谓/昵称可以重复，用于在任务中显示责任人。建议使用便于记忆区别的真实姓名。字数不超过5个（汉字），如“王超”，“小李”。如果不填写，默认使用用户名并截取。</li>
     </ul>
 }
+
+<script>
+    $(document).ready(function () {
+        $(".date_picker").datepicker();
+    })
+</script>

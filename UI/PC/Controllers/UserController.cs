@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using FFLTask.SRV.ServiceInterface;
 using FFLTask.UI.PC.Filter;
+using FFLTask.SRV.ViewModel.User;
 
 namespace FFLTask.UI.PC.Controllers
 {
@@ -27,7 +28,8 @@ namespace FFLTask.UI.PC.Controllers
         [NeedAuthorized]
         public new ActionResult Profile()
         {
-            return View();
+            ProfileModel model = new ProfileModel();
+            return View(model);
         }
 
         //[HttpPost]
