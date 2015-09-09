@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using FFLTask.SRV.ServiceInterface;
+using FFLTask.UI.PC.Filter;
 
 namespace FFLTask.UI.PC.Controllers
 {
@@ -12,10 +13,34 @@ namespace FFLTask.UI.PC.Controllers
             _userService = userService;
         }
 
+        #region URL: /User/Summary/{id}
+
         public ActionResult Summary(int? id)
         {
             return View();
         }
+
+        #endregion
+
+        #region URL: /User/Profile
+
+        [NeedAuthorized]
+        public new ActionResult Profile()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[NeedAuthorized]
+        //public ActionResult Profile()
+        //{
+        //    return View();
+        //}
+
+        #endregion
+
+
+        #region Ajax
 
         public JsonResult HasUnknownMessage()
         {
@@ -26,5 +51,7 @@ namespace FFLTask.UI.PC.Controllers
 
             return Json(_userService.HasUnknownMessage(userHelper.CurrentUserId.Value));
         }
+
+        #endregion
     }
 }

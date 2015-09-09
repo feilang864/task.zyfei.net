@@ -23,6 +23,7 @@ namespace FFLTask.UI.PCTest
             test_route_match("~/Log/on", "Log", "On");
             test_route_match("~/Register", "Register", "Index");
             test_route_match("~/User/8", "User", "Summary", new { userId = "8" });
+            test_route_match("~/User/Profile", "User", "Profile");
         }
 
         [Test]
