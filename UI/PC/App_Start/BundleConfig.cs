@@ -9,17 +9,17 @@ namespace FFLTask.UI.PC
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Resource/Scripts/jquery-{version}.js"));
+                        "~/Resource/Scripts/jquery*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Resource/Scripts/jquery-ui-{version}.js",
-                        "~/Resource/Scripts/jquery.ui*"));
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+            //            "~/Resource/Scripts/jquery-ui-{version}.js",
+            //            "~/Resource/Scripts/jquery.ui*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Resource/Scripts/jquery.unobtrusive*",
-                        "~/Resource/Scripts/jquery.validate*"));
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+            //            "~/Resource/Scripts/jquery.unobtrusive*",
+            //            "~/Resource/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+            bundles.Add(new ScriptBundle("~/bundles/task").Include(
                         "~/Resource/Scripts/task*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
