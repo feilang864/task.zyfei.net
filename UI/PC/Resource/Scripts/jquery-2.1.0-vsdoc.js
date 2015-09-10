@@ -4952,7 +4952,7 @@
             // ( event )  dispatched jQuery.Event
             handleObj = types.handleObj;
             jQuery(types.delegateTarget).off(
-				handleObj.namespace FFLTask.? handleObj.origType + "." + handleObj.namespace FFLTask.: handleObj.origType,
+				handleObj.namespace ? handleObj.origType + "." + handleObj.namespace : handleObj.origType,
 				handleObj.selector,
 				handleObj.handler
 			);
@@ -6390,7 +6390,7 @@
         /// </param>
         /// <returns type="jQuery" />
 
-        // ( namespace FFLTask.) or ( selector, types [, fn] )
+        // ( namespace ) or ( selector, types [, fn] )
         return arguments.length === 1 ? this.off(selector, "**") : this.off(types, selector || "**", fn);
     };
     jQuery.prototype.unload = function (data, fn) {

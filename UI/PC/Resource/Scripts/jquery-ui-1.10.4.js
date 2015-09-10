@@ -333,10 +333,10 @@ $.widget = function( name, base, prototype ) {
 		// proxiedPrototype allows the provided prototype to remain unmodified
 		// so that it can be used as a mixin for multiple widgets (#8876)
 		proxiedPrototype = {},
-		namespace FFLTask.= name.split( "." )[ 0 ];
+		namespace = name.split( "." )[ 0 ];
 
 	name = name.split( "." )[ 1 ];
-	fullName = namespace FFLTask.+ "-" + name;
+	fullName = namespace + "-" + name;
 
 	if ( !prototype ) {
 		prototype = base;
@@ -348,9 +348,9 @@ $.widget = function( name, base, prototype ) {
 		return !!$.data( elem, fullName );
 	};
 
-	$[ namespace FFLTask.] = $[ namespace FFLTask.] || {};
-	existingConstructor = $[ namespace FFLTask.][ name ];
-	constructor = $[ namespace FFLTask.][ name ] = function( options, element ) {
+	$[ namespace ] = $[ namespace ] || {};
+	existingConstructor = $[ namespace ][ name ];
+	constructor = $[ namespace ][ name ] = function( options, element ) {
 		// allow instantiation without "new" keyword
 		if ( !this._createWidget ) {
 			return new constructor( options, element );
@@ -429,7 +429,7 @@ $.widget = function( name, base, prototype ) {
 
 			// redefine the child widget using the same prototype that was
 			// originally used, but inherit from the new version of the base
-			$.widget( childPrototype.namespace FFLTask.+ "." + childPrototype.widgetName, constructor, child._proto );
+			$.widget( childPrototype.namespace + "." + childPrototype.widgetName, constructor, child._proto );
 		});
 		// remove the list of existing child constructors from the old constructor
 		// so the old child constructors can be garbage collected
@@ -530,7 +530,7 @@ $.Widget.prototype = {
 		element = $( element || this.defaultElement || this )[ 0 ];
 		this.element = $( element );
 		this.uuid = uuid++;
-		this.eventnamespace FFLTask.= "." + this.widgetName + this.uuid;
+		this.eventNamespace = "." + this.widgetName + this.uuid;
 		this.options = $.widget.extend( {},
 			this.options,
 			this._getCreateOptions(),
@@ -571,7 +571,7 @@ $.Widget.prototype = {
 		// we can probably remove the unbind calls in 2.0
 		// all event bindings should go through this._on()
 		this.element
-			.unbind( this.eventnamespace FFLTask.)
+			.unbind( this.eventNamespace )
 			// 1.9 BC for #7810
 			// TODO remove dual storage
 			.removeData( this.widgetName )
@@ -580,14 +580,14 @@ $.Widget.prototype = {
 			// http://bugs.jquery.com/ticket/9413
 			.removeData( $.camelCase( this.widgetFullName ) );
 		this.widget()
-			.unbind( this.eventnamespace FFLTask.)
+			.unbind( this.eventNamespace )
 			.removeAttr( "aria-disabled" )
 			.removeClass(
 				this.widgetFullName + "-disabled " +
 				"ui-state-disabled" );
 
 		// clean up events and states
-		this.bindings.unbind( this.eventnamespace FFLTask.);
+		this.bindings.unbind( this.eventNamespace );
 		this.hoverable.removeClass( "ui-state-hover" );
 		this.focusable.removeClass( "ui-state-focus" );
 	},
@@ -720,7 +720,7 @@ $.Widget.prototype = {
 	},
 
 	_off: function( element, eventName ) {
-		eventName = (eventName || "").split( " " ).join( this.eventnamespace FFLTask.+ " " ) + this.eventNamespace;
+		eventName = (eventName || "").split( " " ).join( this.eventNamespace + " " ) + this.eventNamespace;
 		element.unbind( eventName ).undelegate( eventName );
 	},
 
@@ -2660,7 +2660,7 @@ $.widget( "ui.button", {
 	},
 	_create: function() {
 		this.element.closest( "form" )
-			.unbind( "reset" + this.eventnamespace FFLTask.)
+			.unbind( "reset" + this.eventNamespace )
 			.bind( "reset" + this.eventNamespace, formResetHandler );
 
 		if ( typeof this.options.disabled !== "boolean" ) {
@@ -2775,7 +2775,7 @@ $.widget( "ui.button", {
 				})
 				// see #8559, we bind to blur here in case the button element loses
 				// focus between keydown and keyup, it would be left in an "active" state
-				.bind( "keyup" + this.eventnamespace FFLTask.+ " blur" + this.eventNamespace, function() {
+				.bind( "keyup" + this.eventNamespace + " blur" + this.eventNamespace, function() {
 					$( this ).removeClass( "ui-state-active" );
 				});
 
