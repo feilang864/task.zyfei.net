@@ -60,6 +60,8 @@ namespace FFLTask.UI.PC
 
         private void RegisterValidation()
         {
+            Global.Core.Validation.Register.Do();
+
             DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(FflRequiredAttribute),
                 typeof(RequiredAttributeAdapter));
             DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(FflStringLengthAttribute),
