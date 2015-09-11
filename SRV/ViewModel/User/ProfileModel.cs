@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Global.Core.Validation;
 
 namespace FFLTask.SRV.ViewModel.User
 {
     public class ProfileModel
     {
+        [ChineseLength(10, ErrorMessage="* 称谓最多5个汉字/10个字母数字")]
         public string Greet { get; set; }
         public bool? Female { get; set; }
         public DateTime? Birthday { get; set; }

@@ -83,7 +83,7 @@
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
@@ -357,6 +357,7 @@
     <Content Include="Resource\kindeditor-v4.1\themes\default\background.png" />
     <Content Include="Resource\kindeditor-v4.1\themes\default\default.css" />
     <Content Include="Resource\kindeditor-v4.1\themes\default\default.png" />
+    <Content Include="Resource\Scripts\jquery.validate.unobtrusive.mine.js" />
     <Content Include="Resource\Scripts\task-city.js" />
     <Content Include="Resource\Scripts\jquery-1.7.1.js" />
     <Content Include="Resource\Scripts\jquery-1.7.1.min.js" />
@@ -828,7 +829,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>4991</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49912/</IISUrl>
+          <IISUrl>http://localhost:4992/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
