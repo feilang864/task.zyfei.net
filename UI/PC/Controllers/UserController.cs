@@ -17,9 +17,13 @@ namespace FFLTask.UI.PC.Controllers
 
         #region URL: /User/Summary/{id}
 
-        public ActionResult Summary(int? id)
+        public ActionResult Summary(int? userId)
         {
-            return View();
+            SummaryModel model = new SummaryModel();
+            model.IsCurrentUser = (userId == userHelper.CurrentUserId);
+            model.Profile = _userService.GetProfile(userId.Value);
+
+            return View(model);
         }
 
         #endregion
