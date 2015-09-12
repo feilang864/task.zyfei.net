@@ -7,6 +7,8 @@ using FFLTask.SRV.ServiceInterface;
 using FFLTask.SRV.ViewModel.Account;
 using FFLTask.SRV.ViewModelMap;
 using NHibernate.Linq;
+using FFLTask.SRV.ViewModel.User;
+using AutoMapper;
 
 namespace FFLTask.SRV.ProdService
 {
@@ -102,6 +104,12 @@ namespace FFLTask.SRV.ProdService
         public bool HasJoinedProject(int userId)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void SaveProfile(ProfileModel model, int userId)
+        {
+            User user = session.Load<User>(userId);
+            user.Profile = Mapper.Map<FFLTask.BLL.Entity.Profile>(model);
         }
     }
 }

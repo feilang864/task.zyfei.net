@@ -89,6 +89,7 @@
     <Compile Include="UserService.cs" />
     <Compile Include="ViewModelMap\TaskMap.cs" />
     <Compile Include="ViewModelMap\TeamMap.cs" />
+    <Compile Include="ViewModelMap\UserMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\Entity\Entity.csproj">

@@ -47,6 +47,7 @@ namespace FFLTask.SRV.ProdService
         {
             TeamMap.Init();
             TaskMap.Init();
+            UserMap.Init();
 #if DEBUG
             Mapper.AssertConfigurationIsValid();
 #endif

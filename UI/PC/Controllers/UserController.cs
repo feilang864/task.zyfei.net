@@ -37,6 +37,20 @@ namespace FFLTask.UI.PC.Controllers
         [NeedAuthorized]
         public new ActionResult Profile(ProfileModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            model = nullProvinceAndCity(model);
+
+            _userService.SaveProfile(model, userHelper.CurrentUserId.Value);
+
+            return View(model);
+        }
+
+        private ProfileModel nullProvinceAndCity(ProfileModel model)
+        {
             model.Province = model.Province == "------" ?
                 null :
                 AddressHelper.GetLiteral(model.Province);
@@ -46,7 +60,7 @@ namespace FFLTask.UI.PC.Controllers
                 model.City = null;
             }
 
-            return View(model);
+            return model;
         }
 
         #endregion

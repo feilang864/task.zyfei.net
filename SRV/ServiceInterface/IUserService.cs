@@ -18,5 +18,7 @@ namespace FFLTask.SRV.ServiceInterface
         //TODO: comment first
         //IList<UI.ViewModel.Project.GroupModel> GetGroupsWithProjects(int userId);
         //IList<UI.ViewModel.Group.GroupItemModel> GetGroups(int userId);
+
+        void SaveProfile(ViewModel.User.ProfileModel model, int userId);
     }
 }

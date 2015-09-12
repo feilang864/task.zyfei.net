@@ -140,5 +140,11 @@ namespace FFLTask.SRV.UIDevService
         {
             return true;
         }
+
+
+        public void SaveProfile(ViewModel.User.ProfileModel model, int userId)
+        {
+            
+        }
     }
 }
