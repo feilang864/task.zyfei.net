@@ -42,7 +42,7 @@ namespace FFLTask.BLL.EntityTest
             task.has_update_latest();
 
             HistoryItem latest = task.get_latest_history();
-            Assert.That(latest.Description, Is.EqualTo(string.Format("验收通过，质量为{0}", quality.GetEnumDescription())));
+            Assert.That(latest.Description, Is.EqualTo("验收任务"));
         }
 
         internal static void has_complete(this Task task, string description = Constants.DescriptionComplete)
