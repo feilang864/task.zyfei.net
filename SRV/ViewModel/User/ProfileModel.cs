@@ -24,5 +24,7 @@ namespace FFLTask.SRV.ViewModel.User
         public string OtherContact { get; set; }
         public string Interested { get; set; }
         public string SelfDescription { get; set; }
+
+        public bool BuildProject { get; set; }
     }
 }

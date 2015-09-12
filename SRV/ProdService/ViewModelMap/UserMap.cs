@@ -13,7 +13,9 @@ namespace FFLTask.SRV.ProdService.ViewModelMap
     {
         internal static void Init()
         {
-            Mapper.CreateMap<Entity.Profile, UserModel.ProfileModel>();
+            Mapper.CreateMap<Entity.Profile, UserModel.ProfileModel>()
+                .ForMember(m=>m.BuildProject, opt=>opt.Ignore())
+                ;
             Mapper.CreateMap<UserModel.ProfileModel, Entity.Profile>();
         }
     }

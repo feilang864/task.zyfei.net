@@ -32,8 +32,5 @@ namespace FFLTask.SRV.ViewModel.Account
         public string ConfirmPassword { get; set; }
 
         public string UserRealName { get; set; }
-
-        public bool BuildProject { get; set; }
-
     }
 }

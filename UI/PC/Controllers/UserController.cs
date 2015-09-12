@@ -35,18 +35,28 @@ namespace FFLTask.UI.PC.Controllers
 
         [HttpPost]
         [NeedAuthorized]
-        public new ActionResult Profile(ProfileModel model)
+        public new ActionResult Profile(string button, ProfileModel model)
         {
-            if (!ModelState.IsValid)
+            if (button != "跳过")
             {
-                return View(model);
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                model = nullProvinceAndCity(model);
+
+                _userService.SaveProfile(model, userHelper.CurrentUserId.Value);
             }
 
-            model = nullProvinceAndCity(model);
-
-            _userService.SaveProfile(model, userHelper.CurrentUserId.Value);
-
-            return View(model);
+            if (model.BuildProject)
+            {
+                return RedirectToAction("Create", "Project");
+            }
+            else
+            {
+                return RedirectToAction("Search", "Project");
+            }
         }
 
         private ProfileModel nullProvinceAndCity(ProfileModel model)

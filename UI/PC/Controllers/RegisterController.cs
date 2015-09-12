@@ -47,14 +47,7 @@ namespace FFLTask.UI.PC.Controllers
             int userId = _registerService.Do(model);
             userHelper.SetUserId(userId.ToString());
 
-            if (model.BuildProject)
-            {
-                return RedirectToAction("Create", "Project");
-            }
-            else
-            {
-                return RedirectToAction("Search", "Project");
-            }
+            return RedirectToAction("Profile", "User");
 
         }
 
