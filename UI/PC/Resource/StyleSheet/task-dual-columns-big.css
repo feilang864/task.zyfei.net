@@ -1,7 +1,9 @@
 ﻿#dual_columns_big {
     float: right;
     margin: 100px 83px 214px auto;
-    width: 1160px;
+    /*width: 1160px;*/
+    min-width:1160px;
+    _width:1160px;
 }
 
 #dual_columns_big_input {

@@ -1,5 +1,24 @@
 ﻿@{
-    ViewBag.Title = "Summary";
+    ViewBag.Title = "个人资料·自由飞·任务管理系统";
+    Layout = "~/Views/Shared/_Layout_Dual_Columns_Big.cshtml";
 }
-
-<h2>Summaryssssssssssssssssssssssssssssssssssssssss</h2>
+@using Global.Core.ExtensionMethod
+@model FFLTask.SRV.ViewModel.User.SummaryModel
+@section RightTitle{
+    <h2>历史快照</h2>
+}
+@section Introduction{
+    <ul>
+        <li>这里将显示用户曾经参与的项目，及其任务汇总（未实现）</li>
+    </ul>
+}
+<div>
+    <h3>个人资料</h3>
+    @if (Model.IsCurrentUser)
+    {
+        <a href="/User/Profile" class="owner_opt" style="float:right; margin-right: 56px;">修改</a>
+    }
+    @Html.Partial("_ProfileReadOnly", Model.Profile)
+    <h3 style="margin-top:28px">已加入项目</h3>
+    <div>这里将显示用户目前正在参与的项目（未实现）</div>
+</div>

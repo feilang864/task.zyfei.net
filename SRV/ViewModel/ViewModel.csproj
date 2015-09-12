@@ -94,6 +94,7 @@
     <Compile Include="Team\TansferModel.cs" />
     <Compile Include="Test\UserLogonModel.cs" />
     <Compile Include="User\ProfileModel.cs" />
+    <Compile Include="User\SummaryModel.cs" />
     <Compile Include="Validations\FflBlogUrlValidateAttribute.cs" />
     <Compile Include="Validations\FflDateValidationAttribute.cs" />
     <Compile Include="Validations\FflEmailValidationAttribute.cs" />

@@ -1,0 +1,96 @@
+﻿@model FFLTask.SRV.ViewModel.User.ProfileModel
+@using Global.Core.ExtensionMethod
+<table>
+    <tr>
+        <th style="width: 96px">
+            称谓/昵称：
+        </th>
+        <td>
+            @Html.Raw(Model.Greet)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            性别：
+        </th>
+        <td>
+            @if (Model.Female != null)
+            {
+                if (Model.Female.Value)
+                {
+                    <text>男</text>
+                }
+                else
+                {
+                    <text>女</text>
+                }
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>
+            生日：
+        </th>
+        <td>
+            @if (Model.Birthday != null)
+            {
+                @Model.Birthday.Value.ToChineseDate()
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>
+            所在城市：
+        </th>
+        <td>
+            @if (!string.IsNullOrEmpty(Model.Province))
+            {
+                <text>@Model.Province 省</text>
+            }
+            @if (!string.IsNullOrEmpty(Model.City))
+            {
+                <text>@Model.City 市</text>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>
+            手机：
+        </th>
+        <td>
+            @Model.Phone
+        </td>
+    </tr>
+    <tr>
+        <th>
+            QQ：
+        </th>
+        <td>
+            @Model.QQ
+        </td>
+    </tr>
+    <tr>
+        <th>
+            其他联系：
+        </th>
+        <td>
+            @Model.OtherContact
+        </td>
+    </tr>
+    <tr>
+        <th style="width: 96px">
+            感兴趣技术：
+        </th>
+        <td>
+            @Html.Raw(Model.Interested)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            自我介绍：
+        </th>
+        <td>
+            @Html.Raw(Model.SelfDescription)
+        </td>
+    </tr>
+</table>
