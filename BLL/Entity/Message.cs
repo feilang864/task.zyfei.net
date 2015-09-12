@@ -24,11 +24,17 @@ namespace FFLTask.BLL.Entity
 
         public virtual void Send()
         {
-            Addressee.MessagesToMe = Addressee.MessagesToMe ?? new List<Message>();
-            Addresser.MessagesFromMe = Addresser.MessagesFromMe ?? new List<Message>();
+            if (Addressee != null)
+            {
+                Addressee.MessagesToMe = Addressee.MessagesToMe ?? new List<Message>();
+                Addressee.MessagesToMe.Add(this);
+            }
 
-            Addressee.MessagesToMe.Add(this);
-            Addresser.MessagesFromMe.Add(this);
+            if (Addresser != null)
+            {
+                Addresser.MessagesFromMe = Addresser.MessagesFromMe ?? new List<Message>();
+                Addresser.MessagesFromMe.Add(this);
+            }
         }
 
         public virtual void Read()

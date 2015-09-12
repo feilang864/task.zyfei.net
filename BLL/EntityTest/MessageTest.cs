@@ -11,6 +11,44 @@ namespace FFLTask.BLL.EntityTest
     public class MessageTest
     {
         [Test]
+        public void Not_Send()
+        {
+            Message message_empty = new Message
+            {
+                Addresser = null,
+                Addressee = null
+            };
+
+            message_empty.Send();             //no exception is threw out
+
+            User addresser = new User();            
+            Message message_no_addressee = new Message
+            {
+                Addresser = addresser,
+                Addressee = null
+            };
+
+            message_no_addressee.Send();
+
+            //need not record into MessageFromMe since no addressee
+            Assert.That(addresser.MessagesFromMe.Count, Is.EqualTo(1));
+
+            
+            User addressee = new User();
+            Message message_no_addresser = new Message
+            {
+                Addresser = null,
+                Addressee = addressee
+            };
+            Assert.That(addressee.MessagesToMe.IsNullOrEmpty(), Is.True);
+
+            message_no_addresser.Send();
+
+            //only record in MessagesToMe
+            Assert.That(addressee.MessagesToMe.Count, Is.EqualTo(1));              
+        }
+
+        [Test]
         public void Send()
         {
             User addresser = new User();
