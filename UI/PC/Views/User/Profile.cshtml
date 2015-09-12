@@ -31,7 +31,7 @@
                 生日：
             </th>
             <td>
-                @Html.TextBoxFor(m => m.Birthday, new { @class = "date_picker" })
+                @Html.TextBoxFor(m => m.Birthday, "{0:yyyy-MM-dd}", new { @class = "date_picker" })
                 <br />
                 @Html.ValidationMessageFor(m => m.Birthday)
             </td>

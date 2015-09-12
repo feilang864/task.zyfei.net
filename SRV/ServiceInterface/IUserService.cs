@@ -4,6 +4,7 @@ namespace FFLTask.SRV.ServiceInterface
 {
     public interface IUserService
     {
+        ViewModel.User.ProfileModel GetProfile(int userId);
         FFLTask.SRV.ViewModel.Account.UserModel GetUser(int userId);
         IList<FFLTask.SRV.ViewModel.Account.UserModel> GetOwners(int projectId);
         IList<FFLTask.SRV.ViewModel.Account.UserModel> GetAllOwners(int projectId);
@@ -20,5 +21,6 @@ namespace FFLTask.SRV.ServiceInterface
         //IList<UI.ViewModel.Group.GroupItemModel> GetGroups(int userId);
 
         void SaveProfile(ViewModel.User.ProfileModel model, int userId);
+
     }
 }

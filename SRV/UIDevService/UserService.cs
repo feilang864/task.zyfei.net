@@ -8,6 +8,11 @@ namespace FFLTask.SRV.UIDevService
 {
     public class UserService : IUserService
     {
+        public ViewModel.User.ProfileModel GetProfile(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public UserModel GetUser(int userId)
         {
             UserModel model = new UserModel();

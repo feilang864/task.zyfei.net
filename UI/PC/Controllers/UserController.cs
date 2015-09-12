@@ -29,7 +29,7 @@ namespace FFLTask.UI.PC.Controllers
         [NeedAuthorized]
         public new ActionResult Profile()
         {
-            ProfileModel model = new ProfileModel();
+            ProfileModel model = _userService.GetProfile(userHelper.CurrentUserId.Value);
             return View(model);
         }
 

@@ -14,6 +14,14 @@ namespace FFLTask.SRV.ProdService
 {
     public class UserService : BaseService, IUserService
     {
+        public ProfileModel GetProfile(int userId)
+        {
+            User user = session.Load<User>(userId);
+
+            ProfileModel model = new ProfileModel();
+            return Mapper.Map<ProfileModel>(user.Profile);
+        }
+
         public UserModel GetUser(int userId)
         {
             UserModel model = new UserModel();
