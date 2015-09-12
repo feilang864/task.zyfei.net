@@ -3,6 +3,7 @@ using FFLTask.SRV.ServiceInterface;
 using FFLTask.UI.PC.Filter;
 using FFLTask.SRV.ViewModel.User;
 using FFLTask.GLB.Global;
+using System.Collections.Generic;
 
 namespace FFLTask.UI.PC.Controllers
 {
@@ -20,8 +21,11 @@ namespace FFLTask.UI.PC.Controllers
         public ActionResult Summary(int? userId)
         {
             SummaryModel model = new SummaryModel();
+
             model.IsCurrentUser = (userId == userHelper.CurrentUserId);
+
             model.Profile = _userService.GetProfile(userId.Value);
+            model.JoinedProjects = _userService.GetJoinedProjects(userId.Value);
 
             return View(model);
         }

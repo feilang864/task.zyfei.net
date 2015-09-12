@@ -12,6 +12,7 @@ namespace FFLTask.SRV.ServiceInterface
         IList<FFLTask.SRV.ViewModel.Account.UserModel> GetAllPublishers(int projectId);
         IList<FFLTask.SRV.ViewModel.Account.UserModel> GetAccepters(int projectId);
         IList<FFLTask.SRV.ViewModel.Account.UserModel> GetAllAccepters(int projectId);
+        IEnumerable<ViewModel.User.JoinedProjectItemModel> GetJoinedProjects(int userId);
 
         bool HasUnknownMessage(int userId);
         bool HasJoinedProject(int userId);
@@ -21,6 +22,7 @@ namespace FFLTask.SRV.ServiceInterface
         //IList<UI.ViewModel.Group.GroupItemModel> GetGroups(int userId);
 
         void SaveProfile(ViewModel.User.ProfileModel model, int userId);
+
 
     }
 }

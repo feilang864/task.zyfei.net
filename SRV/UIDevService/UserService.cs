@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FFLTask.SRV.ServiceInterface;
 using FFLTask.SRV.ViewModel.Account;
 using FFLTask.SRV.ViewModel.Test;
+using FFLTask.SRV.ViewModel.User;
 
 namespace FFLTask.SRV.UIDevService
 {
@@ -101,6 +102,27 @@ namespace FFLTask.SRV.UIDevService
         public IList<UserModel> GetAllAccepters(int projectId)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<ViewModel.User.JoinedProjectItemModel> GetJoinedProjects(int userId)
+        {
+            return new List<JoinedProjectItemModel> 
+            { 
+                new JoinedProjectItemModel
+                { 
+                    ProjectId =1, 
+                    IsAdmin = true,
+                    IsOwner = true,
+                    IsPublisher = true
+                },
+                new JoinedProjectItemModel
+                { 
+                    ProjectId =2, 
+                    IsAdmin = false,
+                    IsOwner = true,
+                    IsPublisher = false
+                }
+            };
         }
 
         //TODO: comment first

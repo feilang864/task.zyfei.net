@@ -20,5 +20,17 @@
     }
     @Html.Partial("_ProfileReadOnly", Model.Profile)
     <h3 style="margin-top:28px">已加入项目</h3>
-    <div>这里将显示用户目前正在参与的项目（未实现）</div>
+    <table>
+        <tr><th>编号</th><th>名称</th><th>管理</th><th>分配</th><th>承接</th></tr>
+        @foreach (var item in Model.JoinedProjects)
+        {
+            <tr>
+                <td>@item.ProjectId</td>
+                <td>@Html.Action("_LiteralLinkedProject", "Project", new { projectId = item.ProjectId })</td>
+                <td>@item.IsAdmin</td>
+                <td>@item.IsPublisher</td>
+                <td>@item.IsOwner</td>
+            </tr>
+        }
+    </table>
 </div>

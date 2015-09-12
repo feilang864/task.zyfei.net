@@ -17,6 +17,10 @@ namespace FFLTask.SRV.ProdService.ViewModelMap
                 .ForMember(m=>m.BuildProject, opt=>opt.Ignore())
                 ;
             Mapper.CreateMap<UserModel.ProfileModel, Entity.Profile>();
+
+            Mapper.CreateMap<Entity.Authorization, UserModel.JoinedProjectItemModel>()
+                .ForMember(m => m.ProjectId, 
+                    opt => opt.MapFrom(a => a.Project.Id.ToString()));
         }
     }
 }

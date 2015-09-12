@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FFLTask.SRV.ViewModel.Project;
-using FFLTask.SRV.ViewModel.Project;
 
 namespace FFLTask.SRV.ViewModel.Auth
 {

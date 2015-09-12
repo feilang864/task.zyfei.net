@@ -92,6 +92,13 @@ namespace FFLTask.SRV.ProdService
             return fill(accepters);
         }
 
+        public IEnumerable<JoinedProjectItemModel> GetJoinedProjects(int userId)
+        {
+            User user = session.Load<User>(userId);
+            return Mapper.Map < IEnumerable<JoinedProjectItemModel>>(
+                user.Authorizations);
+        }
+
         private IList<UserModel> fill(IEnumerable<User> users)
         {
             IList<UserModel> models = new List<UserModel>();
