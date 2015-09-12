@@ -23,7 +23,7 @@ namespace FFLTask.UI.PC.Controllers
 
         #region /Auth/Grant
 
-        //[NeedAuthorized(Privilege.Admin)]
+        [NeedAuthorized(Privilege.Admin)]
         public ActionResult Grant()
         {
             IList<ProjectAuthorizationModel> model = _authService.GetAdmined(userHelper.CurrentUserId.Value);
@@ -31,6 +31,7 @@ namespace FFLTask.UI.PC.Controllers
         }
 
         [HttpPost]
+        [NeedAuthorized(Privilege.Admin)]
         public ActionResult Grant(IList<ProjectAuthorizationModel> model)
         {
             foreach (var group in model)
