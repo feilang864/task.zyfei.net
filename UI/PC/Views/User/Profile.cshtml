@@ -38,10 +38,11 @@
         </tr>
         <tr>
             <th>
-                所在城：
+                所在城市：
             </th>
             <td>
                 @Html.Partial("_CityDropdownList")
+                @*@Html.Partial("_CityDropdownList", new ViewDataDictionary { { "City", Model.City }, { "Province", Model.Province } })*@
             </td>
         </tr>
         <tr>

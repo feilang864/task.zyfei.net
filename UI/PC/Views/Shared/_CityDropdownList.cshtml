@@ -5,8 +5,13 @@
     <option>--------</option>
 </select>市
 
+@* TODO:
+    var selectedCity = "@ViewBag.City",
+        selectedProvince = "@ViewBag.Province"
+*@
 <script type="text/javascript" src="/Resource/Scripts/task-city.js"></script>
 <script>
+
     $(document).ready(function () {
         for (var i = 0; i < prolist.ps.length; i++) {
             $("#Province").append("<option value='" + prolist.ps[i].pid + "'>" + prolist.ps[i].pname + "</option>");
